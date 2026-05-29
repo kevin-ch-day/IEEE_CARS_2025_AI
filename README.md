@@ -10,11 +10,7 @@ Author pages and conference rules were cross-checked against:
 ## Repository layout
 
 - `main.tex` — IEEE conference paper driver file (`\documentclass[conference]{IEEEtran}`)
-- `sections/title.tex` — title (single source)
-- `sections/abstract.tex` — abstract (single source)
-- `sections/keywords.tex` — keywords (single source)
-- `sections/authors.tex` — author block (single source)
-- `sections/00_preliminary.tex` — preliminary block includes title/author/abstract/keywords
+- `preliminary/00_paper_header.tex` — title + authors + abstract + keywords front-matter block
 - `sections/` — paper body split into modular files:
   - `01_introduction.tex`
   - `02_background_related_work.tex`
@@ -23,7 +19,6 @@ Author pages and conference rules were cross-checked against:
   - `05_results.tex`
   - `06_discussion.tex`
   - `07_conclusion.tex`
-  - `08_acknowledgment.tex`
   - `09_references.tex`
 - `references/references.bib` — bibliography file placeholder (for future real citations)
 - `template/` — IEEE template and sample files
@@ -60,8 +55,8 @@ pdflatex main.tex
 ### Submission readiness checklist (CARS pre-submit)
 
 - [ ] `main.tex` compiles cleanly with `pdflatex` (2-pass) or BibTeX path when citations are final.
-- [ ] All front-matter content remains in `sections/title.tex`, `sections/abstract.tex`, `sections/keywords.tex`, and `sections/authors.tex`.
-- [ ] One cohesive abstract paragraph in `sections/abstract.tex` states purpose, method, and outcomes without unsafe content.
+- [ ] All front-matter content remains in `preliminary/00_paper_header.tex`.
+- [ ] One cohesive abstract paragraph in `preliminary/abstract.tex` states purpose, method, and outcomes without unsafe content.
 - [ ] Section order and naming match IEEE CARS sequence.
 - [ ] No unsafe or operational malware guidance; scope stays defensive and methodological.
 - [ ] Placeholder references removed/replaced with real `\cite{}` + entries in `references/references.bib`.
