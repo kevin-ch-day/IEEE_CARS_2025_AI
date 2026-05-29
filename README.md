@@ -42,6 +42,12 @@ pdflatex main.tex
 
 This path is for draft scaffolding and is controlled via `\setboolean{useBibTeX}{false}` in `main.tex`.
 
+Quick build script:
+
+```bash
+./scripts/build_paper.ps1
+```
+
 If/when real citations are added and `\cite{}` calls are introduced, switch to BibTeX workflow:
 
 ```bash
@@ -50,6 +56,17 @@ bibtex main
 pdflatex main.tex
 pdflatex main.tex
 ```
+
+### Submission readiness checklist (CARS pre-submit)
+
+- [ ] `main.tex` compiles cleanly with `pdflatex` (2-pass) or BibTeX path when citations are final.
+- [ ] All front-matter content remains in `title.tex`, `abstract.tex`, `keywords.tex`, and `authors.tex`.
+- [ ] One cohesive abstract paragraph in `abstract.tex` states purpose, method, and outcomes without unsafe content.
+- [ ] Section order and naming match IEEE CARS sequence.
+- [ ] No unsafe or operational malware guidance; scope stays defensive and methodological.
+- [ ] Placeholder references removed/replaced with real `\cite{}` + entries in `references/references.bib`.
+- [ ] Final page budget targets 6 pages before any overflow.
+- [ ] Figures/tables are IEEE-compatible (two-column width and concise captions).
 
 ## IEEE CARS 2026 policy notes (for pre-submission)
 
@@ -79,10 +96,16 @@ The scaffold is intentionally paper-first and defensive: clear threat-model fram
 - Feature/integration branches should be short-lived and merged via PR or squash into `main`.
 - After merge, delete stale branches locally and in GitHub to avoid clutter.
 
+### Authoring policy for this repository
+
+- Keep claims conservative and evidence-backed.
+- If a result is only a trend or controlled observation, phrase it as such.
+- Keep limitations explicit in every draft cycle.
+
 ### Current status
 
-- Branches used during this cleanup phase are expected to be merged and removed.
 - `main` is the source of truth for ongoing writing.
+- Cleanup branches are expected to remain closed after merging.
 
 ## Author and template notes
 
