@@ -10,7 +10,7 @@ Author pages and conference rules were cross-checked against:
 ## Repository layout
 
 - `main.tex` — IEEE conference paper driver file (`\documentclass[conference]{IEEEtran}`)
-- `title.tex` — paper title (single source)
+- `sections/title.tex` — paper title (single source, grouped in preliminary block)
 - `abstract.tex` — abstract (single source)
 - `keywords.tex` — keywords (single source)
 - `authors.tex` — author block (single source)
