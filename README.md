@@ -14,7 +14,6 @@ Author pages and conference rules were cross-checked against:
 - `abstract.tex` — abstract (single source)
 - `keywords.tex` — keywords (single source)
 - `authors.tex` — author block (single source)
-- `paper_outline.tex` — section order and IEEE CARS pacing guidance
 - `sections/` — paper body split into modular files:
   - `01_introduction.tex`
   - `02_background_related_work.tex`
