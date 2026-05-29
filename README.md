@@ -57,6 +57,7 @@ pdflatex main.tex
 - [ ] `main.tex` compiles cleanly with `pdflatex` (2-pass) or BibTeX path when citations are final.
 - [ ] All front-matter content remains in `preliminary/00_paper_header.tex`.
 - [ ] One cohesive abstract paragraph in `preliminary/abstract.tex` states purpose, method, and outcomes without unsafe content.
+- [ ] `preliminary/abstract.tex` also contains keyword list in IEEE format and is ready for final submission polishing.
 - [ ] Section order and naming match IEEE CARS sequence.
 - [ ] No unsafe or operational malware guidance; scope stays defensive and methodological.
 - [ ] Placeholder references removed/replaced with real `\cite{}` + entries in `references/references.bib`.
