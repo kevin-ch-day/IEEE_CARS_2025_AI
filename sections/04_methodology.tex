@@ -1,19 +1,27 @@
-﻿\section{Methodology}
+\section{Methodology}
 
-The methodology consists of four stages: artifact preparation, static analysis, dynamic or behavioral analysis, and comparative evaluation.
+% IEEE target for 7-page paper: ~1.2--1.4 pages.
+% Include enough detail for reproducibility and future extension.
 
-\subsection{Artifact Preparation}
-
-The study begins by defining baseline and AI-assisted conditions. The baseline condition represents manually developed, manually modified, or known reference artifacts. The AI-assisted condition represents artifacts created or modified with documented AI assistance. Each artifact is assigned a unique identifier and stored with metadata describing its source, condition, and analysis status.
+\subsection{Artifact and Dataset Protocol}
+TODO: Document the source, inclusion criteria, and labeling policy.
+\begin{itemize}
+  \item Artifact identifiers and provenance
+  \item Inclusion/exclusion rules
+  \item Baseline vs AI-assisted condition assignment
+  \item Environment constraints and safety boundaries
+\end{itemize}
 
 \subsection{Static Analysis}
+TODO: Define static indicators and tooling.
+Track static indicators that are likely to be meaningful for defensive workflows, such as metadata fields,
+string features, API-call profiles, imported modules, and entropy distributions.
 
-Static analysis records structural and metadata-level properties of each artifact. These may include file hashes, file size, imported functions, embedded strings, compiler artifacts, entropy, code structure, suspicious API usage, and other features relevant to defensive analysis.
+\subsection{Dynamic and Behavioral Analysis}
+TODO: Define controlled execution procedure and telemetry capture.
+Collect runtime signals in isolation, including process-level activity, file/object modifications,
+network attempts, and alert output from detection systems.
 
-\subsection{Dynamic or Behavioral Analysis}
-
-Where appropriate, artifacts are executed in a controlled environment to observe runtime behavior. The environment should be isolated from production systems and configured to capture relevant telemetry. Possible measurements include process behavior, file-system changes, network connections, persistence attempts, and security-tool alerts.
-
-\subsection{Evaluation Metrics}
-
-The evaluation compares baseline and AI-assisted conditions using measurable indicators. These may include detection counts, behavioral differences, static-feature differences, and qualitative analyst observations.
+\subsection{Comparative Evaluation}
+TODO: Specify comparison metrics and reporting.
+Compare both conditions on paired metrics (baseline vs AI-assisted), using the same template for each item and the same analyst review rubric.

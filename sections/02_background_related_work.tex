@@ -1,7 +1,22 @@
-﻿\section{Background and Related Work}
+\section{Background and Related Work}
 
-Large language models are increasingly used for programming assistance, explanation, and cybersecurity learning. Prior work has examined both the benefits and risks of these systems, including their use in secure coding, vulnerability discovery, malware analysis, and adversarial automation.
+% IEEE target for 7-page paper: ~1.0 pages.
+% This section should summarize prior work and establish what is new in this paper.
+% Suggested structure:
+% - defensive malware analysis methods
+% - AI-assisted cybersecurity workflows
+% - reproducibility and measurement gaps
 
-Malware research traditionally relies on static analysis, dynamic analysis, behavioral observation, and detection-engine results. Static analysis examines code, metadata, imports, permissions, strings, and structural artifacts. Dynamic analysis observes runtime behavior such as process activity, file changes, registry or system modifications, network traffic, and command-and-control patterns.
+% TODO: add 4--8 concise, citation-backed paragraphs.
 
-AI-assisted malware research creates a measurement challenge. Compiled artifacts rarely preserve direct evidence showing whether an AI system contributed to development. Therefore, this study avoids unsupported claims of AI authorship and instead evaluates whether controlled AI-assisted workflows produce measurable differences that are relevant to defensive analysis.
+Defensive malware analysis is typically evaluated across static and dynamic evidence streams.
+Static analysis captures persisted artifacts such as metadata, strings, and code structure, while
+dynamic analysis captures runtime behavior in isolated environments.
+
+Recent AI-assisted security research has emphasized workflow support, code reasoning,
+and analyst productivity. At the same time, less work exists on how controlled AI-assisted
+conditions change the measurability of defensive outcomes.
+
+This work differs in scope by avoiding claims about provenance and by treating workflow
+assistance as an experimental condition. The emphasis is on defensible comparison, not on
+building or improving offensive capability.

@@ -1,33 +1,87 @@
-﻿\documentclass[conference]{IEEEtran}
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% Template compatibility note:
+% Keep these two lines for IEEE CARS 2026 margin/EDAS compliance.
+\addtolength{\topmargin}{0.02in}
+\addtolength{\textheight}{-0.02in}
 
 \usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb}
 \usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{xcolor}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
+\usepackage{ifthen}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\newboolean{useBibTeX}
+\setboolean{useBibTeX}{false}
 
 \begin{document}
 
-\title{AI-Assisted Malware Research: A Controlled Study of Defensive Analysis Workflows}
+\title{Defensive Evaluation of AI-Assisted Malware-Analysis Workflows: A Controlled Comparative Study}
 
 \author{
 \IEEEauthorblockN{Kevin Day}
-\IEEEauthorblockA{
-Metropolitan State University\\
-Email: kevin.ch.day@gmail.com}
+\IEEEauthorblockA{\textit{Computer Science and Cybersecurity} \\
+\textit{Metro State University}\\
+Saint Paul, MN, USA \\
+kevin.day@my.metrostate.edu\\
+0009-0000-7556-7421}
+\and
+\IEEEauthorblockN{Khaled Rabieh}
+\IEEEauthorblockA{\textit{Computer Science and Cybersecurity} \\
+\textit{Metro State University}\\
+Saint Paul, MN, USA \\
+khaled.rabieh@metrostate.edu\\
+0000-0003-2828-6971}
+\and
+\IEEEauthorblockN{Faisal Kaleem}
+\IEEEauthorblockA{\textit{Computer Science and Cybersecurity} \\
+\textit{Metro State University}\\
+Saint Paul, MN, USA \\
+faisal.kaleem@metrostate.edu\\
+0000-0001-6780-1759}
+\and
+\IEEEauthorblockN{Mohamed Baza}
+\IEEEauthorblockA{\textit{Computer Science} \\
+\textit{College of Charleston}\\
+Charleston, SC, USA \\
+bazam@cofc.edu  \\
+0000-0001-5153-8693}
 }
 
 \maketitle
 
 \begin{abstract}
-TODO: Write a 150--250 word summary of the problem, method, main findings, and contribution. For a seven-page IEEE paper, the abstract should be direct and avoid background detail.
+This paper presents a defensive, controlled-study framework for comparing baseline and
+AI-assisted malware-analysis workflows. We do not attempt to infer real-world AI authorship
+from compiled artifacts; instead, we evaluate whether explicitly defined workflow conditions
+produce measurable differences in static indicators, behavioral traces, and detection outcomes.
+The study design uses matched tasks, explicit provenance labeling, and consistent analysis
+practices to produce defensible evidence under controlled conditions. The results section is
+structured to separate observable findings from interpretation, with emphasis on which metrics
+support practical defensive decisions. By focusing on reproducibility, safety boundaries, and
+limitations, this work is intended as a foundation for responsible cybersecurity research that
+supports improved analysis and detection readiness without enabling misuse.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Artificial intelligence, malware analysis, cybersecurity research, defensive evaluation, large language models
+cybersecurity, AI-assisted analysis, malware analysis, static analysis, dynamic analysis, detection evaluation, research methodology
 \end{IEEEkeywords}
 
+% IEEE paper organization guidance for a 7-page conference submission.
+% Target section order and pacing:
+% 01 Intro  ~1.0 pp
+% 02 Related Work ~1.0 pp
+% 03 RQ + Design ~0.9 pp
+% 04 Methodology ~1.3 pp
+% 05 Results ~1.6 pp
+% 06 Discussion+Limits ~1.0 pp
+% 07 Conclusion+Future Work ~0.5 pp
 \input{sections/01_introduction}
 \input{sections/02_background_related_work}
 \input{sections/03_research_questions_study_design}
@@ -35,12 +89,19 @@ Artificial intelligence, malware analysis, cybersecurity research, defensive eva
 \input{sections/05_results}
 \input{sections/06_discussion}
 \input{sections/07_conclusion}
-
+\input{sections/08_acknowledgment}
+\ifthenelse{\boolean{useBibTeX}}{
+\bibliographystyle{IEEEtran}
+\bibliography{references/references}
+}{%
+\section*{References}
 \begin{thebibliography}{1}
-
+% Build-safe placeholder: keep pdflatex-only builds working during drafting.
+% Migration path when references are ready:
+% set useBibTeX=true and replace with IEEE-ready entries.
 \bibitem{placeholder}
 A. Author, ``Placeholder reference,'' 2026. Replace this placeholder with real IEEE references before submission.
-
 \end{thebibliography}
+}
 
 \end{document}
