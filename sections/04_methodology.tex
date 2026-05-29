@@ -1,0 +1,27 @@
+\section{Methodology}
+
+% IEEE target for 7-page paper: ~1.2--1.4 pages.
+% Include enough detail for reproducibility and future extension.
+
+\subsection{Artifact and Dataset Protocol}
+TODO: Document the source, inclusion criteria, and labeling policy.
+\begin{itemize}
+  \item Artifact identifiers and provenance
+  \item Inclusion/exclusion rules
+  \item Baseline vs AI-assisted condition assignment
+  \item Environment constraints and safety boundaries
+\end{itemize}
+
+\subsection{Static Analysis}
+TODO: Define static indicators and tooling.
+Track static indicators that are likely to be meaningful for defensive workflows, such as metadata fields,
+string features, API-call profiles, imported modules, and entropy distributions.
+
+\subsection{Dynamic and Behavioral Analysis}
+TODO: Define controlled execution procedure and telemetry capture.
+Collect runtime signals in isolation, including process-level activity, file/object modifications,
+network attempts, and alert output from detection systems.
+
+\subsection{Comparative Evaluation}
+TODO: Specify comparison metrics and reporting.
+Compare both conditions on paired metrics (baseline vs AI-assisted), using the same template for each item and the same analyst review rubric.
