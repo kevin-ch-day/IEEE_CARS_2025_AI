@@ -1,14 +1,20 @@
-﻿# IEEE CARS 2025/2026 AI-Assisted Cybersecurity Paper
+﻿# IEEE CARS 2026 AI-Assisted Cybersecurity Paper Scaffold
 
-This repository contains an IEEE conference-paper scaffold for a defensive AI-assisted malware/cybersecurity research manuscript.
+This repository contains an IEEE conference-paper scaffold for a defensive AI-assisted malware/cybersecurity research manuscript intended for [IEEE CARS 2026](https://www.ieee-cars.org/).
 The project is intentionally scoped to **analysis and defensive research framing only** (no exploit-building, evasive guidance, payload code, or operational malware workflow content).
+
+Author pages and conference rules were cross-checked against:
+- [IEEE CARS 2026 authors and formatting guidance](https://www.ieee-cars.org/authors)
+- [IEEE CARS call for papers](https://www.ieee-cars.org/call-for-papers)
 
 ## Repository layout
 
 - `main.tex` — IEEE conference paper driver file (`\documentclass[conference]{IEEEtran}`)
 - `title.tex` — paper title (single source)
 - `abstract.tex` — abstract (single source)
+- `keywords.tex` — keywords (single source)
 - `authors.tex` — author block (single source)
+- `paper_outline.tex` — section order and IEEE CARS pacing guidance
 - `sections/` — paper body split into modular files:
   - `01_introduction.tex`
   - `02_background_related_work.tex`
@@ -17,11 +23,13 @@ The project is intentionally scoped to **analysis and defensive research framing
   - `05_results.tex`
   - `06_discussion.tex`
   - `07_conclusion.tex`
+  - `08_acknowledgment.tex`
+  - `09_references.tex`
 - `references/references.bib` — bibliography file placeholder (for future real citations)
 - `template/` — IEEE template and sample files
 - `figures/` — paper figures
 - `.gitignore` and `.gitattributes` — clean source control and line ending normalization
-- `IEEEtran.cls` — conference class at repo root
+- `IEEEtran.cls` — conference class file at repo root
 
 ## Build instructions
 
@@ -32,6 +40,8 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
+This path is for draft scaffolding and is controlled via `\setboolean{useBibTeX}{false}` in `main.tex`.
+
 If/when real citations are added and `\cite{}` calls are introduced, switch to BibTeX workflow:
 
 ```bash
@@ -40,6 +50,15 @@ bibtex main
 pdflatex main.tex
 pdflatex main.tex
 ```
+
+## IEEE CARS 2026 policy notes (for pre-submission)
+
+- Full-paper submission is IEEE 2-column conference format.
+- Paper length: **6 pages (base limit)**.
+- Extra pages (7–9) are available with extra-page charges.
+- Submissions must be original and not under review elsewhere.
+- Camera-ready stage includes IEEE PDF eXpress validation (Conference ID: 70730X).
+- Current workflow keeps all front matter split into separate files for safe iterative edits.
 
 ## Research scope and safety posture
 
@@ -52,20 +71,20 @@ The intended framing is:
 - detection/analysis outcomes
 - limitations and ethics
 
-The scaffold supports a paper-first, defensively oriented workflow: clear threat-model framing, controlled experiments, and explicit limitations.
+The scaffold is intentionally paper-first and defensive: clear threat-model framing, controlled experiments, and explicit limitations.
 
 ## Branch and merge workflow
 
 - `main` is the canonical branch for consolidated work.
 - Feature/integration branches should be short-lived and merged via PR or squash into `main`.
-- After a branch is fully merged, delete it locally and remotely to keep history clean.
+- After merge, delete stale branches locally and in GitHub to avoid clutter.
 
 ### Current status
 
-- Mainline includes the Overleaf/cleanup integration.
-- Stale branches used during this phase (`paper-structure-cleanup`, `overleaf-2026-05-29-0655`) have been merged and removed.
+- Branches used during this cleanup phase are expected to be merged and removed.
+- `main` is the source of truth for ongoing writing.
 
 ## Author and template notes
 
-- Author and front-matter blocks are split into dedicated files (`authors.tex`, `title.tex`, `abstract.tex`) to match IEEE submission expectations and make iterative writing easier.
-- If title/abstract/author formatting needs a final submission pass, keep all edits in these dedicated files and include them from `main.tex`.
+- Title/abstract/keywords/authors are split into dedicated files to match IEEE workflow and simplify submission edits.
+- If final submission formatting is needed, keep final typography changes in these dedicated files and include them from `main.tex`.
