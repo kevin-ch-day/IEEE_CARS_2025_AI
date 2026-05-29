@@ -1,0 +1,19 @@
+﻿\section{Methodology}
+
+The methodology consists of four stages: artifact preparation, static analysis, dynamic or behavioral analysis, and comparative evaluation.
+
+\subsection{Artifact Preparation}
+
+The study begins by defining baseline and AI-assisted conditions. The baseline condition represents manually developed, manually modified, or known reference artifacts. The AI-assisted condition represents artifacts created or modified with documented AI assistance. Each artifact is assigned a unique identifier and stored with metadata describing its source, condition, and analysis status.
+
+\subsection{Static Analysis}
+
+Static analysis records structural and metadata-level properties of each artifact. These may include file hashes, file size, imported functions, embedded strings, compiler artifacts, entropy, code structure, suspicious API usage, and other features relevant to defensive analysis.
+
+\subsection{Dynamic or Behavioral Analysis}
+
+Where appropriate, artifacts are executed in a controlled environment to observe runtime behavior. The environment should be isolated from production systems and configured to capture relevant telemetry. Possible measurements include process behavior, file-system changes, network connections, persistence attempts, and security-tool alerts.
+
+\subsection{Evaluation Metrics}
+
+The evaluation compares baseline and AI-assisted conditions using measurable indicators. These may include detection counts, behavioral differences, static-feature differences, and qualitative analyst observations.
