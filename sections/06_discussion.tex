@@ -1,21 +1,17 @@
 \section{Discussion and Limitations}
 
-% IEEE CARS 2026 target baseline: 6-page conference paper.
-% Target for this section: ~0.8--1.0 pages.
-% This is the place for interpretation, implications, and caveats.
+The cutoff model addresses a practical research problem: a live all-current-build queue is not stable enough to be the rough-draft gate when consumer apps update during collection. Without a cutoff, the study can enter a loop where evidence is valid when collected but appears operationally incomplete after the installed app changes. Paper 3 breaks that loop by freezing selected build-backed evidence bundles and treating later current-build refresh as future work.
 
-This section should interpret results only within the stated controlled conditions.
-It should avoid causal claims beyond the comparison design and avoid unsupported
-provenance assertions.
+This approach does not weaken the evidence model. It makes the evidence model more explicit. Every paper-usable row is tied to version identity, static run identifiers, dynamic run identifiers, APK hashes, packet-capture availability, and quality-assurance provenance. Readers can distinguish strict current-build rows from mixed current-build rows and retained prior-build rows. That distinction is more defensible than collapsing all evidence into a single ``complete'' label.
 
-\subsection{Interpretation}
-TODO: Summarize what each observed difference means for defensive analysis and prioritization.
+Drift is therefore not evidence loss. If a selected evidence bundle was collected from version code X and the app later updated to version code Y, the version-X evidence remains valid for claims about the selected version-X bundle. What changes is the operational queue state: version Y becomes a candidate for future refresh or longitudinal comparison. The study's contribution is to make that boundary visible.
 
-\subsection{Safety and Ethics}
-TODO: Restate the defensive scope, safe handling requirements, and responsible-use framing.
-Examples: isolated analysis environments, no harmful reproduction steps, and explicit
-alignment with defensive objectives.
+Static and dynamic evidence complement each other in this model. Static analysis identifies declared capabilities, component exposure, network/security posture, strings, endpoint hints, and risk-relevant app structure. Dynamic analysis shows which behaviors and services appear during baseline, QFG, and interactive capture windows. Linking the two through static run identifiers, dynamic run identifiers, APK hashes, and package/version identity lets the paper discuss observed behavior without losing sight of the app's declared and embedded surface.
 
-\subsection{Limitations}
-TODO: Document threat-model scope, dataset size effects, tool dependence, and
-environmental bias. Clarify what cannot be generalized from this dataset.
+The QFG category is especially important for modern social and media apps. A no-touch foreground app can still load feeds, refresh content, synchronize services, or maintain communication state. Treating those captures as strict idle would overstate baseline quietness. Treating them as invalid would discard meaningful app-driven behavior. This paper instead reports QFG as its own class: valid no-touch foreground evidence, but not strict idle.
+
+The study has several limitations. It is not an exact reproduction of the earlier static-only and dynamic-only predecessor papers. It expands the cohort, regenerates evidence, and introduces a cutoff evidence model. The final cutoff also does not mean that all 15 apps were current-build complete or that the full operational quota was complete. The correct claim is that all 15 apps had paper-usable build-backed evidence at cutoff.
+
+Prior-build evidence has a necessary caveat. It is paper-usable when static-linked, PCAP-backed, QA-valid, and labeled with version provenance, but it is not equivalent to current-build evidence. Interactive-depth coverage also varies across apps. Some selected evidence bundles contain full interactive coverage, while others are paper-usable through baseline, QFG, retained prior-build, or limited interactive evidence. The paper therefore avoids claims that require identical interactive depth across every app.
+
+Finally, the study is bounded by a single-device, Android 15, non-root setting. That setting is deliberate and realistic for non-invasive behavioral measurement, but it limits claims about other Android versions, OEMs, devices, rooted instrumentation, and alternate account states. Static detector caveats, resource parsing caveats, unresolved service mappings, and dynamic signal limitations should be retained in future expanded analyses.
