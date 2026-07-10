@@ -1,0 +1,63 @@
+\section{Results}
+
+The final cutoff-window evidence bundle supports the core empirical claim: all 15 Research Dataset Beta apps had recent, build-backed static and runtime evidence at cutoff. The selected dynamic evidence was collected within the 14-day window ending July 9, 2026, and the cutoff contained zero true evidence holes. This result should be interpreted as evidence availability for recent selected builds, not as a claim that app-store updates stopped or that every app remained on the exact same installed build after its capture.
+
+\begin{table}[htbp]
+\caption{Cutoff-window evidence summary.}
+\label{tab:cutoff-window-summary}
+\centering
+\begin{tabular}{lr}
+\toprule
+Metric & Count \\
+\midrule
+Apps with recent build-backed evidence & 15/15 \\
+Apps with selected evidence in 14-day window & 15/15 \\
+True evidence holes & 0 \\
+PCAP-backed dynamic runs & 123 \\
+Strict idle captures & 44 \\
+Quiescent foreground captures & 23 \\
+Interactive captures & 56 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The evidence availability result is a provenance control, not the main privacy/security finding. It establishes that every app-level result below is tied to a selected package version, APK set, static run, dynamic run set, PCAP availability, and QA outcome. The selected bundles include 123 PCAP-backed dynamic runs: 44 strict idle captures, 23 quiescent foreground captures, and 56 interactive captures.
+
+\begin{table*}[t]
+\caption{Research Dataset Beta selected evidence bundles at cutoff. Runtime classes are strict idle/quiescent foreground/interactive.}
+\label{tab:cohort-evidence-bundles}
+\centering
+\scriptsize
+\begin{tabular}{llrccr}
+\toprule
+App & Version & Last capture & I/Q/Int & PCAPs & Static risk \\
+\midrule
+BBC News & 2026.5.0 & Jul. 7 & 4/0/6 & 10 & 0.72 \\
+CNN & 26.13.0 & Jul. 9 & 4/1/7 & 12 & 0.12 \\
+LinkedIn & 4.1.1218 & Jul. 9 & 3/1/4 & 8 & 4.08 \\
+Telegram & 12.8.3 & Jul. 9 & 3/0/4 & 7 & 6.59 \\
+Signal & 8.18.2 & Jul. 9 & 3/0/4 & 7 & 5.52 \\
+Pinterest & 14.26.0 & Jul. 9 & 5/0/2 & 7 & 2.84 \\
+Snapchat & 14.14.0.43 & Jul. 9 & 1/2/2 & 5 & 6.04 \\
+Facebook & 567.1.0.52.74 & Jul. 6 & 3/1/4 & 8 & 6.00 \\
+Messenger & 567.1.0.53.87 & Jul. 7 & 4/0/5 & 9 & 5.88 \\
+Guardian & 6.226.23011 & Jul. 6 & 3/2/4 & 9 & 0.74 \\
+Instagram & 436.0.0.41.73 & Jul. 7 & 2/4/1 & 7 & 5.48 \\
+Reddit & 2026.26.0 & Jul. 9 & 2/3/1 & 6 & 3.16 \\
+X & 12.5.0-release.0 & Jul. 6 & 3/1/4 & 8 & 4.48 \\
+WhatsApp & 2.26.25.80 & Jul. 6 & 4/0/5 & 9 & 7.55 \\
+TikTok & 45.7.3 & Jul. 6 & 0/8/3 & 11 & 4.40 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{assets/figures/runtime_coverage_by_app.png}
+\caption{Runtime evidence coverage by app at cutoff. Strict idle, quiescent foreground, and interactive captures are kept separate.}
+\label{fig:runtime-coverage}
+\end{figure*}
+
+The table shows why runtime class separation matters more than live update status. Pinterest and Snapchat both have recent selected-build evidence, but their evidence must separate strict idle, QFG/no-touch foreground, and interactive classes. For Snapchat, the selected bundle includes one strict idle baseline, two QFG captures, and two interactive captures. These are usable for the study only when QFG is reported as app-driven foreground activity rather than strict idle.
+
+The dynamic evidence-class table also shows that recent evidence does not imply identical runtime depth. Some apps have strong strict-idle and interactive coverage, while others have meaningful QFG evidence or limited interactive coverage. TikTok, for example, has QFG-heavy recent evidence and should not be described as strict-idle complete. Snapchat has recent selected-build evidence, but it should not be over-summarized as strictly idle-complete.
