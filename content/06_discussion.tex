@@ -10,7 +10,7 @@ Static and dynamic evidence complement each other in this model. Static analysis
 
 The QFG category is especially important for modern social and media apps. A no-touch foreground app can still load feeds, refresh content, synchronize services, or maintain communication state. Treating those captures as strict idle would overstate baseline quietness. Treating them as invalid would discard meaningful app-driven behavior. This paper instead reports QFG as its own class: valid no-touch foreground evidence, but not strict idle.
 
-The study has several limitations. It is not an exact reproduction of the earlier static-only and dynamic-only predecessor papers. It expands the cohort, regenerates evidence, and introduces a recent cutoff-window evidence model. The final cutoff also does not mean that app-store updates stopped or that the full operational quota was complete. The correct claim is that all 15 apps had recent build-backed evidence at cutoff.
+The study has several limitations. It is bounded by its 15-app cohort, single device, Android 15 environment, selected user scenarios, and July 2026 cutoff window. The final cutoff also does not mean that app-store updates stopped or that every possible runtime behavior was exercised. The correct claim is that all 15 apps had recent build-backed evidence at cutoff.
 
 Interactive-depth coverage also varies across apps. Some selected evidence bundles contain stronger interactive coverage, while others are supported by baseline, QFG, or limited interactive evidence. The paper therefore avoids claims that require identical interactive depth across every app.
 
