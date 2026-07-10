@@ -26,3 +26,7 @@ network attempts, and alert output from detection systems.
 \subsection{Comparative Evaluation}
 TODO: Specify comparison metrics and reporting.
 Compare both conditions on paired metrics (baseline vs AI-assisted), using the same template for each item and the same analyst review rubric.
+
+\subsection{Limitations}
+
+A key challenge in this study was the churn of update of the app. During collection, several apps updated before the entire group could be completed on the same live installed-build state. Apps that had valid baseline or interactive evidence could later appear incomplete in the operational queue after a new version was installed. Treating the live current-build queue as the paper-readiness gate would therefore create a moving target. To avoid this problem, the study closes collection at a fixed cutoff and assembles app-level evidence bundles tied to package name, version code/name, APK hashes, static run identifiers, dynamic run identifiers, PCAP availability, and QA provenance.

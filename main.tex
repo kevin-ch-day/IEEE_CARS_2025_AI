@@ -1,10 +1,12 @@
 \documentclass[conference]{IEEEtran}
+
 \IEEEoverridecommandlockouts
-% Template compatibility note:
-% Keep these two lines for IEEE CARS 2026 margin/EDAS compliance.
+
+% IEEE CARS 2026 margin/EDAS compatibility.
 \addtolength{\topmargin}{0.02in}
 \addtolength{\textheight}{-0.02in}
 
+% Core packages
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -14,23 +16,25 @@
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
-\usepackage{ifthen}
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-% Draft mode default keeps the paper compiling without BibTeX.
-\newboolean{useBibTeX}
-\setboolean{useBibTeX}{false}
 
 \begin{document}
+
+% Title, authors, abstract, and keywords
 \input{preliminary/00_paper_header}
 
+% Main paper sections
 \input{sections/01_introduction}
-\input{sections/02_background_related_work}
-\input{sections/03_research_questions_study_design}
+\input{sections/02_background}
 \input{sections/04_methodology}
 \input{sections/05_results}
 \input{sections/06_discussion}
 \input{sections/07_conclusion}
-\input{sections/09_references}
+
+% IEEE bibliography
+\bibliographystyle{IEEEtran}
+\bibliography{references/references}
 
 \end{document}

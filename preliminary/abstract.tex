@@ -1,16 +1,7 @@
 \begin{abstract}
-This paper presents a defensive, controlled-study framework for comparing baseline and
-AI-assisted malware-analysis workflows. We do not attempt to infer real-world AI authorship
-from compiled artifacts; instead, we evaluate whether explicitly defined workflow conditions
-produce measurable differences in static indicators, behavioral traces, and detection outcomes.
-The study design uses matched tasks, explicit provenance labeling, and consistent analysis
-practices to produce defensible evidence under controlled conditions. The results section is
-structured to separate observable findings from interpretation, with emphasis on which metrics
-support practical defensive decisions. By focusing on reproducibility, safety boundaries, and
-limitations, this work is intended as a foundation for responsible cybersecurity research that
-supports improved analysis and detection readiness without enabling misuse.
+Android consumer applications (apps) provide everyday services such as news, social networking, messaging, and personalized content delivery, but these capabilities also introduce privacy and security exposure through permissions, exported components, storage access, embedded services, and network behavior. This paper presents an empirical assessment of privacy and security risk in Android consumer apps using ScytaleDroid, a database-backed Android analysis platform. The study evaluates 15 different apps using build-backed evidence bundles that preserve APK hashes, package versions, static run identifiers, dynamic run identifiers, PCAP availability, and quality-assurance provenance. Static analysis examines manifest declarations, permission posture, component exposure, detector findings, string and resource indicators, and MASVS-aligned risk areas across harvested base and split APK artifacts. Runtime analysis complements the static evidence with idle, quiescent foreground, and interactive captures collected from a non-root physical Android device. The results show that consumer apps expose measurable static risk surfaces while also exhibiting distinct runtime behavior patterns that are not visible from static evidence alone. The study further shows that app-update churn makes all-current-build completion impractical as a paper gate; fixed cutoff evidence bundles provide a more reproducible and auditable basis for reporting. In general, the paper demonstrates how database-backed research cohorts improve repeatability, provenance, and interpretation in privacy and security studies.
 \end{abstract}
 
 \begin{IEEEkeywords}
-cybersecurity, AI-assisted analysis, malware analysis, static analysis, dynamic analysis, detection evaluation, research methodology
+Android security, mobile application privacy, static analysis, runtime analysis, dynamic analysis, APK analysis, MASVS, privacy risk, security risk, research cohorts
 \end{IEEEkeywords}

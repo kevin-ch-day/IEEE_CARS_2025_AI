@@ -1,28 +1,17 @@
 \section{Introduction}
 
-% IEEE CARS 2026 target baseline: 6-page conference paper.
-% Target for this section: ~0.85--1.0 pages.
-% This section should define the problem, scope, and contribution clearly.
-% Suggested flow: motivation, gap, contribution, and roadmap.
+Android applications (apps) used for social networking, messaging, news, browsing, and media consumption handle large amounts of personal and behavioral data. These apps are not necessarily malicious, but their permissions, exported components, storage behavior, embedded web content, third-party integrations, and network activity can create privacy and security exposure. Because these apps are widely installed and frequently updated, their risk posture is difficult to evaluate using one-time inspection alone. A reproducible assessment must preserve not only what was found, but also which app version, APK artifacts, static run, dynamic run, and runtime evidence produced the result.
 
-AI-assisted tools are increasingly used in cybersecurity workflows for triage, reporting,
-explanation, and research support. This raises an operational question for defenders:
-what measurable differences, if any, emerge when analysis work is performed under
-documented AI-assisted conditions versus baseline conditions.
+Static and dynamic analysis provide different but complementary forms of evidence. Static analysis identifies declared capabilities and configuration choices before execution, including permissions, manifest attributes, exported components, network security settings, storage flags, and MASVS-aligned findings. Dynamic analysis observes runtime behavior, including network activity during idle, foreground, and interactive use. Static evidence describes the potential exposure surface, while dynamic evidence helps show how an app behaves under controlled use. Combining these views is especially important for privacy-oriented analysis because declared access and realized behavior do not always align.
 
-In this paper, we adopt a defensive, controlled research framing. The objective is not
-to infer provenance of malware samples or describe offensive construction workflows. Instead,
-we compare measurable outcomes under two known conditions and report differences that are
-useful for detection engineering and analyst workflows.
+This paper presents a static and dynamic security evidence study of 15 Android apps spanning social media, messaging, and news. The goal is to evaluate privacy and security-relevant exposure across mainstream consumer apps while preserving enough provenance for the study to be audited and rerun. The analysis is performed with ScytaleDroid, a database-backed Android app analysis platform that links harvested APK artifacts, static findings, dynamic evidence packs, packet-capture availability, and quality-assurance status. Rather than treating the app list as an informal sample, the study organizes each app as a build-backed evidence target.
 
-The contributions are:
+At the final cutoff, all 15 apps had paper-usable, build-backed evidence bundles, and no true evidence holes remained. This does not mean that all 15 apps were current-build complete. Instead, the paper reports evidence tiers: strict current-build complete, current-build mixed-baseline, and retained prior-build paper evidence. This distinction allows the study to remain honest about live app updates while still preserving valid evidence collected from known builds. This paper makes the following contributions:
 \begin{itemize}
-  \item A defensive, conference-style scaffold for studying AI-assisted cybersecurity workflows.
-  \item A clear condition-level methodology (baseline vs. AI-assisted) with reproducible metadata tracking.
-  \item A structured set of static, dynamic, and detection-oriented metrics for comparative analysis.
+    \item We present a 15-app Android consumer-app study covering social media, messaging, and news apps using combined static and dynamic evidence.
+    \item We introduce a cutoff-based evidence model that separates operational current-build collection status from paper-ready build/version-backed evidence.
+    \item We preserve package, version, APK hash, static run, dynamic run, PCAP, and QA provenance for app-level privacy and security claims.
+    \item We report strict idle, quiescent foreground, and interactive dynamic captures as separate evidence classes to avoid treating app-driven foreground traffic as strict idle behavior.
 \end{itemize}
 
-The paper is organized as follows: Section II summarizes background and related work,
-Section III states the research questions and study design, Section IV details the method,
-Section V presents results, Section VI discusses implications and limitations, and
-Section VII concludes with future research directions.
+The remainder of this paper is organized as follows. Section~II provides background on Android static and dynamic analysis. Section~III describes the cohort, evidence model, static pipeline, and dynamic pipeline. Section~IV presents the results. Section~V discusses app-update churn and provenance-aware evidence collection. Section~VI presents limitations and future work, and Section~VII concludes.
