@@ -1,6 +1,6 @@
 # Paper 2 Dynamic Behavior Bridge
 
-This bridge maps the earlier dynamic-analysis concepts onto the current 15-app evidence package without claiming an exact reproduction.
+This bridge maps the earlier dynamic-analysis concepts onto the current 15-app evidence package without claiming that the original published RDI tables were regenerated.
 
 ## Current Dynamic Coverage
 
@@ -14,9 +14,9 @@ This bridge maps the earlier dynamic-analysis concepts onto the current 15-app e
 ## Safe Wording
 
 - Use: baseline-relative runtime behavior.
-- Use: dynamic-deviation proxy based on PCAP-derived traffic-shape and TLS-fingerprint features.
+- Use: baseline-relative traffic-shape evidence based on PCAP-derived traffic-shape and TLS-fingerprint features.
 - Use: static exposure and runtime behavior are complementary evidence layers.
-- Avoid: exact RDI reproduction, payload inspection, malware labeling, causal attribution, or static posture predicting runtime deviation.
+- Avoid: original RDI-table regeneration claims, payload inspection, malware labeling, causal attribution, or static posture predicting runtime deviation.
 
 ## Highest-Signal Metric Shifts
 

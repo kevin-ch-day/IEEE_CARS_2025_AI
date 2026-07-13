@@ -1,4 +1,4 @@
-% Paper 2-style dynamic behavior bridge. This is baseline-relative runtime evidence, not an exact RDI reproduction.
+% Baseline-relative runtime bridge from the published Paper #2 method family.
 
 \begin{table*}[t]
 \centering
@@ -20,8 +20,8 @@ unique\_ja4\_count & 9 & 8 & 4 & 8 & 0.704 \\
 
 \begin{table*}[t]
 \centering
-\caption{App-level dynamic-deviation proxy summary.}
-\label{tab:dynamic_deviation_proxy}
+\caption{App-level baseline-relative traffic-shape summary.}
+\label{tab:baseline_relative_traffic_shape}
 \small
 \begin{tabular}{llllll}
 \hline
@@ -40,4 +40,4 @@ X & 24 & 4 & pcap\_bytes & large & 0.001 \\
 \end{table*}
 
 
-The dynamic behavior exports support a baseline-relative runtime analysis: non-root PCAP-backed sessions are separated into baseline and interactive observations, then summarized using traffic-shape and TLS-fingerprint features. The current manuscript reports these as dynamic-deviation proxy evidence rather than exact Runtime Deviation Index values, because the selected publication bundle is based on aggregate baseline-vs-interactive feature summaries.
+The dynamic behavior exports support a baseline-relative runtime analysis: non-root PCAP-backed sessions are separated into baseline and interactive observations, then summarized using traffic-shape and TLS-fingerprint features. The current manuscript reports these as baseline-relative traffic-shape evidence, because the selected publication bundle is based on aggregate baseline-vs-interactive feature summaries rather than the original published RDI tables.
