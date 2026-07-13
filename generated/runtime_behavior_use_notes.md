@@ -1,6 +1,6 @@
-# Paper 2 Dynamic Behavior Bridge
+# Runtime Behavior Method Bridge
 
-This bridge maps the earlier dynamic-analysis concepts onto the current 15-app evidence package without claiming that the original published RDI tables were regenerated.
+This bridge maps earlier dynamic-analysis concepts onto the current 15-app evidence package without claiming that the original published RDI tables were regenerated.
 
 ## Current Dynamic Coverage
 
