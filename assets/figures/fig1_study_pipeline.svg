@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-07-10T12:33:55.393841</dc:date>
+    <dc:date>2026-07-12T12:23:55.219223</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -36,7 +36,7 @@ L 95.5872 50.070757
 L 15.2352 50.070757 
 L 15.2352 108.615397 
 z
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_3">
     <path d="M 115.6752 108.615397 
@@ -45,7 +45,7 @@ L 196.0272 50.070757
 L 115.6752 50.070757 
 L 115.6752 108.615397 
 z
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 216.1152 108.615397 
@@ -54,7 +54,7 @@ L 296.4672 50.070757
 L 216.1152 50.070757 
 L 216.1152 108.615397 
 z
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 316.5552 108.615397 
@@ -63,34 +63,34 @@ L 396.9072 50.070757
 L 316.5552 50.070757 
 L 316.5552 108.615397 
 z
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #334155; stroke-width: 1.2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
     <path d="M 97.583249 79.343077 
 Q 105.628778 79.343077 112.556274 79.343077 
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
     <path d="M 107.756274 76.943077 
 L 112.556274 79.343077 
 L 107.756274 81.743077 
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
    </g>
    <g id="patch_7">
     <path d="M 198.023249 79.343077 
 Q 206.068778 79.343077 212.996274 79.343077 
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
     <path d="M 208.196274 76.943077 
 L 212.996274 79.343077 
 L 208.196274 81.743077 
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
    </g>
    <g id="patch_8">
     <path d="M 298.463249 79.343077 
 Q 306.508778 79.343077 313.436274 79.343077 
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
     <path d="M 308.636274 76.943077 
 L 313.436274 79.343077 
 L 308.636274 81.743077 
-" clip-path="url(#pa17dee25bb)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+" clip-path="url(#p1f6d61ac32)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
    </g>
    <g id="text_1">
     <!-- APK harvest -->
@@ -1153,7 +1153,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pa17dee25bb">
+  <clipPath id="p1f6d61ac32">
    <rect x="7.2" y="20.798437" width="401.76" height="121.968"/>
   </clipPath>
  </defs>

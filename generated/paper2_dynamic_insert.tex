@@ -1,0 +1,43 @@
+% Paper 2-style dynamic behavior bridge. This is baseline-relative runtime evidence, not an exact RDI reproduction.
+
+\begin{table*}[t]
+\centering
+\caption{Baseline-relative runtime metric shifts across apps.}
+\label{tab:dynamic_metric_shifts}
+\small
+\begin{tabular}{llllll}
+\hline
+Metric & Apps & +Delta & p<=0.05 & Large & |Cliff| \\
+\hline
+packets\_per\_second & 9 & 9 & 8 & 9 & 0.929 \\
+pcap\_bytes & 9 & 9 & 8 & 9 & 0.9 \\
+unique\_ja3\_count & 9 & 9 & 4 & 8 & 0.667 \\
+unique\_ja4\_count & 9 & 8 & 4 & 8 & 0.704 \\
+\hline
+\end{tabular}
+\end{table*}
+
+
+\begin{table*}[t]
+\centering
+\caption{App-level dynamic-deviation proxy summary.}
+\label{tab:dynamic_deviation_proxy}
+\small
+\begin{tabular}{llllll}
+\hline
+App & Base & Int & Strongest shift & Effect & p \\
+\hline
+BBC News & 9 & 9 & packets\_per\_second & large & 0.003 \\
+CNN & 8 & 9 & pcap\_bytes & large & 0.001 \\
+Facebook Msg & 10 & 8 & packets\_per\_second & large & 8.00e-04 \\
+LinkedIn & 7 & 2 & packets\_per\_second & large & 0.028 \\
+The Guardian & 11 & 5 & packets\_per\_second & large & 0.005 \\
+TikTok & 14 & 4 & pcap\_bytes & large & 0.002 \\
+WhatsApp & 7 & 9 & packets\_per\_second & large & 0.022 \\
+X & 24 & 4 & pcap\_bytes & large & 0.001 \\
+\hline
+\end{tabular}
+\end{table*}
+
+
+The dynamic behavior exports support a baseline-relative runtime analysis: non-root PCAP-backed sessions are separated into baseline and interactive observations, then summarized using traffic-shape and TLS-fingerprint features. The current manuscript reports these as dynamic-deviation proxy evidence rather than exact Runtime Deviation Index values, because the selected publication bundle is based on aggregate baseline-vs-interactive feature summaries.

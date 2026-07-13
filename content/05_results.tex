@@ -30,26 +30,28 @@ The evidence availability result is a provenance control, not the main privacy/s
 \scriptsize
 \begin{tabular}{llrccr}
 \toprule
-App & Version & Last capture & I/Q/Int & PCAPs & Static risk \\
+App & Version & Last capture & I/Q/Int & PCAPs & High+Med \\
 \midrule
-BBC News & 2026.5.0 & Jul. 7 & 4/0/6 & 10 & 0.72 \\
-CNN & 26.13.0 & Jul. 9 & 4/1/7 & 12 & 0.12 \\
-LinkedIn & 4.1.1218 & Jul. 9 & 3/1/4 & 8 & 4.08 \\
-Telegram & 12.8.3 & Jul. 9 & 3/0/4 & 7 & 6.59 \\
-Signal & 8.18.2 & Jul. 9 & 3/0/4 & 7 & 5.52 \\
-Pinterest & 14.26.0 & Jul. 9 & 5/0/2 & 7 & 2.84 \\
-Snapchat & 14.14.0.43 & Jul. 9 & 1/2/2 & 5 & 6.04 \\
-Facebook & 567.1.0.52.74 & Jul. 6 & 3/1/4 & 8 & 6.00 \\
-Messenger & 567.1.0.53.87 & Jul. 7 & 4/0/5 & 9 & 5.88 \\
-Guardian & 6.226.23011 & Jul. 6 & 3/2/4 & 9 & 0.74 \\
-Instagram & 436.0.0.41.73 & Jul. 7 & 2/4/1 & 7 & 5.48 \\
-Reddit & 2026.26.0 & Jul. 9 & 2/3/1 & 6 & 3.16 \\
-X & 12.5.0-release.0 & Jul. 6 & 3/1/4 & 8 & 4.48 \\
-WhatsApp & 2.26.25.80 & Jul. 6 & 4/0/5 & 9 & 7.55 \\
-TikTok & 45.7.3 & Jul. 6 & 0/8/3 & 11 & 4.40 \\
+BBC News & 2026.5.0 & Jul. 7 & 4/0/6 & 10 & 16 \\
+CNN & 26.13.0 & Jul. 9 & 4/1/7 & 12 & 25 \\
+LinkedIn & 4.1.1218 & Jul. 9 & 3/1/4 & 8 & 52 \\
+Telegram & 12.8.3 & Jul. 9 & 3/0/4 & 7 & 43 \\
+Signal & 8.18.2 & Jul. 9 & 3/0/4 & 7 & 35 \\
+Pinterest & 14.26.0 & Jul. 9 & 5/0/2 & 7 & 16 \\
+Snapchat & 14.14.0.43 & Jul. 9 & 1/2/2 & 5 & 325 \\
+Facebook & 567.1.0.52.74 & Jul. 6 & 3/1/4 & 8 & 166 \\
+Facebook Msg & 567.1.0.53.87 & Jul. 7 & 4/0/5 & 9 & 98 \\
+Guardian & 6.226.23011 & Jul. 6 & 3/2/4 & 9 & 22 \\
+Instagram & 436.0.0.41.73 & Jul. 7 & 2/4/1 & 7 & 127 \\
+Reddit & 2026.26.0 & Jul. 9 & 2/3/1 & 6 & 47 \\
+X & 12.5.0-release.0 & Jul. 6 & 3/1/4 & 8 & 83 \\
+WhatsApp & 2.26.25.80 & Jul. 6 & 4/0/5 & 9 & 104 \\
+TikTok & 45.7.3 & Jul. 6 & 0/8/3 & 11 & 74 \\
 \bottomrule
 \end{tabular}
 \end{table*}
+
+\noindent The High+Med column is the count of high- and medium-severity static findings for the selected app build. It is reported as a descriptive static-exposure indicator, not as a composite risk score or MASVS compliance grade.
 
 \begin{figure*}[t]
 \centering
@@ -61,3 +63,9 @@ TikTok & 45.7.3 & Jul. 6 & 0/8/3 & 11 & 4.40 \\
 The table shows why runtime class separation matters more than live update status. Pinterest and Snapchat both have recent selected-build evidence, but their evidence must separate strict idle, QFG/no-touch foreground, and interactive classes. For Snapchat, the selected bundle includes one strict idle baseline, two QFG captures, and two interactive captures. These are usable for the study only when QFG is reported as app-driven foreground activity rather than strict idle.
 
 The dynamic evidence-class table also shows that recent evidence does not imply identical runtime depth. Some apps have strong strict-idle and interactive coverage, while others have meaningful QFG evidence or limited interactive coverage. TikTok, for example, has QFG-heavy recent evidence and should not be described as strict-idle complete. Snapchat has recent selected-build evidence, but it should not be over-summarized as strictly idle-complete.
+
+\subsection{Baseline-Relative Runtime Behavior}
+
+The runtime exports also support a baseline-relative behavior view. Across the apps with baseline-to-interactive comparisons, traffic-volume metrics showed the clearest interaction-driven broadening: packet rate and PCAP-byte volume increased for all compared apps, with large effect bands in all compared cases and app-level permutation support in eight of nine comparisons. TLS-fingerprint diversity also broadened for most compared apps, but it should be interpreted as a metadata-level behavior signal, not as evidence of payload content or malicious behavior.
+
+\input{generated/paper2_dynamic_insert}
