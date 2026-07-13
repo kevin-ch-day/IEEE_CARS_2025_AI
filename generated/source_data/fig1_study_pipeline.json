@@ -3,13 +3,13 @@
     "15-app dataset",
     "APK harvest + split identity",
     "Static analysis",
-    "Dynamic idle/QFG/int",
-    "Evidence QA gate",
+    "Dynamic I/QFG/Int",
+    "Evidence QA + build gate",
     "14-day build selection",
     "Static-runtime alignment",
-    "Integrated measures",
+    "Integrated analysis",
     "Tables, figures, checksums"
   ],
-  "exclusion_branch": "Exclude or defer:; build mismatch; missing static/dynamic; invalid run",
+  "exclusion_branch": "Exclude/defer:; build mismatch; missing evidence; invalid run",
   "source": "scripts/generate_publication_assets.py"
 }

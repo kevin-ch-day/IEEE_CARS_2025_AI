@@ -1,6 +1,6 @@
 # Tables
 
-This directory contains the canonical manuscript table inputs and matching CSV exports. Regenerate them with:
+This directory contains generated LaTeX table assets and matching CSV exports. Tables I, II, IV, V-matrix, and VI are used by the manuscript. The full static exposure table and full 15-row integrated profile table are retained as supplemental/generated report assets, not duplicated in the main text. Regenerate all table assets with:
 
 ```bash
 python scripts/generate_publication_assets.py

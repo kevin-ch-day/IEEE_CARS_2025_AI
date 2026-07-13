@@ -15,12 +15,12 @@ Runtime collection used package-associated dynamic evidence packs and PCAP metad
 \subsection{Build Selection and Static-Runtime Alignment}
 For each app, ScytaleDroid selected a build group using package/version identity, base APK hash, static-run availability, dynamic-run availability, PCAP state, QA validity, and recency. Static and runtime rows were included only when the selected static and dynamic evidence aligned to the same selected build group. Runs with mismatched build identity, missing static evidence, missing dynamic evidence, invalid QA state, or insufficient signal were excluded or deferred.
 
-\begin{figure*}[t]
+\begin{figure}[!t]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig1_study_pipeline.pdf}
+\includegraphics[width=\columnwidth]{figures/fig1_study_pipeline.pdf}
 \caption{Study pipeline for exact-build-aligned static and runtime evidence. The QA gate excludes mismatched builds, missing evidence, and invalid or unqualified runs before integrated measurement.}
 \label{fig:study-pipeline}
-\end{figure*}
+\end{figure}
 
 \subsection{Integrated Measures and Statistical Analysis}
 Integrated analysis compares app-level static exposure with app-level runtime metadata. The paper reports descriptive counts, medians by evidence class, baseline-relative packet-rate shifts, and Spearman-style app-level associations only as exploratory summaries. For cross-layer grouping, apps are assigned by median split: high or lower static exposure using high/medium finding volume, and high or lower runtime activity using interactive domain count. No opaque composite risk score is introduced.

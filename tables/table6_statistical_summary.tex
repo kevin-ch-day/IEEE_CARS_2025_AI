@@ -1,18 +1,20 @@
-\begin{table}[t]
+\begin{table}[!t]
 \centering
 \caption{Compact descriptive statistical summary.}
 \label{tab:statistical-summary}
 \scriptsize
-\begin{tabular}{@{}p{0.35\columnwidth}p{0.18\columnwidth}p{0.34\columnwidth}@{}}
+\begin{tabular}{@{}p{0.68\columnwidth}r@{}}
 \toprule
-Metric & Value & Note \\
+Measure & Value \\
 \midrule
-Apps with selected evidence & 15 & 14-day window \\
-Selected dynamic runs & 123 & PCAP-backed selected runs \\
-Strict idle/QFG/interactive & 44/23/56 & Classes reported separately \\
-Baseline-relative eligible apps & 15 & Excluded: 0 app(s) \\
-Median log2 interactive/base pps shift & 3.39 & Strict idle else QFG baseline \\
-Spearman high+med vs interactive domains & 0.01 & Descriptive app-level association \\
+Selected apps & 15 \\
+Selected dynamic runs & 123 \\
+Strict idle/QFG/interactive & 44/23/56 \\
+Runtime-shift eligible apps & 15 \\
+Median log2 PPS shift & 3.39 \\
+Spearman rho, findings vs. domains & 0.01 \\
 \bottomrule
 \end{tabular}
+\vspace{1pt}
+\begin{flushleft}\scriptsize Runtime shift uses strict idle when available, otherwise QFG. Associations are descriptive.\end{flushleft}
 \end{table}

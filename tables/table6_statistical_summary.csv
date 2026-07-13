@@ -1,7 +1,7 @@
-Metric,Value,Note
-Apps with selected evidence,15,14-day window
-Selected dynamic runs,123,PCAP-backed selected runs
-Strict idle/QFG/interactive,44/23/56,Classes reported separately
-Baseline-relative eligible apps,15,Excluded: 0 app(s)
-Median log2 interactive/base pps shift,3.39,Strict idle else QFG baseline
-Spearman high+med vs interactive domains,0.01,Descriptive app-level association
+Measure,Value
+Selected apps,15
+Selected dynamic runs,123
+Strict idle/QFG/interactive,44/23/56
+Runtime-shift eligible apps,15
+Median log2 PPS shift,3.39
+"Spearman rho, findings vs. domains",0.01

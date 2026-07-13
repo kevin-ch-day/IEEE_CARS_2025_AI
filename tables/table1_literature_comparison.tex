@@ -1,9 +1,11 @@
-\begin{table*}[t]
+\begin{table*}[!t]
 \centering
 \caption{Comparison of related Android privacy and security studies.}
 \label{tab:literature-comparison}
-\tiny
-\begin{tabular}{@{}p{0.18\textwidth}p{0.075\textwidth}p{0.075\textwidth}p{0.10\textwidth}p{0.125\textwidth}p{0.115\textwidth}p{0.15\textwidth}@{}}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.15\textwidth}cccc>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
 Study & Static & Runtime & Privacy & Provenance & Scope & Limit \\
 \midrule
@@ -17,5 +19,5 @@ Privacy SDKs \cite{zhang2024privacysdks} & SDK config & Limited & SDK risk & SDK
 Android SAST \cite{zhu2024sastandroid} & Yes & No & Security findings & Tool/app & SAST tools & No runtime layer \\
 This study & Yes & Yes & Transport/provenance & Exact selected build & 15 apps & Scenario-bounded \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table*}
