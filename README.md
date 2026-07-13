@@ -11,7 +11,7 @@ Author pages and conference rules were cross-checked against:
 ## Repository layout
 
 - `main.tex` — IEEE conference paper driver file (`\documentclass[conference]{IEEEtran}`)
-- `frontmatter/` — title, authors, abstract, and IEEE keywords:
+- `preliminary/` — title, authors, abstract, and IEEE keywords:
   - `00_paper_header.tex`
   - `authors.tex`
   - `abstract.tex`
@@ -24,7 +24,8 @@ Author pages and conference rules were cross-checked against:
   - `06_discussion.tex`
   - `07_conclusion.tex`
 - `references/references.bib` — bibliography file
-- `assets/figures/` — figures included by the paper
+- `figures/` — figures included by the paper
+- `tables/` — publication-ready table exports copied out of generated report bundles
 - `generated/` — reproducible generated snippets and support tables copied from ScytaleDroid reports
 - `templates/` — IEEE template and reference files
 - `scripts/` — local build helpers
@@ -63,9 +64,9 @@ latexmk -C
 ### Submission readiness checklist (CARS pre-submit)
 
 - [ ] `main.tex` compiles cleanly with `pdflatex` (2-pass) or BibTeX path when citations are final.
-- [ ] All front-matter content remains in `frontmatter/`.
-- [ ] One cohesive abstract paragraph in `frontmatter/abstract.tex` states purpose, method, and outcomes without unsafe content.
-- [ ] `frontmatter/abstract.tex` also contains keyword list in IEEE format and is ready for final submission polishing.
+- [ ] All front matter content remains in `preliminary/`.
+- [ ] One cohesive abstract paragraph in `preliminary/abstract.tex` states purpose, method, and outcomes without unsafe content.
+- [ ] `preliminary/abstract.tex` also contains keyword list in IEEE format and is ready for final submission polishing.
 - [ ] Section order and naming match IEEE CARS sequence.
 - [ ] No unsafe operational guidance; scope stays defensive, observational, and methodological.
 - [ ] Claims preserve the cutoff-window evidence boundaries: no same-day installed-build completion claim, no `105/105 quota complete`, and no QFG-as-strict-idle wording.
@@ -113,5 +114,5 @@ The draft is intentionally paper-first and defensive: clear evidence boundaries,
 
 ## Author and template notes
 
-- Title/abstract/keywords/authors are split into `frontmatter/` files to match IEEE workflow and simplify submission edits.
+- Title/abstract/keywords/authors are split into `preliminary/` files to match IEEE workflow and simplify submission edits.
 - If final submission formatting is needed, keep final typography changes in these dedicated files and include them from `main.tex`.
