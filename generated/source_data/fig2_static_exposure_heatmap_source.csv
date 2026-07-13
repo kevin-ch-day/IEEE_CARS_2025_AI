@@ -1,0 +1,16 @@
+app_label,dangerous_permissions,high_medium_findings,exported_components_without_permission_guard,privacy_findings,platform_findings,network_security_findings,storage_findings
+BBC News,4,16,10,0,20,1,1
+CNN,1,25,17,1,29,2,1
+The Guardian,2,21,16,0,21,1,4
+Facebook,18,164,118,2,161,4,6
+Instagram,19,128,91,1,124,2,6
+Pinterest,11,16,10,1,16,0,2
+Reddit,10,47,37,1,47,0,4
+TikTok,16,85,54,3,84,6,6
+X,14,83,70,1,84,2,5
+LinkedIn,14,52,45,1,55,1,0
+Signal,18,35,26,1,34,0,3
+Snapchat,18,325,308,2,323,3,6
+Telegram,20,43,30,1,41,2,6
+WhatsApp,20,99,73,1,99,0,5
+Facebook Messenger,18,96,50,1,95,5,6

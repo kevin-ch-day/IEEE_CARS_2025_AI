@@ -1,0 +1,16 @@
+app_label,package_name,high_medium_findings,runtime_shift_log2_pps,interactive_run_count,package_name
+BBC News,bbc.mobile.news.ww,16,2.4555309335222284,6,bbc.mobile.news.ww
+CNN,com.cnn.mobile.android.phone,25,2.3707100566852812,7,com.cnn.mobile.android.phone
+The Guardian,com.guardian,21,0.8056528677235969,4,com.guardian
+Facebook,com.facebook.katana,164,4.343173612081366,4,com.facebook.katana
+Instagram,com.instagram.android,128,4.311695075342142,1,com.instagram.android
+Pinterest,com.pinterest,16,3.3773832330863063,2,com.pinterest
+Reddit,com.reddit.frontpage,47,2.4254912341110715,1,com.reddit.frontpage
+TikTok,com.zhiliaoapp.musically,85,3.3852445817762273,3,com.zhiliaoapp.musically
+X,com.twitter.android,83,2.624807584110142,4,com.twitter.android
+LinkedIn,com.linkedin.android,52,3.732741810096105,4,com.linkedin.android
+Signal,org.thoughtcrime.securesms,35,6.08974899674651,4,org.thoughtcrime.securesms
+Snapchat,com.snapchat.android,325,2.6496082119364557,2,com.snapchat.android
+Telegram,org.telegram.messenger,43,5.159467094235193,4,org.telegram.messenger
+WhatsApp,com.whatsapp,99,7.019347320082375,5,com.whatsapp
+Facebook Messenger,com.facebook.orca,96,3.620363478767746,5,com.facebook.orca

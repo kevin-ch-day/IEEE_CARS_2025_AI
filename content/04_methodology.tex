@@ -1,23 +1,29 @@
 \section{Methodology}
 
-\subsection{Dataset and Device Setting}
+\subsection{Research Questions and Study Design}
+The study is a descriptive, build-aligned analysis of 15 Android consumer apps. The unit of inference is the selected app build: package name, version code/name, base APK hash, split identity, contributing static run, and selected dynamic runs. RQ1 is addressed through static exposure variables; RQ2 through runtime evidence classes and network metadata; RQ3 through app-level integrated profiles and descriptive associations.
 
-The study used a 15-app dataset analyzed on a non-root Motorola moto g 5G 2024 device running Android 15. The dataset includes social, media, messaging, and news applications selected to expose common mobile behavioral surfaces: feeds, messaging, public content loading, calls, media discovery, account-linked services, and app-driven foreground network activity. The non-root physical-device setting is part of the study design because it reflects an analyst-observable environment without privileged instrumentation, application modification, TLS interception, or root-only filesystem access.
+\subsection{Dataset, Device, and Collection Window}
+Collection used a non-root Motorola moto g 5G 2024 running Android 15. The fixed recent-evidence window spans June 26--July 9, 2026 UTC. A run or static result was eligible only when it could be tied to the selected package/version group and passed identity, validity, signal, and QA checks. The non-root setting avoids privileged instrumentation, app modification, TLS interception, and payload inspection.
 
-\subsection{Static Evidence}
+\subsection{Static Analysis and Exposure Variables}
+Static analysis used harvested base and split APK artifacts for the selected build. Variables include dangerous permission count, high/medium finding count, unguarded exported components, network-security findings, storage findings, privacy findings, platform findings, MASVS-aligned category counts, and SDK/service indicators where supported. These values are exposure indicators; they are not a calibrated exploitability score.
 
-Static evidence was generated from harvested APK artifacts and preserved as part of each app's build-backed evidence bundle. The harvested inputs include base APKs and split APK members associated with the selected package version. Static outputs include package and version identity, APK hashes, static run identifiers, manifest and permission surfaces, exported component posture, network and storage flags, string/resource findings, and static-to-dynamic handoff context. These artifacts provide the vocabulary used to interpret runtime observations, including privacy-sensitive capabilities, embedded endpoint indicators, SDK signals, and component exposure.
+\subsection{Runtime Collection and Evidence Classes}
+Runtime collection used package-associated dynamic evidence packs and PCAP metadata. Runs were classified as strict idle, QFG, or interactive. Strict idle captures represent foreground quiet-state baselines. QFG captures are no-touch foreground observations in which app-driven activity continued. Interactive captures exercise user-facing behavior. Runtime variables include run counts, duration, PCAP bytes, packet rate, domain count, service-family count, protocol prevalence, and baseline-relative shifts where both baseline and interactive evidence exist.
 
-\subsection{Runtime Evidence}
+\subsection{Build Selection and Static-Runtime Alignment}
+For each app, ScytaleDroid selected a build group using package/version identity, base APK hash, static-run availability, dynamic-run availability, PCAP state, QA validity, and recency. Static and runtime rows were included only when the selected static and dynamic evidence aligned to the same selected build group. Runs with mismatched build identity, missing static evidence, missing dynamic evidence, invalid QA state, or insufficient signal were excluded or deferred.
 
-Dynamic evidence was generated through foreground capture scenarios and package-filtered network observation. Dynamic runs preserve dynamic run identifiers, run profile, package/build identity, packet-capture availability, quality-assurance verdict, scenario class, and static-plan linkage. Runs were classified into strict idle baselines, quiescent foreground baselines, and interactive captures. These classes answer different questions: strict idle measures quiet foreground behavior, quiescent foreground captures app-driven activity without direct interaction, and interactive captures exercise user-facing features or communication flows.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig1_study_pipeline.pdf}
+\caption{Study pipeline for exact-build-aligned static and runtime evidence. The QA gate excludes mismatched builds, missing evidence, and invalid or unqualified runs before integrated measurement.}
+\label{fig:study-pipeline}
+\end{figure*}
 
-\subsection{Cutoff-Window Evidence Model}
+\subsection{Integrated Measures and Statistical Analysis}
+Integrated analysis compares app-level static exposure with app-level runtime metadata. The paper reports descriptive counts, medians by evidence class, baseline-relative packet-rate shifts, and Spearman-style app-level associations only as exploratory summaries. For cross-layer grouping, apps are assigned by median split: high or lower static exposure using high/medium finding volume, and high or lower runtime activity using interactive domain count. No opaque composite risk score is introduced.
 
-Dynamic collection was closed at a fixed cutoff because consumer Android applications updated during the study faster than a full same-day installed-build collection wave could be completed. Evidence was therefore assembled as app-level, build/version-backed bundles from the final 14-day cutoff window, preserving package name, version code/name, static run identifiers, dynamic run identifiers, APK hashes, packet-capture availability, collection timestamps, and quality-assurance provenance. App-store updates during or after that window were treated as normal churn, not evidence loss. Claims in this paper use the selected recent build-backed evidence bundle for each app and do not require every app to remain on the same installed build after collection.
-
-Strict idle baselines, quiescent foreground baselines, and interactive captures were reported as separate evidence classes. Quiescent foreground captures represent valid no-touch foreground observations in which the app continued app-driven network activity; they were not counted as strict idle. This distinction is important for apps whose foreground surfaces continue loading feed, media, messaging, or service state even when the operator does not touch the screen.
-
-\subsection{Privacy Boundary}
-
-The packet-capture privacy model is limited to behavioral and transport-level evidence. The study uses package-filtered PCAP metadata and derived indicators; it does not export message bodies, content payloads, cookies, authorization headers, private account content, or decrypted TLS contents. This boundary is consistent with the non-root, no-MITM, no-Frida, no-TLS-decryption design and supports analysis of traffic shape, endpoint context, service activation, and capture health without collecting application-layer private content.
+\subsection{Privacy and Reproducibility Boundaries}
+PCAP processing is limited to metadata and derived transport indicators. The study does not inspect message bodies, cookies, authorization headers, private account content, or decrypted TLS payloads. Reproducibility artifacts include source CSVs, generated \LaTeX{} tables, figure source data, and SHA-256 checksums for generated assets.

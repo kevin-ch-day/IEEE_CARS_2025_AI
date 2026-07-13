@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    "15-app dataset",
+    "APK harvest + split identity",
+    "Static analysis",
+    "Dynamic idle/QFG/int",
+    "Evidence QA gate",
+    "14-day build selection",
+    "Static-runtime alignment",
+    "Integrated measures",
+    "Tables, figures, checksums"
+  ],
+  "exclusion_branch": "Exclude or defer:; build mismatch; missing static/dynamic; invalid run",
+  "source": "scripts/generate_publication_assets.py"
+}

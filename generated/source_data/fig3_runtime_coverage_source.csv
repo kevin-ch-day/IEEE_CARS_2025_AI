@@ -1,0 +1,16 @@
+app_label,strict_idle_run_count,qfg_run_count,interactive_run_count
+BBC News,4,0,6
+CNN,4,1,7
+The Guardian,3,2,4
+Facebook,3,1,4
+Instagram,2,4,1
+Pinterest,5,0,2
+Reddit,2,3,1
+TikTok,0,8,3
+X,3,1,4
+LinkedIn,3,1,4
+Signal,3,0,4
+Snapchat,1,2,2
+Telegram,3,0,4
+WhatsApp,4,0,5
+Facebook Messenger,4,0,5

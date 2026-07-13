@@ -1,0 +1,10 @@
+Study,Static,Runtime,Privacy,Provenance,Scope,Limit
+ManiScope \cite{yang2022maniscope},Yes,No,Limited,Manifest/package,Large app corpus,No runtime alignment
+Runtime permissions \cite{wang2023runtimepermissions},Permissions,Behavioral failures,Indirect,Version/context varies,Permission issues,Not network-focused
+Dynamic SLR \cite{sutter2024dynamic},Surveyed,Surveyed,Varies,Method-level,Literature,No empirical app bundle
+Tracking study \cite{paci2023tracking},Some,Yes,Tracking,Execution-based,Third-party tracking,Less build alignment
+Data Safety longitudinal \cite{arkalakis2024datasafety},Ecosystem,Dynamic,Disclosure,Longitudinal,Google Play labels,Disclosure-centered
+Privacy labels \cite{khandelwal2024privacylabels},Measurement,No,Disclosure,Developer/app,Data Safety,No runtime PCAP
+Privacy SDKs \cite{zhang2024privacysdks},SDK config,Limited,SDK risk,SDK/app,Mobile SDKs,SDK-specific
+Android SAST \cite{zhu2024sastandroid},Yes,No,Security findings,Tool/app,SAST tools,No runtime layer
+This study,Yes,Yes,Transport/provenance,Exact selected build,15 apps,Scenario-bounded

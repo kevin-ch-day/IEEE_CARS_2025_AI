@@ -1,0 +1,16 @@
+App,Group,High+Med,Int domains,Int runs,Interpretation
+BBC News,Lower static/high runtime,16,16,6,Review divergence
+CNN,Lower static/high runtime,25,14,7,Review divergence
+The Guardian,Lower static/high runtime,21,14,4,Review divergence
+Facebook,High static/high runtime,164,16,4,Concordant
+Instagram,High static/high runtime,128,15,1,Concordant
+Pinterest,Lower static/lower runtime,16,10,2,Concordant
+Reddit,Lower static/high runtime,47,12,1,Review divergence
+TikTok,High static/high runtime,85,14,3,Concordant
+X,High static/high runtime,83,12,4,Concordant
+LinkedIn,High static/lower runtime,52,10,4,Review divergence
+Signal,Lower static/lower runtime,35,3,4,Concordant
+Snapchat,High static/lower runtime,325,11,2,Review divergence
+Telegram,Lower static/lower runtime,43,0,4,Concordant
+WhatsApp,High static/lower runtime,99,3,5,Review divergence
+Facebook Messenger,High static/lower runtime,96,9,5,Review divergence

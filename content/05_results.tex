@@ -1,71 +1,49 @@
 \section{Results}
 
-The final cutoff-window evidence bundle supports the core empirical claim all 15 apps had recent, build-backed static and runtime evidence at cutoff. The selected dynamic evidence was collected within the 14-day window and the cutoff contained zero true evidence holes. This result should be interpreted as evidence availability for recent selected builds, not as a claim that app-store updates stopped or that every app remained on the exact same installed build after its capture.
+\subsection{Dataset and Evidence Provenance}
+The final selected evidence bundle contained 15 of 15 apps with exact build-backed static and runtime evidence and zero true evidence holes. Table~\ref{tab:cutoff-evidence-summary} reports the selected versions, contributing static runs, runtime counts, and static-runtime alignment. The cutoff-window result is a provenance control: it establishes that the app-level rows below refer to selected package/version groups rather than to mutable installed-app state.
 
-\begin{table}[htbp]
-\caption{Cutoff-window evidence summary.}
-\label{tab:cutoff-window-summary}
-\centering
-\begin{tabular}{lr}
-\toprule
-Metric & Count \\
-\midrule
-Apps with recent build-backed evidence & 15/15 \\
-Apps with selected evidence in 14-day window & 15/15 \\
-True evidence holes & 0 \\
-PCAP-backed dynamic runs & 123 \\
-Strict idle captures & 44 \\
-Quiescent foreground captures & 23 \\
-Interactive captures & 56 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{tables/table2_cutoff_evidence_summary}
 
-The evidence availability result is a provenance control, not the main privacy/security finding. It establishes that every app-level result below is tied to a selected package version, APK set, static run, dynamic run set, PCAP availability, and QA outcome. The selected bundles include 123 PCAP-backed dynamic runs: 44 strict idle captures, 23 quiescent foreground captures, and 56 interactive captures.
-
-\begin{table*}[t]
-\caption{Selected evidence bundles for the 15-app dataset at cutoff. Runtime classes are strict idle/quiescent foreground/interactive.}
-\label{tab:dataset-evidence-bundles}
-\centering
-\scriptsize
-\begin{tabular}{llrccr}
-\toprule
-App & Version & Last capture & I/Q/Int & PCAPs & High+Med \\
-\midrule
-BBC News & 2026.5.0 & Jul. 7 & 4/0/6 & 10 & 16 \\
-CNN & 26.13.0 & Jul. 9 & 4/1/7 & 12 & 25 \\
-LinkedIn & 4.1.1218 & Jul. 9 & 3/1/4 & 8 & 52 \\
-Telegram & 12.8.3 & Jul. 9 & 3/0/4 & 7 & 43 \\
-Signal & 8.18.2 & Jul. 9 & 3/0/4 & 7 & 35 \\
-Pinterest & 14.26.0 & Jul. 9 & 5/0/2 & 7 & 16 \\
-Snapchat & 14.14.0.43 & Jul. 9 & 1/2/2 & 5 & 325 \\
-Facebook & 567.1.0.52.74 & Jul. 6 & 3/1/4 & 8 & 166 \\
-Facebook Msg & 567.1.0.53.87 & Jul. 7 & 4/0/5 & 9 & 98 \\
-Guardian & 6.226.23011 & Jul. 6 & 3/2/4 & 9 & 22 \\
-Instagram & 436.0.0.41.73 & Jul. 7 & 2/4/1 & 7 & 127 \\
-Reddit & 2026.26.0 & Jul. 9 & 2/3/1 & 6 & 47 \\
-X & 12.5.0-release.0 & Jul. 6 & 3/1/4 & 8 & 83 \\
-WhatsApp & 2.26.25.80 & Jul. 6 & 4/0/5 & 9 & 104 \\
-TikTok & 45.7.3 & Jul. 6 & 0/8/3 & 11 & 74 \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
-\noindent The High+Med column is the count of high- and medium-severity static findings for the selected app build. It is reported as a descriptive static-exposure indicator, not as a composite risk score or MASVS compliance grade.
+\subsection{Static Exposure Across Selected Builds}
+Static exposure varied substantially across apps. Table~\ref{tab:static-exposure-summary} reports dangerous permissions, high/medium finding volume, unguarded exported components, and MASVS-aligned category counts. Snapchat, Facebook, Instagram, WhatsApp, and Facebook Msg had the largest high/medium finding volumes, while Pinterest and BBC News had much smaller static finding volumes in the selected builds.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/runtime_coverage_by_app.png}
-\caption{Runtime evidence coverage by app at cutoff. Strict idle, quiescent foreground, and interactive captures are kept separate.}
+\includegraphics[width=0.94\linewidth]{figures/fig2_static_exposure_heatmap.pdf}
+\caption{Static exposure indicators for selected builds. Cells show raw counts; color is min--max normalized per metric.}
+\label{fig:static-exposure-heatmap}
+\end{figure*}
+
+\input{tables/table3_static_exposure_summary}
+
+\subsection{Runtime Coverage and Behavioral Variation}
+Runtime evidence included strict idle, QFG, and interactive captures. Table~\ref{tab:runtime-behavior-summary} summarizes selected run counts and median runtime indicators. Figure~\ref{fig:runtime-coverage} shows the evidence-class distribution by app. QFG is kept separate because no-touch foreground activity can still represent app-driven feed loading, synchronization, or service maintenance.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig3_runtime_coverage_by_app.pdf}
+\caption{Selected runtime evidence by app. Strict idle, QFG, and interactive captures are reported separately.}
 \label{fig:runtime-coverage}
 \end{figure*}
 
-The table shows why runtime class separation matters more than live update status. Pinterest and Snapchat both have recent selected-build evidence, but their evidence must separate strict idle, QFG/no-touch foreground, and interactive classes. For Snapchat, the selected bundle includes one strict idle baseline, two QFG captures, and two interactive captures. These are usable for the study only when QFG is reported as app-driven foreground activity rather than strict idle.
+\input{tables/table4_runtime_behavior_summary}
 
-The dynamic evidence-class table also shows that recent evidence does not imply identical runtime depth. Some apps have strong strict-idle and interactive coverage, while others have meaningful QFG evidence or limited interactive coverage. TikTok, for example, has QFG-heavy recent evidence and should not be described as strict-idle complete. Snapchat has recent selected-build evidence, but it should not be over-summarized as strictly idle-complete.
+\subsection{Integrated Static-Runtime Findings}
+The integrated profile table uses a transparent median split rather than a composite score. Table~\ref{tab:integrated-static-runtime-profiles} labels apps as high/lower static exposure and high/lower runtime activity using high/medium static finding count and interactive domain count. This reveals useful divergence: some apps have large static exposure but lower observed runtime diversity in the selected scenarios, while others show broader runtime activity with lower static finding volume.
 
-\subsection{Baseline-Relative Runtime Behavior}
+\input{tables/table5_integrated_static_runtime_profiles}
 
-The runtime exports also support a baseline-relative behavior view. Across the apps with baseline-to-interactive comparisons, traffic-volume metrics showed the clearest interaction-driven broadening: packet rate and PCAP-byte volume increased for all compared apps, with large effect bands in all compared cases and app-level permutation support in eight of nine comparisons. TLS-fingerprint diversity also broadened for most compared apps, but it should be interpreted as a metadata-level behavior signal, not as evidence of payload content or malicious behavior.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.76\linewidth]{figures/fig4_static_runtime_scatter.pdf}
+\caption{Descriptive static-runtime relationship. The x-axis is log-transformed high/medium static finding volume; the y-axis is baseline-relative interactive packet-rate shift. Marker size reflects interactive run count.}
+\label{fig:static-runtime-scatter}
+\end{figure*}
 
-\input{generated/runtime_behavior_insert}
+\subsection{App-Level Divergence and Representative Cases}
+Snapchat is the clearest high-static case: the selected build has high static finding volume, but runtime interpretation depends on limited strict idle coverage and QFG/interactive separation. Facebook combines high static finding volume with broad observed runtime domain activity. CNN has lower static exposure than the large social apps but strong runtime evidence depth and interactive traffic broadening. Signal and Telegram show lower observed service diversity in the selected captures, consistent with narrower encrypted messaging behavior under the exercised scenarios.
+
+The prior runtime bridge had an apparent discrepancy: aggregate metric-shift text referred to nine compared apps, while one detailed table listed eight app rows. The current generator resolves this by exporting a baseline-relative eligibility CSV for every app. Baseline-relative comparisons are now reported only with explicit eligibility/exclusion state and should not be read as covering every app unless the eligibility CSV says so.
+
+\input{tables/table6_statistical_summary}

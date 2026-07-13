@@ -1,0 +1,145 @@
+{
+  "source_root": "/home/secadmin/Laughlin/GitHub/ScytaleDroid/output/paper/android_empirical_alignment_final",
+  "files": [
+    {
+      "path": "figures/fig1_study_pipeline.pdf",
+      "sha256": "67781a64c6cf68c083fa6df7a09be84f7690cf1ba510cb78b3b1477108b63193",
+      "bytes": 14380
+    },
+    {
+      "path": "figures/fig1_study_pipeline.png",
+      "sha256": "913117ff8378f926b6b3a402e4ca7965a8dc73895584ff02b56880cd384008e3",
+      "bytes": 102080
+    },
+    {
+      "path": "figures/fig2_static_exposure_heatmap.pdf",
+      "sha256": "c9c1a4125442c6bae5b053a873eb34d9e68fde01cc2d05f972e521e2213700bb",
+      "bytes": 20778
+    },
+    {
+      "path": "figures/fig2_static_exposure_heatmap.png",
+      "sha256": "ed6e6539f28fde3a5153aba6dc0861b701fabd7b754a54e9c157239473bf49db",
+      "bytes": 152081
+    },
+    {
+      "path": "figures/fig3_runtime_coverage_by_app.pdf",
+      "sha256": "70af7eb6b5df33f747a7e12af77a1a80fce119934ca3180191ed383b904b5854",
+      "bytes": 14968
+    },
+    {
+      "path": "figures/fig3_runtime_coverage_by_app.png",
+      "sha256": "3c50b196a4b0ae72c65f4cb235ff2d84220b5e07791bb14cfcfc5a503eb3f5dd",
+      "bytes": 96642
+    },
+    {
+      "path": "figures/fig4_static_runtime_scatter.pdf",
+      "sha256": "fc52ccc15c0e95a3fab797ad3028eb6ef2767478b825386bf80aab35861d7579",
+      "bytes": 18253
+    },
+    {
+      "path": "figures/fig4_static_runtime_scatter.png",
+      "sha256": "9f5ff792ff5d066a84df47bfd9d87f709c771007280e9e8dbf2a558fd05f57a2",
+      "bytes": 116641
+    },
+    {
+      "path": "generated/source_data/baseline_relative_eligibility.csv",
+      "sha256": "27f50d566e1bb4ee4ee9c17d6b3cc9a2204400a341503b086084466861447514",
+      "bytes": 684
+    },
+    {
+      "path": "generated/source_data/dynamic_metrics_source.csv",
+      "sha256": "4cd22e6823363c717440f98c2d5dac03858ff3e72064242841081f7edbb1ed98",
+      "bytes": 6675
+    },
+    {
+      "path": "generated/source_data/fig1_study_pipeline.json",
+      "sha256": "7ef62d52abf35993228186ef4717b522c48079291536c1823eef1e8c5dcad930",
+      "bytes": 425
+    },
+    {
+      "path": "generated/source_data/fig2_static_exposure_heatmap_source.csv",
+      "sha256": "db4cf7f63f5e38c547f0e47dc871f519353ac7f0f4a2101cef98b4acfcf1f3b3",
+      "bytes": 584
+    },
+    {
+      "path": "generated/source_data/fig3_runtime_coverage_source.csv",
+      "sha256": "99d8384be817c752d76474d1e95bdb47ac918ad15e0f8fdd74edb61670286ec9",
+      "bytes": 291
+    },
+    {
+      "path": "generated/source_data/fig4_static_runtime_scatter_source.csv",
+      "sha256": "b8d80f82e3f81b6df2d5a1b23f72ee5800c8a90b3280f30b8b49b09d8dfb1d3d",
+      "bytes": 1201
+    },
+    {
+      "path": "generated/source_data/manifest_source.csv",
+      "sha256": "174ca82c3dafc6e8ac387a3d0680b4808fa3a62c69f118151119ab83a5a27888",
+      "bytes": 15478
+    },
+    {
+      "path": "generated/source_data/static_metrics_source.csv",
+      "sha256": "dade80d73104e21ccbe5bf9deccb0f207a990652fc32cb9691516f4688658e68",
+      "bytes": 3638
+    },
+    {
+      "path": "tables/table1_literature_comparison.csv",
+      "sha256": "0e6889f7d23c0b1115a7574f454fe13a467fc7a1bbba0aa0f61e2447644ed65a",
+      "bytes": 1092
+    },
+    {
+      "path": "tables/table1_literature_comparison.tex",
+      "sha256": "147e08e165f9e729e57010011e2e2475cae4bd1f70fe5251277ac71afd6596b4",
+      "bytes": 1575
+    },
+    {
+      "path": "tables/table2_cutoff_evidence_summary.csv",
+      "sha256": "12ef246393b8102bb4cfc7cc1151c860c8424479f6e11d11973232d5bde78bb9",
+      "bytes": 798
+    },
+    {
+      "path": "tables/table2_cutoff_evidence_summary.tex",
+      "sha256": "c5bf8905a99b05ae4a9683b91ba93732a0f5b247cd3fe209707b93df39241fe2",
+      "bytes": 1240
+    },
+    {
+      "path": "tables/table3_static_exposure_summary.csv",
+      "sha256": "1499fa7bca49a7aaa35804b261680afd1bbddbc679c23e32fb5aef7f98143b14",
+      "bytes": 487
+    },
+    {
+      "path": "tables/table3_static_exposure_summary.tex",
+      "sha256": "d05e3184d8e4d529d38b3b45f22195f2458fa1baf4396d611f406d21cc4736d8",
+      "bytes": 956
+    },
+    {
+      "path": "tables/table4_runtime_behavior_summary.csv",
+      "sha256": "c85ed1b26792eef1819c9e651c438a9c06a56540a07b592c406191c010f2c259",
+      "bytes": 631
+    },
+    {
+      "path": "tables/table4_runtime_behavior_summary.tex",
+      "sha256": "cf7a91c3d88bcf82894caa97ada4eea6490be07d5fbb1ceb18d1c59d43c84253",
+      "bytes": 1101
+    },
+    {
+      "path": "tables/table5_integrated_static_runtime_profiles.csv",
+      "sha256": "7503c523789b41c77502363d8fdae6fd929e75e11864539980a2d7c0dc3407dc",
+      "bytes": 933
+    },
+    {
+      "path": "tables/table5_integrated_static_runtime_profiles.tex",
+      "sha256": "55b6737605e70a0f2b307e1ab921b50f651334e3945e737ca6834f2c3f1394d3",
+      "bytes": 1368
+    },
+    {
+      "path": "tables/table6_statistical_summary.csv",
+      "sha256": "2f9663c85f868c5648062bfe3789813b5d5b6683e56654e81c6dbb1125c7dcb5",
+      "bytes": 395
+    },
+    {
+      "path": "tables/table6_statistical_summary.tex",
+      "sha256": "e0ee12729c0516caa58e7ea375d32d9f6c406ca0c941950029c3274186cf49c2",
+      "bytes": 697
+    }
+  ]
+}

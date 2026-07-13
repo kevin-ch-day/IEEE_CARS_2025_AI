@@ -24,9 +24,9 @@ Author pages and conference rules were cross-checked against:
   - `06_discussion.tex`
   - `07_conclusion.tex`
 - `references/references.bib` — bibliography file
-- `figures/` — figures included by the paper
-- `tables/` — publication-ready table exports copied out of generated report bundles
-- `generated/` — reproducible generated snippets and support tables copied from ScytaleDroid reports
+- `figures/` — publication figures generated from ScytaleDroid report outputs
+- `tables/` — publication-ready LaTeX tables and matching CSV exports
+- `generated/source_data/` — source CSV/JSON inputs and checksum manifests used to build tables and figures
 - `templates/` — IEEE template, sample figure, and reference files
 - `scripts/` — local build helpers
 - `.gitignore` and `.gitattributes` — clean source control and line ending normalization
@@ -59,6 +59,12 @@ Clean generated files with:
 
 ```bash
 latexmk -C
+```
+
+Regenerate publication tables and figures from the current ScytaleDroid alignment bundle with:
+
+```bash
+python scripts/generate_publication_assets.py
 ```
 
 ### Submission readiness checklist (CARS pre-submit)
