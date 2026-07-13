@@ -1,7 +1,7 @@
 # Generated Tables
 
 
-## Fifteen-app cohort and selected cutoff evidence.
+## Fifteen-app dataset and selected cutoff evidence.
 
 | App | Category | Package | Version | PCAPs | Idle/QFG/Int |
 | --- | --- | --- | --- | --- | --- |
