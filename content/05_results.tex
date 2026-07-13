@@ -6,7 +6,7 @@ The final selected evidence bundle contained 15 of 15 apps with exact build-back
 \input{tables/table2_cutoff_evidence_summary}
 
 \subsection{Static Exposure Across Selected Builds}
-Static exposure varied substantially across apps. Figure~\ref{fig:static-exposure} ranks selected builds by three manuscript-level exposure indicators: high/medium finding volume, unguarded exported components, and dangerous permissions. Snapchat, Facebook, Instagram, WhatsApp, and Facebook Msg had the largest high/medium finding volumes, while Pinterest and BBC News had much smaller static finding volumes in the selected builds. The complete seven-metric static table is retained in the generated report bundle.
+Static exposure varied substantially across apps. Figure~\ref{fig:static-exposure} ranks selected builds by three manuscript-level exposure indicators: high/medium finding volume, unguarded exported components, and dangerous permissions. High/medium finding volume ranged from 16 findings for BBC News and Pinterest to 325 for Snapchat. Facebook and Instagram were also high-volume static cases, with 164 and 128 high/medium findings, respectively. Unguarded exported components followed a similar pattern for the largest apps: Snapchat had 308, Facebook had 118, and Instagram had 91. Dangerous permission counts were less dispersed, with several messaging and social apps clustering between 18 and 20. The complete seven-metric static table, including privacy, platform, network, and storage categories, is retained in the generated report bundle.
 
 \begin{figure}[!t]
 \centering
@@ -17,6 +17,8 @@ Static exposure varied substantially across apps. Figure~\ref{fig:static-exposur
 
 \subsection{Runtime Coverage and Behavioral Variation}
 Runtime evidence included strict idle, QFG, and interactive captures. Figure~\ref{fig:runtime-coverage} shows the evidence-class distribution by app. Table~\ref{tab:runtime-behavior-summary} then reports compact behavior indicators without repeating the coverage counts. QFG is kept separate because no-touch foreground activity can still represent app-driven feed loading, synchronization, or service maintenance.
+
+The selected runtime bundle contains 123 dynamic runs: 44 strict idle, 23 QFG, and 56 interactive captures. CNN and BBC News provide the deepest selected runtime coverage, with 12 and 10 runs, while every app has at least five selected runs. Interactive packet-rate and volume varied more than domain count. TikTok, Instagram, WhatsApp, and Facebook show the largest interactive packet-rate or volume indicators in Table~\ref{tab:runtime-behavior-summary}; Signal and Telegram show large packet-rate shifts from quiet baselines but narrower domain diversity under the exercised messaging scenarios.
 
 \begin{figure}[!t]
 \centering
@@ -32,15 +34,17 @@ The integrated profile matrix uses a transparent median split rather than a comp
 
 \input{tables/table5_integrated_profile_matrix}
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig4_static_runtime_scatter.pdf}
-\caption{Descriptive static-runtime relationship. The x-axis is $\log_{10}(1+x)$ high/medium static finding volume; the y-axis is $\log_2$ baseline-relative interactive packet-rate shift. Marker size reflects interactive run count.}
+\includegraphics[width=0.82\textwidth]{figures/fig4_static_runtime_scatter.pdf}
+\caption{Descriptive static-runtime relationship with all selected apps labeled. The x-axis is $\log_{10}(1+x)$ high/medium static finding volume; the y-axis is $\log_2$ baseline-relative interactive packet-rate shift. Marker size reflects interactive run count.}
 \label{fig:static-runtime-scatter}
-\end{figure}
+\end{figure*}
 
 \subsection{App-Level Divergence and Representative Cases}
 Snapchat is the clearest high-static case: the selected build has high static finding volume, but runtime interpretation depends on limited strict idle coverage and QFG/interactive separation. Facebook combines high static finding volume with broad observed runtime domain activity. CNN has lower static exposure than the large social apps but strong runtime evidence depth and interactive traffic broadening. Signal and Telegram show lower observed service diversity in the selected captures, consistent with narrower encrypted messaging behavior under the exercised scenarios.
+
+Figure~\ref{fig:static-runtime-scatter} makes the cross-layer differences visible. \mbox{WhatsApp} has one of the largest baseline-relative packet-rate shifts despite a smaller observed interactive domain count than the large content-feed apps. TikTok and Instagram combine high static exposure with high runtime activity under the selected scenarios. BBC News and CNN have lower static finding volume but clear interactive broadening from baseline. These are not contradictions; they show that static exposure and runtime behavior answer different questions about the same selected builds.
 
 The prior runtime bridge had an apparent discrepancy: aggregate metric-shift text referred to nine compared apps, while one detailed table listed eight app rows. The current generator resolves this by exporting a baseline-relative eligibility CSV for every app. Baseline-relative comparisons are now reported only with explicit eligibility/exclusion state and should not be read as covering every app unless the eligibility CSV says so.
 

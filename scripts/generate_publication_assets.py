@@ -598,7 +598,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     merged[["app_label", "package_name", "high_medium_findings", "runtime_shift_log2_pps", "interactive_run_count", "app_category" if "app_category" in merged.columns else "package_name"]].to_csv(
         SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False
     )
-    fig, ax = plt.subplots(figsize=(3.45, 3.05))
+    fig, ax = plt.subplots(figsize=(7.15, 4.15))
     cats = pd.read_csv(SOURCE / "publication_cohort_manifest.csv")[["app_label", "app_category"]]
     plot = merged.merge(cats, on="app_label", how="left")
     category_colors = {cat: c for cat, c in zip(sorted(plot["app_category"].dropna().unique()), ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#999999"])}
@@ -615,24 +615,38 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
             edgecolor="black",
             linewidth=0.4,
         )
-    labels = {"Snapchat", "Facebook", "CNN", "Signal", "Telegram", "TikTok"}
     offsets = {
-        "Snapchat": (4, 6),
-        "Facebook": (4, -9),
-        "CNN": (4, 5),
-        "Signal": (4, -9),
-        "Telegram": (4, 5),
-        "TikTok": (4, -9),
+        "BBC News": (-48, -10),
+        "CNN": (5, 7),
+        "The Guardian": (-72, -11),
+        "Facebook": (6, 6),
+        "Instagram": (-64, 9),
+        "Pinterest": (5, 8),
+        "Reddit": (5, -11),
+        "TikTok": (7, -14),
+        "X": (8, -12),
+        "LinkedIn": (6, 7),
+        "Signal": (6, 7),
+        "Snapchat": (6, -11),
+        "Telegram": (6, -11),
+        "WhatsApp": (-62, 6),
+        "Facebook Messenger": (-86, -11),
     }
     for _, row in plot.iterrows():
-        if row["app_label"] in labels:
-            ax.annotate(row["app_label"], (row["x_log_high_med"], row["runtime_shift_log2_pps"]),
-                        xytext=offsets.get(row["app_label"], (4, 4)), textcoords="offset points", fontsize=6.6)
+        ax.annotate(
+            display_label(row["app_label"]),
+            (row["x_log_high_med"], row["runtime_shift_log2_pps"]),
+            xytext=offsets.get(row["app_label"], (4, 4)),
+            textcoords="offset points",
+            fontsize=7.2,
+            arrowprops=dict(arrowstyle="-", color="#888888", lw=0.35, shrinkA=0, shrinkB=4),
+        )
     ax.axhline(0, color="#777777", lw=0.8, linestyle="--")
     ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8)
     ax.set_ylabel("log2 interactive/base PPS", fontsize=8)
     ax.tick_params(labelsize=7.5)
-    ax.legend(fontsize=5.8, loc="upper center", bbox_to_anchor=(0.5, 1.23), ncols=2, frameon=False)
+    ax.margins(x=0.18, y=0.14)
+    ax.legend(fontsize=6.8, loc="upper center", bbox_to_anchor=(0.5, 1.18), ncols=5, frameon=False)
     fig.tight_layout(pad=0.2)
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.pdf")
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.png", dpi=240)

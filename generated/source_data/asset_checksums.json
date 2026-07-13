@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "figures/fig1_study_pipeline.pdf",
-      "sha256": "2879213dc08d1538660344682f57ffa27c66306ccab2aa33ea48c962dae6eb01",
+      "sha256": "4e74573480151572d9b76b8d3bee9cbaa3c14ef57516b2f49a9810601cb5da16",
       "bytes": 14383
     },
     {
@@ -13,7 +13,7 @@
     },
     {
       "path": "figures/fig2_static_exposure_heatmap.pdf",
-      "sha256": "a311e5698bf980acbbe662b469711069fffff40dfa976d06f7f1273bc1456720",
+      "sha256": "db3497a96a82599fbe98cfc4b6c11762c6145448beeedd0691fc465e31a054be",
       "bytes": 16038
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "path": "figures/fig3_runtime_coverage_by_app.pdf",
-      "sha256": "a7caeba95c8caec30368c88996090c6308024fc3b0ea2489e550d3d56e75e0cd",
+      "sha256": "a39eccebee396085e9753b186feffb7d729de5c7b3c6ab25367c6b6c69df9fb2",
       "bytes": 39260
     },
     {
@@ -33,13 +33,13 @@
     },
     {
       "path": "figures/fig4_static_runtime_scatter.pdf",
-      "sha256": "6b9e4363eacaa3c41ee551a5df705a45df497a6738b28d1b2b17ad6062389e8e",
-      "bytes": 15702
+      "sha256": "190834298b3940bf5e706d1a90037ab205c62dbd5d95dedf37aa695a3eebbf3e",
+      "bytes": 18230
     },
     {
       "path": "figures/fig4_static_runtime_scatter.png",
-      "sha256": "72c3a2baff39fda45f836dcdc0369b3f1bd02952f1b6fbd1b211da6f2975e6b8",
-      "bytes": 67292
+      "sha256": "d3b40618548a3c58ee88e46d81f85c20962fd9773ce0e477c9a175d9f5fa4f06",
+      "bytes": 109122
     },
     {
       "path": "generated/source_data/baseline_relative_eligibility.csv",

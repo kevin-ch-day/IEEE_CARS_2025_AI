@@ -27,3 +27,6 @@ Integrated analysis compares app-level static exposure with app-level runtime me
 
 \subsection{Privacy and Reproducibility Boundaries}
 PCAP processing is limited to metadata and derived transport indicators. The study does not inspect message bodies, cookies, authorization headers, private account content, or decrypted TLS payloads. Reproducibility artifacts include source CSVs, generated \LaTeX{} tables, figure source data, and SHA-256 checksums for generated assets.
+
+\subsection{Limitations and Threats to Validity}
+The study is bounded by a 15-app dataset, one Android 15 physical device, selected user scenarios, available static detectors, and a non-root no-MITM PCAP privacy model. It does not claim exhaustive code coverage, decrypted payload semantics, or full Data Safety validation. Some apps have stronger interactive depth than others, and runtime findings are scenario-bounded. Static detector counts remain descriptive exposure indicators rather than formal exploitability or compliance scores. The integrated analysis is therefore intended to characterize cross-layer posture for selected builds, not to infer causation or predict future app behavior.
