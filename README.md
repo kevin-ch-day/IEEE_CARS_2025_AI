@@ -27,7 +27,7 @@ Author pages and conference rules were cross-checked against:
 - `figures/` — figures included by the paper
 - `tables/` — publication-ready table exports copied out of generated report bundles
 - `generated/` — reproducible generated snippets and support tables copied from ScytaleDroid reports
-- `templates/` — IEEE template and reference files
+- `templates/` — IEEE template, sample figure, and reference files
 - `scripts/` — local build helpers
 - `.gitignore` and `.gitattributes` — clean source control and line ending normalization
 - `IEEEtran.cls` — conference class file at repo root
