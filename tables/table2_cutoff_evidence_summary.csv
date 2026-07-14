@@ -1,16 +1,16 @@
-App,Category,Version,I/Q/Int
-BBC News,News,2026.5.0,4/0/6
-CNN,News,26.13.0,4/1/7
-The Guardian,News,6.226.23011,3/2/4
-Facebook,Social Media,567.1.0.52.74,3/1/4
-Instagram,Social Media,436.0.0.41.73,2/4/1
-Pinterest,Social Media,14.26.0,5/0/2
-Reddit,Social Media,2026.26.0,2/3/1
-Snapchat,Social Media,14.14.0.43,1/2/2
-TikTok,Social Media,45.7.3,0/8/3
-X (Twitter),Social Media,12.5.0-release.0,3/1/4
-Facebook Msg,Messaging,567.1.0.53.87,4/0/5
-Signal,Messaging,8.18.2,3/0/4
-Telegram,Messaging,12.8.3,3/0/4
-WhatsApp,Messaging,2.26.25.80,4/0/5
-LinkedIn,Professional Networking,4.1.1218,3/1/4
+Application,Category,Strict idle,Quiescent foreground,Interactive
+BBC News,News,4,0,6
+CNN,News,4,1,7
+The Guardian,News,3,2,4
+Facebook,Social Media,3,1,4
+Instagram,Social Media,2,4,1
+Pinterest,Social Media,5,0,2
+Reddit,Social Media,2,3,1
+Snapchat,Social Media,1,2,2
+TikTok,Social Media,0,8,3
+X,Social Media,3,1,4
+Facebook Messenger,Messaging,4,0,5
+Signal,Messaging,3,0,4
+Telegram,Messaging,3,0,4
+WhatsApp,Messaging,4,0,5
+LinkedIn,Prof. network,3,1,4

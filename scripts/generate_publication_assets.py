@@ -161,48 +161,49 @@ def write_literature_table(path: Path, rows: list[dict[str, object]]) -> None:
     path.write_text("\n".join(body), encoding="utf-8")
 
 
-def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]]) -> None:
+def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]], *, tabcolsep: str = "2.5pt") -> None:
     body = [
         r"\begin{table}[!t]",
         r"\centering",
-        r"\caption{Selected 14-day evidence bundles.}",
+        r"\caption{Selected runtime evidence by application and evidence class.}",
         r"\label{tab:cutoff-evidence-summary}",
         r"\scriptsize",
-        r"\setlength{\tabcolsep}{2.4pt}",
+        rf"\setlength{{\tabcolsep}}{{{tabcolsep}}}",
         r"\renewcommand{\arraystretch}{1.03}",
-        r"\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.23\columnwidth}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}X>{\centering\arraybackslash}p{0.13\columnwidth}@{}}",
+        r"\begin{tabular}{@{}llccc@{}}",
         r"\toprule",
-        r"App & Cat. & Sel. build & I/Q/Int \\",
+        r"Application & Category & \shortstack{Strict\\idle} & \shortstack{Quiescent\\foreground} & Interactive \\",
         r"\midrule",
     ]
     for row in rows:
         body.append(
             " & ".join(
                 [
-                    latex_escape(row["App"]),
+                    latex_escape(row["Application"]),
                     latex_escape(row["Category"]),
-                    latex_breakable_version(row["Version"]),
-                    latex_escape(row["I/Q/Int"]),
+                    latex_escape(row["Strict idle"]),
+                    latex_escape(row["Quiescent foreground"]),
+                    latex_escape(row["Interactive"]),
                 ]
             )
             + r" \\"
         )
+    totals = {
+        "Strict idle": sum(int(row["Strict idle"]) for row in rows),
+        "Quiescent foreground": sum(int(row["Quiescent foreground"]) for row in rows),
+        "Interactive": sum(int(row["Interactive"]) for row in rows),
+    }
     body.extend(
         [
+            r"\midrule",
+            rf"\textbf{{Total}} & & \textbf{{{totals['Strict idle']}}} & \textbf{{{totals['Quiescent foreground']}}} & \textbf{{{totals['Interactive']}}} \\",
             r"\bottomrule",
-            r"\end{tabularx}",
-            r"\vspace{1pt}",
-            r"\begin{flushleft}\tiny Sel. build is the evidence-window selected build/version, not necessarily the latest installed version; I/Q/Int reports strict-idle/QFG/interactive runs. Full versions, hashes, and run IDs are retained in source CSVs.\end{flushleft}",
+            r"\end{tabular}",
             r"\end{table}",
             "",
         ]
     )
     path.write_text("\n".join(body), encoding="utf-8")
-
-
-def latex_breakable_version(value: object) -> str:
-    text = latex_escape(value)
-    return text.replace(".", r".\allowbreak{}").replace("-", r"-\allowbreak{}")
 
 
 def fnum(value: object, digits: int = 1) -> str:
@@ -237,9 +238,16 @@ def publication_category(package: object) -> str:
 def manuscript_category_label(category: object) -> str:
     text = "" if pd.isna(category) else str(category)
     if text == "Professional Networking":
-        return "Prof. Net."
-    if text == "Social Media":
-        return "Social"
+        return "Prof. network"
+    return text
+
+
+def evidence_table_label(value: object) -> str:
+    text = "" if pd.isna(value) else str(value)
+    if text == "Facebook Msg":
+        return "Facebook Messenger"
+    if text == "X (Twitter)":
+        return "X"
     return text
 
 
@@ -398,29 +406,20 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     manifest = manifest.copy()
     manifest["app_category"] = manifest["package_name"].map(publication_category)
     manifest = category_sort(manifest.rename(columns={"app_label": "App"}), column="App")
-    table2_csv = []
-    table2_tex = []
+    table2_rows = []
     for _, row in manifest.iterrows():
-        common = {
-            "App": display_label(row["App"]),
-            "Version": row["selected_version_name"],
-            "I/Q/Int": f"{count_ids(row['strict_idle_run_ids'])}/{count_ids(row['qfg_run_ids'])}/{count_ids(row['interactive_run_ids'])}",
-        }
-        table2_csv.append(
+        table2_rows.append(
             {
-                **common,
-                "Category": row["app_category"],
-            }
-        )
-        table2_tex.append(
-            {
-                **common,
+                "Application": evidence_table_label(display_label(row["App"])),
                 "Category": manuscript_category_label(row["app_category"]),
+                "Strict idle": count_ids(row["strict_idle_run_ids"]),
+                "Quiescent foreground": count_ids(row["qfg_run_ids"]),
+                "Interactive": count_ids(row["interactive_run_ids"]),
             }
         )
-    cols2 = ["App", "Category", "Version", "I/Q/Int"]
-    write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2_csv, cols2)
-    write_cutoff_evidence_table(TABLE_DIR / "table2_cutoff_evidence_summary.tex", table2_tex)
+    cols2 = ["Application", "Category", "Strict idle", "Quiescent foreground", "Interactive"]
+    write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2_rows, cols2)
+    write_cutoff_evidence_table(TABLE_DIR / "table2_cutoff_evidence_summary.tex", table2_rows)
 
     static = static.copy()
     static["app_category"] = static["package_name"].map(publication_category)

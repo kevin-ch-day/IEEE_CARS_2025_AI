@@ -1,31 +1,31 @@
 \begin{table}[!t]
 \centering
-\caption{Selected 14-day evidence bundles.}
+\caption{Selected runtime evidence by application and evidence class.}
 \label{tab:cutoff-evidence-summary}
 \scriptsize
-\setlength{\tabcolsep}{2.4pt}
+\setlength{\tabcolsep}{2.5pt}
 \renewcommand{\arraystretch}{1.03}
-\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.23\columnwidth}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}X>{\centering\arraybackslash}p{0.13\columnwidth}@{}}
+\begin{tabular}{@{}llccc@{}}
 \toprule
-App & Cat. & Sel. build & I/Q/Int \\
+Application & Category & \shortstack{Strict\\idle} & \shortstack{Quiescent\\foreground} & Interactive \\
 \midrule
-BBC News & News & 2026.\allowbreak{}5.\allowbreak{}0 & 4/0/6 \\
-CNN & News & 26.\allowbreak{}13.\allowbreak{}0 & 4/1/7 \\
-The Guardian & News & 6.\allowbreak{}226.\allowbreak{}23011 & 3/2/4 \\
-Facebook & Social & 567.\allowbreak{}1.\allowbreak{}0.\allowbreak{}52.\allowbreak{}74 & 3/1/4 \\
-Instagram & Social & 436.\allowbreak{}0.\allowbreak{}0.\allowbreak{}41.\allowbreak{}73 & 2/4/1 \\
-Pinterest & Social & 14.\allowbreak{}26.\allowbreak{}0 & 5/0/2 \\
-Reddit & Social & 2026.\allowbreak{}26.\allowbreak{}0 & 2/3/1 \\
-Snapchat & Social & 14.\allowbreak{}14.\allowbreak{}0.\allowbreak{}43 & 1/2/2 \\
-TikTok & Social & 45.\allowbreak{}7.\allowbreak{}3 & 0/8/3 \\
-X (Twitter) & Social & 12.\allowbreak{}5.\allowbreak{}0-\allowbreak{}release.\allowbreak{}0 & 3/1/4 \\
-Facebook Msg & Messaging & 567.\allowbreak{}1.\allowbreak{}0.\allowbreak{}53.\allowbreak{}87 & 4/0/5 \\
-Signal & Messaging & 8.\allowbreak{}18.\allowbreak{}2 & 3/0/4 \\
-Telegram & Messaging & 12.\allowbreak{}8.\allowbreak{}3 & 3/0/4 \\
-WhatsApp & Messaging & 2.\allowbreak{}26.\allowbreak{}25.\allowbreak{}80 & 4/0/5 \\
-LinkedIn & Prof. Net. & 4.\allowbreak{}1.\allowbreak{}1218 & 3/1/4 \\
+BBC News & News & 4 & 0 & 6 \\
+CNN & News & 4 & 1 & 7 \\
+The Guardian & News & 3 & 2 & 4 \\
+Facebook & Social Media & 3 & 1 & 4 \\
+Instagram & Social Media & 2 & 4 & 1 \\
+Pinterest & Social Media & 5 & 0 & 2 \\
+Reddit & Social Media & 2 & 3 & 1 \\
+Snapchat & Social Media & 1 & 2 & 2 \\
+TikTok & Social Media & 0 & 8 & 3 \\
+X & Social Media & 3 & 1 & 4 \\
+Facebook Messenger & Messaging & 4 & 0 & 5 \\
+Signal & Messaging & 3 & 0 & 4 \\
+Telegram & Messaging & 3 & 0 & 4 \\
+WhatsApp & Messaging & 4 & 0 & 5 \\
+LinkedIn & Prof. network & 3 & 1 & 4 \\
+\midrule
+\textbf{Total} & & \textbf{44} & \textbf{23} & \textbf{56} \\
 \bottomrule
-\end{tabularx}
-\vspace{1pt}
-\begin{flushleft}\tiny Sel. build is the evidence-window selected build/version, not necessarily the latest installed version; I/Q/Int reports strict-idle/QFG/interactive runs. Full versions, hashes, and run IDs are retained in source CSVs.\end{flushleft}
+\end{tabular}
 \end{table}
