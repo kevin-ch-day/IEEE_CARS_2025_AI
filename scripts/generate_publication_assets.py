@@ -39,6 +39,7 @@ APP_ORDER = [
     "Snapchat",
     "TikTok",
     "X",
+    "X (Twitter)",
     "Facebook Messenger",
     "Signal",
     "Telegram",
@@ -177,7 +178,11 @@ def count_ids(value: object) -> int:
 
 def display_label(value: object) -> str:
     text = "" if pd.isna(value) else str(value)
-    return "Facebook Msg" if text == "Facebook Messenger" else text
+    if text == "Facebook Messenger":
+        return "Facebook Msg"
+    if text == "X":
+        return "X (Twitter)"
+    return text
 
 
 def publication_category(package: object) -> str:
@@ -202,7 +207,7 @@ def write_category_policy() -> None:
         "com.reddit.frontpage": "Reddit",
         "com.snapchat.android": "Snapchat",
         "com.zhiliaoapp.musically": "TikTok",
-        "com.twitter.android": "X",
+        "com.twitter.android": "X (Twitter)",
         "com.facebook.orca": "Facebook Msg",
         "org.thoughtcrime.securesms": "Signal",
         "org.telegram.messenger": "Telegram",
@@ -587,7 +592,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         int_count = int(g["evidence_class"].eq("interactive").sum())
         eligibility.append(
             {
-                "app": app_name,
+                "app": display_label(app_name),
                 "package": pkg,
                 "baseline_or_qfg_runs": base_count,
                 "interactive_runs": int_count,
@@ -606,7 +611,11 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         "dynamic_metrics_source.csv": dynamic,
         "manifest_source.csv": manifest,
     }.items():
-        df.to_csv(SOURCE_DIR / name, index=False)
+        out = df.copy()
+        for display_col in ("app", "app_label", "App", "app_display_name"):
+            if display_col in out.columns:
+                out[display_col] = out[display_col].map(display_label)
+        out.to_csv(SOURCE_DIR / name, index=False)
 
 
 def build_pipeline_figure() -> None:
@@ -676,6 +685,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.pdf")
     fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.png", dpi=240)
     heat_out = plot_static[["app_label", "high_medium_findings", "exported_components_without_permission_guard", "dangerous_permissions"]].copy()
+    heat_out["app_label"] = heat_out["app_label"].map(display_label)
     heat_out.to_csv(SOURCE_DIR / "fig2_static_exposure_dotplot_source.csv", index=False)
     plt.close(fig)
 
@@ -683,6 +693,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     dynamic["app_category"] = dynamic["package"].map(publication_category)
     dynamic = category_sort(dynamic)
     dyn_counts = dynamic[["app_label", "strict_idle_run_count", "qfg_run_count", "interactive_run_count"]].copy()
+    dyn_counts["app_label"] = dyn_counts["app_label"].map(display_label)
     dyn_counts.to_csv(SOURCE_DIR / "fig3_runtime_coverage_source.csv", index=False)
     y = np.arange(len(dynamic))
     fig, ax = plt.subplots(figsize=(3.45, 4.75))
@@ -719,7 +730,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     merged["runtime_shift_log2_pps"] = np.log2((merged["interactive_median_packets_per_second"].fillna(0) + 1) / (baseline.fillna(0) + 1))
     merged["x_log_high_med"] = np.log10(1 + merged["high_medium_findings"])
     merged["app_category"] = merged["package_name"].map(publication_category)
-    merged[
+    scatter_source = merged[
         [
             "app_label",
             "package_name",
@@ -729,9 +740,9 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
             "interactive_run_count",
             "x_log_high_med",
         ]
-    ].to_csv(
-        SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False
-    )
+    ].copy()
+    scatter_source["app_label"] = scatter_source["app_label"].map(display_label)
+    scatter_source.to_csv(SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False)
     fig, ax = plt.subplots(figsize=(7.2, 4.05))
     plot = merged.copy()
     for cat in CATEGORY_ORDER:

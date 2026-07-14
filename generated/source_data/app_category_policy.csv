@@ -8,7 +8,7 @@ Pinterest,com.pinterest,Social Media,Content discovery and social recommendation
 Reddit,com.reddit.frontpage,Social Media,Community content and discussion,Supports public and semi-public community discussion and content feeds.,integrated-primary-function-v1
 Snapchat,com.snapchat.android,Social Media,Social media and ephemeral content,"Classified by primary user-facing function rather than ownership; despite messaging features, it is treated as a social media/content app for this study.",integrated-primary-function-v1
 TikTok,com.zhiliaoapp.musically,Social Media,Short-form social video/content,"Supports creator content, social video, and feed-based interaction.",integrated-primary-function-v1
-X,com.twitter.android,Social Media,Social feed and public interaction,"Supports social feeds, publishing, and public or semi-public interaction.",integrated-primary-function-v1
+X (Twitter),com.twitter.android,Social Media,Social feed and public interaction,"Supports social feeds, publishing, and public or semi-public interaction.",integrated-primary-function-v1
 Signal,org.thoughtcrime.securesms,Messaging,Direct and group private communication,Primary purpose is direct or group private message exchange and calls.,integrated-primary-function-v1
 Telegram,org.telegram.messenger,Messaging,Direct and group private communication,Primary purpose is direct or group private message exchange and calls.,integrated-primary-function-v1
 WhatsApp,com.whatsapp,Messaging,Direct and group private communication,Primary purpose is direct or group private message exchange and calls.,integrated-primary-function-v1
