@@ -43,13 +43,6 @@ The 14-day window serves as a provenance control rather than a claim that every 
 \end{algorithmic}
 \end{algorithm}
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{figures/fig1_study_pipeline.pdf}
-\caption{Study pipeline for build-aligned static and runtime evidence. The qualification gate excludes mismatched builds, missing evidence, and invalid or insufficient runs before integrated analysis.}
-\label{fig:study-pipeline}
-\end{figure}
-
 \subsection{Integrated Analysis and Reproducibility}
 
 Integrated analysis compares app-level static exposure indicators with app-level runtime observations. The study reports descriptive counts, evidence-class medians, baseline-relative packet-rate changes, and exploratory Spearman associations. Cross-layer profiles are constructed using a transparent median split: higher static exposure is determined from high- and medium-severity finding volume greater than or equal to the cohort median, while higher runtime activity is determined from interactive domain count greater than or equal to the cohort median. Equality is assigned to the higher group. These profiles support comparative interpretation but do not constitute a composite risk score or predictive model.

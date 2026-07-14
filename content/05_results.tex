@@ -2,9 +2,7 @@
 
 \subsection{Dataset and Evidence Provenance}
 
-The final evidence bundle included all 15 applications with build-aligned static and runtime evidence; no application was classified as a true evidence hole. Table~\ref{tab:cutoff-evidence-summary} summarizes the selected app versions and the associated strict-idle, quiescent foreground (QFG), and interactive runtime evidence. Full provenance---including static-run identifiers, dynamic-run identifiers, APK hashes, alignment status, and source-file checksums---is retained in the generated report bundle. The cutoff-window result therefore functions as a provenance control: every app-level observation reported below refers to a selected package and version group rather than to mutable live-installed state.
-
-The selected bundle is intentionally not a same-day installed-state snapshot. It is a recent, build-backed analysis set: each row identifies a selected app version, the selected runtime evidence classes, and the provenance needed to connect static and dynamic observations. This matters because consumer apps updated during collection; the analysis therefore treats app-store churn as a provenance problem rather than as automatic evidence loss.
+The final evidence bundle included all 15 applications with build-aligned static and runtime evidence, and no application was classified as a true evidence hole. Table~\ref{tab:cutoff-evidence-summary} reports the selected versions and strict-idle/QFG/interactive evidence classes. Detailed hashes, static-run identifiers, dynamic-run identifiers, alignment status, and source-file checksums remain in the generated source bundle. Results therefore refer to selected package/version groups rather than mutable installed-app state.
 
 \input{tables/table2_cutoff_evidence_summary}
 
@@ -27,7 +25,7 @@ The selected runtime evidence includes strict-idle, QFG, and interactive capture
 
 The selected runtime bundle contains 123 dynamic runs: 44 strict-idle, 23 QFG, and 56 interactive captures. CNN and BBC News provide the deepest selected coverage, with 12 and 10 runs, respectively, and every application contributes at least five selected runs. Interaction produced clearer changes in packet rate and traffic volume than in domain count. TikTok, Instagram, WhatsApp, and Facebook exhibited some of the largest interactive packet-rate or traffic-volume measurements. Signal and Telegram showed substantial packet-rate increases from comparatively quiet baselines, while retaining narrower observed domain diversity under the exercised messaging scenarios.
 
-The runtime results separate activity volume from service breadth. Interactive packet rates ranged from 14.0 packets/s for The Guardian to 285.7 packets/s for TikTok, with a median of 41.6 packets/s. Interactive median transfer volume ranged from about 10.1 MB for Facebook Messenger to 211.3 MB for Instagram. Domain breadth was less dispersed: the median interactive domain count was 12, and most content apps clustered between 10 and 16 domains. Messaging apps therefore require a different interpretation: WhatsApp, Signal, and Telegram show large baseline-relative packet-rate shifts, but only three or fewer interactive domains in the selected captures.
+The runtime results separate activity volume from service breadth. Interactive packet rates ranged from 14.0 packets/s for The Guardian to 285.7 packets/s for TikTok, with a median of 41.6 packets/s. Interactive median transfer volume ranged from about 10.1 MB for Facebook Msg to 211.3 MB for Instagram. Domain breadth was less dispersed: the median interactive domain count was 12, and most content apps clustered between 10 and 16 domains. Messaging apps therefore require a different interpretation: WhatsApp, Signal, and Telegram show large baseline-relative packet-rate shifts, but only three or fewer interactive domains in the selected captures.
 
 \input{tables/table4_runtime_behavior_summary}
 
@@ -48,8 +46,8 @@ These groupings are descriptive and should not be interpreted as formal risk ran
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/fig4_static_runtime_scatter.pdf}
-\caption{Descriptive static-runtime relationship for selected app builds. The x-axis is $\log_{10}(1+x)$ high/medium static finding volume; the y-axis is $\log_2$ baseline-relative interactive packet-rate shift. Marker size reflects interactive run count; representative apps are labeled, with complete app identities retained in Table~\ref{tab:cutoff-evidence-summary} and the source CSV.}
+\includegraphics[width=0.76\textwidth]{figures/fig4_static_runtime_scatter.pdf}
+\caption{Static exposure and baseline-relative runtime change for selected app builds. Static exposure is the $\log_{10}(1+x)$ transformation of high/medium finding count, and runtime change is the $\log_2$ ratio of interactive to baseline packet rate. Categories reflect primary app function; labeled points identify representative cases discussed in the text.}
 \label{fig:static-runtime-scatter}
 \end{figure*}
 

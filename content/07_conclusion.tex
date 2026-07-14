@@ -1,7 +1,5 @@
-\section{Conclusion and Future Work}
+\section{Conclusion}
 
-This paper presented a cutoff-window evidence model for assessing privacy and security risk in Android consumer applications using static and runtime evidence. At cutoff, all 15 apps had recent, build-backed evidence bundles, and the cutoff contained zero true evidence holes. The key result is that every app had auditable evidence with preserved build, static, dynamic, APK, PCAP, collection-window, and QA provenance.
-
-The study integrates static and dynamic evidence across a 15-app dataset. Static analysis supplies declared and embedded risk context, while runtime analysis supplies observed baseline, QFG, and interactive behavior. The cutoff-window model connects these surfaces through selected build-backed evidence bundles so the paper can report recent app evidence without treating normal app-store churn as evidence loss.
+This paper presented a cutoff-window evidence model for assessing privacy and security risk in Android consumer applications using static and runtime evidence. At cutoff, all 15 apps had recent, build-backed evidence bundles with zero true evidence holes, preserving build, static, dynamic, APK, PCAP, collection-window, and QA provenance. Static analysis supplies declared and embedded risk context, while runtime analysis supplies observed baseline, QFG, and interactive behavior; the cutoff-window model connects these surfaces without treating normal app-store churn as evidence loss.
 
 Future work will extend the frozen cutoff through longitudinal build-to-build comparisons, additional devices and Android versions, improved service-family labeling, and controlled held-out runtime scenarios. The present study establishes a reproducible, build-backed static-runtime evidence model for recent Android consumer-app measurements while preserving the provenance and limitations needed for reliable interpretation.

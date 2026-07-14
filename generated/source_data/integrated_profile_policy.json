@@ -6,5 +6,5 @@
   "runtime_threshold": 12.0,
   "comparison_operator": ">=",
   "tie_handling": "Values equal to the median are assigned to the higher group.",
-  "taxonomy_version": "paper3-primary-function-v1"
+  "taxonomy_version": "integrated-primary-function-v1"
 }

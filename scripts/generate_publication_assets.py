@@ -46,7 +46,7 @@ APP_ORDER = [
     "LinkedIn",
 ]
 
-CATEGORY_POLICY_VERSION = "paper3-primary-function-v1"
+CATEGORY_POLICY_VERSION = "integrated-primary-function-v1"
 CATEGORY_POLICY = {
     "bbc.mobile.news.ww": ("News", "News publication and consumption", "Primary purpose is news publication and consumption."),
     "com.cnn.mobile.android.phone": ("News", "News publication and consumption", "Primary purpose is news publication and consumption."),
@@ -177,12 +177,17 @@ def count_ids(value: object) -> int:
 
 def display_label(value: object) -> str:
     text = "" if pd.isna(value) else str(value)
-    return "FB Messenger" if text == "Facebook Messenger" else text
+    return "Facebook Msg" if text == "Facebook Messenger" else text
 
 
 def publication_category(package: object) -> str:
     pkg = "" if pd.isna(package) else str(package)
     return CATEGORY_POLICY.get(pkg, ("Other", ""))[0]
+
+
+def manuscript_category_label(category: object) -> str:
+    text = "" if pd.isna(category) else str(category)
+    return "Prof. Networking" if text == "Professional Networking" else text
 
 
 def write_category_policy() -> None:
@@ -198,7 +203,7 @@ def write_category_policy() -> None:
         "com.snapchat.android": "Snapchat",
         "com.zhiliaoapp.musically": "TikTok",
         "com.twitter.android": "X",
-        "com.facebook.orca": "Facebook Messenger",
+        "com.facebook.orca": "Facebook Msg",
         "org.thoughtcrime.securesms": "Signal",
         "org.telegram.messenger": "Telegram",
         "com.whatsapp": "WhatsApp",
@@ -345,13 +350,12 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         table2.append(
             {
                 "App": display_label(row["App"]),
-                "Category": row["app_category"],
+                "Category": manuscript_category_label(row["app_category"]),
                 "Version": row["selected_version_name"],
-                "Runs": int(row["selected_run_count"]),
                 "I/Q/Int": f"{count_ids(row['strict_idle_run_ids'])}/{count_ids(row['qfg_run_ids'])}/{count_ids(row['interactive_run_ids'])}",
             }
         )
-    cols2 = ["App", "Category", "Version", "Runs", "I/Q/Int"]
+    cols2 = ["App", "Category", "Version", "I/Q/Int"]
     write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2, cols2)
     write_tex_table(
         TABLE_DIR / "table2_cutoff_evidence_summary.tex",
@@ -359,7 +363,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         "tab:cutoff-evidence-summary",
         cols2,
         table2,
-        r"lllrc",
+        r"lllc",
         note="Categories reflect primary application function rather than corporate ownership or every supported feature.",
     )
 
@@ -554,14 +558,14 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         if not pd.isna(b) and not pd.isna(i) and b > 0:
             shift.append(math.log2((i + 1) / (b + 1)))
     table6 = [
-        {"Measure": "Selected apps", "Value": str(len(manifest))},
-        {"Measure": "Selected dynamic runs", "Value": str(int(dynamic["selected_run_count"].sum()))},
-        {"Measure": "Strict idle/QFG/interactive", "Value": f"{int(dynamic['strict_idle_run_count'].sum())}/{int(dynamic['qfg_run_count'].sum())}/{int(dynamic['interactive_run_count'].sum())}"},
-        {"Measure": "Runtime-shift eligible apps", "Value": str(len(compared))},
-        {"Measure": "Median log2 PPS shift", "Value": f"{np.median(shift):.2f}"},
-        {"Measure": "Spearman rho, findings vs. domains", "Value": f"{rho:.2f}"},
+        {"Measure": "Selected apps", "Basis": "Build-aligned set", "Value": str(len(manifest))},
+        {"Measure": "Selected dynamic runs", "Basis": "QA-valid runs", "Value": str(int(dynamic["selected_run_count"].sum()))},
+        {"Measure": "Strict idle/QFG/interactive", "Basis": "Evidence classes", "Value": f"{int(dynamic['strict_idle_run_count'].sum())}/{int(dynamic['qfg_run_count'].sum())}/{int(dynamic['interactive_run_count'].sum())}"},
+        {"Measure": "Runtime-shift eligible apps", "Basis": "Baseline+interactive", "Value": str(len(compared))},
+        {"Measure": "Median log2 PPS shift", "Basis": "App medians", "Value": f"{np.median(shift):.2f}"},
+        {"Measure": "Spearman rho, findings vs. domains", "Basis": "Descriptive", "Value": f"{rho:.2f}"},
     ]
-    cols6 = ["Measure", "Value"]
+    cols6 = ["Measure", "Basis", "Value"]
     write_csv(TABLE_DIR / "table6_statistical_summary.csv", table6, cols6)
     write_tex_table(
         TABLE_DIR / "table6_statistical_summary.tex",
@@ -569,7 +573,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         "tab:statistical-summary",
         cols6,
         table6,
-        r"@{}p{0.68\columnwidth}r@{}",
+        r"@{}p{0.42\columnwidth}p{0.34\columnwidth}r@{}",
         table_env="table",
         size=r"\scriptsize",
         note="Runtime shift uses strict-idle when available, otherwise QFG. Associations are descriptive.",
@@ -728,7 +732,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     ].to_csv(
         SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False
     )
-    fig, ax = plt.subplots(figsize=(7.15, 4.15))
+    fig, ax = plt.subplots(figsize=(6.5, 3.85))
     plot = merged.copy()
     for cat in CATEGORY_ORDER:
         group = plot[plot["app_category"].eq(cat)]
@@ -738,7 +742,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         ax.scatter(
             group["x_log_high_med"],
             group["runtime_shift_log2_pps"],
-            s=35 + group["interactive_run_count"].fillna(0) * 14,
+            s=58,
             label=cat,
             alpha=0.82,
             color=style["color"],
@@ -775,7 +779,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         )
     ax.axhline(0, color="#777777", lw=0.8, linestyle="--")
     ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8.6)
-    ax.set_ylabel("log2 interactive/base PPS", fontsize=8.6)
+    ax.set_ylabel("log2(interactive/base PPS)", fontsize=8.6)
     ax.tick_params(labelsize=8.0)
     ax.margins(x=0.18, y=0.14)
     ax.legend(fontsize=7.2, loc="upper center", bbox_to_anchor=(0.5, 1.17), ncols=4, frameon=False)
