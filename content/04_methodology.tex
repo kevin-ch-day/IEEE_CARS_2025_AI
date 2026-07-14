@@ -4,7 +4,7 @@
 The study is a descriptive, build-aligned analysis of 15 Android consumer apps. The unit of inference is the selected app build: package name, version code/name, base APK hash, split identity, contributing static run, and selected dynamic runs. RQ1 is addressed through static exposure variables; RQ2 through runtime evidence classes and network metadata; RQ3 through app-level integrated profiles and descriptive associations.
 
 \subsection{Dataset, Device, and Collection Window}
-Collection used a non-root Motorola moto g 5G 2024 running Android 15. The fixed recent-evidence window spans June 26--July 9, 2026 UTC. A run or static result was eligible only when it could be tied to the selected package/version group and passed identity, validity, signal, and QA checks. The non-root setting avoids privileged instrumentation, app modification, TLS interception, and payload inspection.
+Collection used a non-root Motorola moto g 5G 2024 running Android 15. The fixed recent-evidence window spans June 26 to July 9, 2026 UTC. A run or static result was eligible only when it could be tied to the selected package/version group and passed identity, validity, signal, and QA checks. The non-root setting avoids privileged instrumentation, app modification, TLS interception, and payload inspection.
 
 \subsection{Static Analysis and Exposure Variables}
 Static analysis used harvested base and split APK artifacts for the selected build. Variables include dangerous permission count, high/medium finding count, unguarded exported components, network-security findings, storage findings, privacy findings, platform findings, MASVS-aligned category counts, and SDK/service indicators where supported. These values are exposure indicators; they are not a calibrated exploitability score.
@@ -13,7 +13,7 @@ Static analysis used harvested base and split APK artifacts for the selected bui
 Runtime collection used package-associated dynamic evidence packs and PCAP metadata. Runs were classified as strict idle, QFG, or interactive. Strict idle captures represent foreground quiet-state baselines. QFG captures are no-touch foreground observations in which app-driven activity continued. Interactive captures exercise user-facing behavior. Runtime variables include run counts, duration, PCAP bytes, packet rate, domain count, service-family count, protocol prevalence, and baseline-relative shifts where both baseline and interactive evidence exist.
 
 \subsection{Build Selection and Static-Runtime Alignment}
-For each app, ScytaleDroid selected a build group using package/version identity, base APK hash, static-run availability, dynamic-run availability, PCAP state, QA validity, and recency. Static and runtime rows were included only when the selected static and dynamic evidence aligned to the same selected build group. Runs with mismatched build identity, missing static evidence, missing dynamic evidence, invalid QA state, or insufficient signal were excluded or deferred.
+For each app, we selected a build group using package/version identity, base APK hash, static-run availability, dynamic-run availability, PCAP state, QA validity, and recency. Static and runtime rows were included only when the selected static and dynamic evidence aligned to the same selected build group. Runs with mismatched build identity, missing static evidence, missing dynamic evidence, invalid QA state, or insufficient signal were excluded or deferred.
 
 \begin{figure}[!t]
 \centering
