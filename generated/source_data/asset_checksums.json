@@ -103,13 +103,13 @@
     },
     {
       "path": "tables/table2_cutoff_evidence_summary.csv",
-      "sha256": "897265d03927ba166503b037c57de294ae496a7d02b6c06cb30716f60dfeb2da",
-      "bytes": 593
+      "sha256": "7ef5035c5b521b2f2dedaae270b42c7c7e9a16df5b8f58bccabef54fb09f8ad6",
+      "bytes": 600
     },
     {
       "path": "tables/table2_cutoff_evidence_summary.tex",
-      "sha256": "144699b7306c08506d10ba15fe757ad9103b06805cc2b49a83aa91c5161bb81f",
-      "bytes": 1181
+      "sha256": "953652e4acc43cc6e2e74c291b1f297d0c8ae6428c47ed25225e4205993842a8",
+      "bytes": 1919
     },
     {
       "path": "tables/table3_static_exposure_summary.csv",

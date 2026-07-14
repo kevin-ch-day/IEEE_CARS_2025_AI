@@ -167,12 +167,12 @@ def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]]) -> No
         r"\centering",
         r"\caption{Selected 14-day evidence bundles.}",
         r"\label{tab:cutoff-evidence-summary}",
-        r"\tiny",
-        r"\setlength{\tabcolsep}{2.2pt}",
-        r"\renewcommand{\arraystretch}{1.02}",
-        r"\begin{tabular}{@{}p{0.25\columnwidth}p{0.25\columnwidth}p{0.28\columnwidth}c@{}}",
+        r"\scriptsize",
+        r"\setlength{\tabcolsep}{2.4pt}",
+        r"\renewcommand{\arraystretch}{1.03}",
+        r"\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.23\columnwidth}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}X>{\centering\arraybackslash}p{0.13\columnwidth}@{}}",
         r"\toprule",
-        r"App & Category & Version & I/Q/Int \\",
+        r"App & Cat. & Sel. build & I/Q/Int \\",
         r"\midrule",
     ]
     for row in rows:
@@ -181,7 +181,7 @@ def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]]) -> No
                 [
                     latex_escape(row["App"]),
                     latex_escape(row["Category"]),
-                    latex_escape(row["Version"]),
+                    latex_breakable_version(row["Version"]),
                     latex_escape(row["I/Q/Int"]),
                 ]
             )
@@ -190,14 +190,19 @@ def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]]) -> No
     body.extend(
         [
             r"\bottomrule",
-            r"\end{tabular}",
+            r"\end{tabularx}",
             r"\vspace{1pt}",
-            r"\begin{flushleft}\tiny Categories reflect primary app function; I/Q/Int reports strict-idle/QFG/interactive runs.\end{flushleft}",
+            r"\begin{flushleft}\tiny Sel. build is the evidence-window selected build/version, not necessarily the latest installed version; I/Q/Int reports strict-idle/QFG/interactive runs. Full versions, hashes, and run IDs are retained in source CSVs.\end{flushleft}",
             r"\end{table}",
             "",
         ]
     )
     path.write_text("\n".join(body), encoding="utf-8")
+
+
+def latex_breakable_version(value: object) -> str:
+    text = latex_escape(value)
+    return text.replace(".", r".\allowbreak{}").replace("-", r"-\allowbreak{}")
 
 
 def fnum(value: object, digits: int = 1) -> str:
@@ -231,7 +236,11 @@ def publication_category(package: object) -> str:
 
 def manuscript_category_label(category: object) -> str:
     text = "" if pd.isna(category) else str(category)
-    return "Prof. Networking" if text == "Professional Networking" else text
+    if text == "Professional Networking":
+        return "Prof. Net."
+    if text == "Social Media":
+        return "Social"
+    return text
 
 
 def write_category_policy() -> None:
@@ -389,19 +398,29 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     manifest = manifest.copy()
     manifest["app_category"] = manifest["package_name"].map(publication_category)
     manifest = category_sort(manifest.rename(columns={"app_label": "App"}), column="App")
-    table2 = []
+    table2_csv = []
+    table2_tex = []
     for _, row in manifest.iterrows():
-        table2.append(
+        common = {
+            "App": display_label(row["App"]),
+            "Version": row["selected_version_name"],
+            "I/Q/Int": f"{count_ids(row['strict_idle_run_ids'])}/{count_ids(row['qfg_run_ids'])}/{count_ids(row['interactive_run_ids'])}",
+        }
+        table2_csv.append(
             {
-                "App": display_label(row["App"]),
+                **common,
+                "Category": row["app_category"],
+            }
+        )
+        table2_tex.append(
+            {
+                **common,
                 "Category": manuscript_category_label(row["app_category"]),
-                "Version": row["selected_version_name"],
-                "I/Q/Int": f"{count_ids(row['strict_idle_run_ids'])}/{count_ids(row['qfg_run_ids'])}/{count_ids(row['interactive_run_ids'])}",
             }
         )
     cols2 = ["App", "Category", "Version", "I/Q/Int"]
-    write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2, cols2)
-    write_cutoff_evidence_table(TABLE_DIR / "table2_cutoff_evidence_summary.tex", table2)
+    write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2_csv, cols2)
+    write_cutoff_evidence_table(TABLE_DIR / "table2_cutoff_evidence_summary.tex", table2_tex)
 
     static = static.copy()
     static["app_category"] = static["package_name"].map(publication_category)
