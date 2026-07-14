@@ -8,7 +8,7 @@ Collection was conducted on a non-root Motorola Moto G 5G (2024) running Android
 
 \subsection{Static and Runtime Evidence}
 
-Static analysis used the harvested base and split APK artifacts associated with each selected build. The reported variables include dangerous permissions, high- and medium-severity findings, unguarded exported components, network- and storage-related findings, privacy and platform findings, MASVS-aligned categories, and supported SDK or service indicators. These measurements represent descriptive exposure indicators rather than calibrated exploitability, compliance, or risk scores.
+Static analysis used the harvested base and split APK artifacts associated with each selected build. The reported variables include dangerous permissions, high- and medium-severity findings, unguarded exported components, network- and storage-related findings, privacy and platform findings, MASVS-aligned categories, and supported SDK or service indicators \cite{owaspMasvs2024}. These measurements represent descriptive exposure indicators rather than calibrated exploitability, compliance, or risk scores.
 
 Runtime analysis used package-associated evidence packs and PCAP-derived metadata. Captures were classified as strict-idle, quiescent foreground (QFG), or interactive. Strict-idle captures represent quiet foreground baselines; QFG captures represent no-touch foreground periods in which app-driven activity continued; and interactive captures exercise user-facing behavior. Runtime variables include capture count and duration, PCAP volume, packet rate, observed domains, service families, protocol prevalence, and baseline-relative changes where comparable baseline and interactive evidence were available.
 
