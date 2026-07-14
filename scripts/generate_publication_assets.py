@@ -732,7 +732,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     ].to_csv(
         SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False
     )
-    fig, ax = plt.subplots(figsize=(6.5, 3.85))
+    fig, ax = plt.subplots(figsize=(7.2, 4.05))
     plot = merged.copy()
     for cat in CATEGORY_ORDER:
         group = plot[plot["app_category"].eq(cat)]
@@ -751,31 +751,31 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
             linewidth=0.4,
         )
     offsets = {
-        "BBC News": (-48, -10),
-        "CNN": (5, 7),
-        "The Guardian": (-72, -11),
-        "Facebook": (6, 6),
-        "Instagram": (-64, 9),
-        "Pinterest": (5, 8),
-        "Reddit": (5, -11),
-        "TikTok": (7, -14),
-        "X": (8, -12),
-        "LinkedIn": (6, 7),
-        "Signal": (6, 7),
-        "Snapchat": (6, -11),
-        "Telegram": (6, -11),
-        "WhatsApp": (-62, 6),
-        "Facebook Messenger": (-86, -11),
+        "BBC News": (-48, 7),
+        "CNN": (6, 6),
+        "The Guardian": (-76, -13),
+        "Facebook": (8, 7),
+        "Instagram": (-72, 9),
+        "Pinterest": (-58, 9),
+        "Reddit": (-52, -12),
+        "TikTok": (8, -14),
+        "X": (8, -15),
+        "LinkedIn": (8, 7),
+        "Signal": (7, 8),
+        "Snapchat": (8, -10),
+        "Telegram": (8, -12),
+        "WhatsApp": (-68, 8),
+        "Facebook Messenger": (8, 8),
     }
-    label_apps = {"Snapchat", "Facebook", "CNN", "Signal", "Telegram", "TikTok", "WhatsApp"}
-    for _, row in plot[plot["app_label"].isin(label_apps)].iterrows():
+    for _, row in plot.iterrows():
         ax.annotate(
             display_label(row["app_label"]),
             (row["x_log_high_med"], row["runtime_shift_log2_pps"]),
             xytext=offsets.get(row["app_label"], (4, 4)),
             textcoords="offset points",
-            fontsize=7.6,
-            arrowprops=dict(arrowstyle="-", color="#888888", lw=0.35, shrinkA=0, shrinkB=4),
+            fontsize=7.1,
+            bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.72),
+            arrowprops=dict(arrowstyle="-", color="#8a8a8a", lw=0.35, shrinkA=0, shrinkB=4),
         )
     ax.axhline(0, color="#777777", lw=0.8, linestyle="--")
     ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8.6)
