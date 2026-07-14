@@ -2,9 +2,9 @@
 
 \subsection{Study Design and Evidence Window}
 
-This study performs a descriptive, build-aligned analysis of 15 Android consumer applications. It examines three questions: the static exposure present in selected app builds, the runtime behavior observed for those builds, and the relationships or divergences between the two evidence layers. The unit of inference is the selected app-build group, defined by package name, version code and name, base APK hash, split-APK identity, contributing static run, and selected dynamic runs.
+This study performs a descriptive, build-aligned analysis of 15 Android consumer applicatios. It examines three questions: the static exposure present in selected app builds, the runtime behavior observed for those builds, and the relationships or divergences between the two evidence layers. The unit of inference is the selected app-build group, defined by package name, version code and name, base APK hash, split-APK identity, contributing static run, and selected dynamic runs.
 
-Collection was conducted on a non-root Motorola Moto G 5G (2024) running Android 15. Evidence was selected from a fixed window spanning June 26 through July 9, 2026 UTC. Static results and dynamic runs were eligible only when they could be linked to the selected package and build group and passed identity, validity, signal-sufficiency, and quality-assurance checks. Applications were grouped by primary user-facing function into News, Social Media, Messaging, and Professional Networking categories. The categories are used for descriptive visualization only and are not treated as statistical strata. The non-root setting avoided application modification, privileged instrumentation, TLS interception, and payload inspection.
+Collection was conducted on a non-root Motorola Moto G 5G (2024) running Android 15. Evidence was selected from a fixed window spanning June 26 through July 9, 2026 UTC. Static results and dynamic runs were eligible only when they could be linked to the selected package and build group and passed identity, validity, signal-sufficiency, and quality-assurance checks. Each app was grouped by primary user-facing function into News, Social Media, Messaging, and Professional Networking categories. The categories are used for descriptive visualization only and are not treated as statistical strata. The non-root setting avoided app modification, privileged instrumentation, TLS interception, and payload inspection.
 
 \subsection{Static and Runtime Evidence}
 
@@ -14,9 +14,9 @@ Runtime analysis used package-associated evidence packs and PCAP-derived metadat
 
 \subsection{Build Selection and Evidence Alignment}
 
-For each application, ScytaleDroid selected one eligible build group using package and version identity, base APK hash, static- and dynamic-run availability, PCAP state, recency, signal sufficiency, and quality-assurance status. Static and runtime observations were integrated only when they referred to the same selected build group. Evidence with mismatched build identity, missing static or dynamic support, invalid QA state, or insufficient signal was excluded or deferred. Algorithm~\ref{alg:build-aligned-selection} summarizes the deterministic selection and reporting procedure.
+For each app, ScytaleDroid selected one eligible build group using package and version identity, base APK hash, static- and dynamic-run availability, PCAP state, recency, signal sufficiency, and quality-assurance status. Static and runtime observations were integrated only when they referred to the same selected build group. Evidence with mismatched build identity, missing static or dynamic support, invalid QA state, or insufficient signal was excluded or deferred. Algorithm~\ref{alg:build-aligned-selection} summarizes the deterministic selection and reporting procedure.
 
-The 14-day window serves as a provenance control rather than a claim that every application remained on the same installed version throughout the study. A later app-store update did not invalidate evidence collected from a recent, fully identified build; it instead created a candidate for future longitudinal comparison.
+The 14-day window serves as a provenance control rather than a claim that every app remained on the same installed version throughout the study. A later app-store update did not invalidate evidence collected from a recent, fully identified build; it instead created a candidate for future longitudinal comparison.
 
 \begin{algorithm}[!t]
 \caption{Build-Aligned Static-Runtime Evidence Selection}
@@ -24,7 +24,7 @@ The 14-day window serves as a provenance control rather than a claim that every 
 \begin{algorithmic}[1]
 \REQUIRE cohort $A$, 14-day window $W$, static set $S$, dynamic set $D$, qualification policy $P$
 \ENSURE aligned app-build rows, excluded/deferred rows, source data, checksums
-\FOR{each application $a \in A$}
+\FOR{each app $a \in A$}
   \STATE retrieve candidate dynamic runs for $a$ within $W$
   \STATE apply identity, evidence-validity, signal, PCAP, and QA requirements from $P$
   \STATE group qualifying runs by normalized package, version code, base APK SHA-256, and artifact/build-set identity
@@ -51,6 +51,6 @@ PCAP processing is limited to metadata and derived transport indicators. Message
 
 \subsection{Limitations}
 
-The study is limited to 15 applications, one Android 15 physical device, one collection environment, selected interaction scenarios, and the available static detectors. Runtime observations are scenario-bounded and do not establish exhaustive application behavior, while unequal capture depth may affect the precision of app-level comparisons. The non-root, no-MITM design preserves a clear privacy boundary but prevents inspection of encrypted payload semantics.
+The study is limited to 15 apps, one Android 15 physical device, one collection environment, selected interaction scenarios, and the available static detectors. Runtime observations are scenario-bounded and do not establish exhaustive app behavior, while unequal capture depth may affect the precision of app-level comparisons. The non-root, no-MITM design preserves a clear privacy boundary but prevents inspection of encrypted payload semantics.
 
 Static finding counts are tool-dependent exposure indicators rather than formal measures of exploitability, MASVS compliance, or privacy harm. Likewise, observed runtime activity does not demonstrate malicious behavior, and limited activity does not establish low risk. The integrated analysis therefore characterizes the static and runtime posture of the selected builds without inferring causation, predicting future behavior, or generalizing the results to all Android devices and app versions.
