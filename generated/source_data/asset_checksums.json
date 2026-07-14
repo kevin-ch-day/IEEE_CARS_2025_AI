@@ -108,8 +108,8 @@
     },
     {
       "path": "tables/table2_cutoff_evidence_summary.tex",
-      "sha256": "a964598286c0be0d55da5b6caf65cfb5cb3de622014f934c17f6da79dc302617",
-      "bytes": 1102
+      "sha256": "144699b7306c08506d10ba15fe757ad9103b06805cc2b49a83aa91c5161bb81f",
+      "bytes": 1181
     },
     {
       "path": "tables/table3_static_exposure_summary.csv",

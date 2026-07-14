@@ -1,9 +1,11 @@
-\begin{table*}[!t]
+\begin{table}[!t]
 \centering
-\caption{Selected 14-day evidence bundles and provenance.}
+\caption{Selected 14-day evidence bundles.}
 \label{tab:cutoff-evidence-summary}
-\scriptsize
-\begin{tabular}{lllc}
+\tiny
+\setlength{\tabcolsep}{2.2pt}
+\renewcommand{\arraystretch}{1.02}
+\begin{tabular}{@{}p{0.25\columnwidth}p{0.25\columnwidth}p{0.28\columnwidth}c@{}}
 \toprule
 App & Category & Version & I/Q/Int \\
 \midrule
@@ -25,5 +27,5 @@ LinkedIn & Prof. Networking & 4.1.1218 & 3/1/4 \\
 \bottomrule
 \end{tabular}
 \vspace{1pt}
-\begin{flushleft}\scriptsize Categories reflect primary application function rather than corporate ownership or every supported feature.\end{flushleft}
-\end{table*}
+\begin{flushleft}\tiny Categories reflect primary app function; I/Q/Int reports strict-idle/QFG/interactive runs.\end{flushleft}
+\end{table}

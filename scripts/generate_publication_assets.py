@@ -161,6 +161,45 @@ def write_literature_table(path: Path, rows: list[dict[str, object]]) -> None:
     path.write_text("\n".join(body), encoding="utf-8")
 
 
+def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]]) -> None:
+    body = [
+        r"\begin{table}[!t]",
+        r"\centering",
+        r"\caption{Selected 14-day evidence bundles.}",
+        r"\label{tab:cutoff-evidence-summary}",
+        r"\tiny",
+        r"\setlength{\tabcolsep}{2.2pt}",
+        r"\renewcommand{\arraystretch}{1.02}",
+        r"\begin{tabular}{@{}p{0.25\columnwidth}p{0.25\columnwidth}p{0.28\columnwidth}c@{}}",
+        r"\toprule",
+        r"App & Category & Version & I/Q/Int \\",
+        r"\midrule",
+    ]
+    for row in rows:
+        body.append(
+            " & ".join(
+                [
+                    latex_escape(row["App"]),
+                    latex_escape(row["Category"]),
+                    latex_escape(row["Version"]),
+                    latex_escape(row["I/Q/Int"]),
+                ]
+            )
+            + r" \\"
+        )
+    body.extend(
+        [
+            r"\bottomrule",
+            r"\end{tabular}",
+            r"\vspace{1pt}",
+            r"\begin{flushleft}\tiny Categories reflect primary app function; I/Q/Int reports strict-idle/QFG/interactive runs.\end{flushleft}",
+            r"\end{table}",
+            "",
+        ]
+    )
+    path.write_text("\n".join(body), encoding="utf-8")
+
+
 def fnum(value: object, digits: int = 1) -> str:
     try:
         if value == "" or pd.isna(value):
@@ -362,15 +401,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         )
     cols2 = ["App", "Category", "Version", "I/Q/Int"]
     write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2, cols2)
-    write_tex_table(
-        TABLE_DIR / "table2_cutoff_evidence_summary.tex",
-        "Selected 14-day evidence bundles and provenance.",
-        "tab:cutoff-evidence-summary",
-        cols2,
-        table2,
-        r"lllc",
-        note="Categories reflect primary application function rather than corporate ownership or every supported feature.",
-    )
+    write_cutoff_evidence_table(TABLE_DIR / "table2_cutoff_evidence_summary.tex", table2)
 
     static = static.copy()
     static["app_category"] = static["package_name"].map(publication_category)
