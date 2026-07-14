@@ -1,16 +1,16 @@
-App,Group,High+Med,Int domains,Int runs,Interpretation
-BBC News,Lower static/high runtime,16,16,6,runtime-heavy
-CNN,Lower static/high runtime,25,14,7,runtime-heavy
-The Guardian,Lower static/high runtime,21,14,4,runtime-heavy
-Facebook,High static/high runtime,164,16,4,concordant higher
-Instagram,High static/high runtime,128,15,1,concordant higher
-Pinterest,Lower static/lower runtime,16,10,2,concordant lower
-Reddit,Lower static/high runtime,47,12,1,runtime-heavy
-TikTok,High static/high runtime,85,14,3,concordant higher
-X,High static/high runtime,83,12,4,concordant higher
-LinkedIn,High static/lower runtime,52,10,4,static-heavy
-Signal,Lower static/lower runtime,35,3,4,concordant lower
-Snapchat,High static/lower runtime,325,11,2,static-heavy
-Telegram,Lower static/lower runtime,43,0,4,concordant lower
-WhatsApp,High static/lower runtime,99,3,5,static-heavy
-Facebook Msg,High static/lower runtime,96,9,5,static-heavy
+App,Group,High+Med,Int domains,Int runs,Static threshold,Runtime threshold,Threshold policy,Policy version,Interpretation
+BBC News,Lower static/high runtime,16,16,6,52,12,>=,median-split-v1,runtime-heavy
+CNN,Lower static/high runtime,25,14,7,52,12,>=,median-split-v1,runtime-heavy
+The Guardian,Lower static/high runtime,21,14,4,52,12,>=,median-split-v1,runtime-heavy
+Facebook,High static/high runtime,164,16,4,52,12,>=,median-split-v1,concordant higher
+Instagram,High static/high runtime,128,15,1,52,12,>=,median-split-v1,concordant higher
+Pinterest,Lower static/lower runtime,16,10,2,52,12,>=,median-split-v1,concordant lower
+Reddit,Lower static/high runtime,47,12,1,52,12,>=,median-split-v1,runtime-heavy
+Snapchat,High static/lower runtime,325,11,2,52,12,>=,median-split-v1,static-heavy
+TikTok,High static/high runtime,85,14,3,52,12,>=,median-split-v1,concordant higher
+X,High static/high runtime,83,12,4,52,12,>=,median-split-v1,concordant higher
+FB Messenger,High static/lower runtime,96,9,5,52,12,>=,median-split-v1,static-heavy
+Signal,Lower static/lower runtime,35,3,4,52,12,>=,median-split-v1,concordant lower
+Telegram,Lower static/lower runtime,43,0,4,52,12,>=,median-split-v1,concordant lower
+WhatsApp,High static/lower runtime,99,3,5,52,12,>=,median-split-v1,static-heavy
+LinkedIn,High static/lower runtime,52,10,4,52,12,>=,median-split-v1,static-heavy

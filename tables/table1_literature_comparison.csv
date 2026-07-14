@@ -4,7 +4,8 @@ Runtime permissions \cite{wang2023runtimepermissions},Permissions,Behavioral fai
 Dynamic SLR \cite{sutter2024dynamic},Surveyed,Surveyed,Varies,Method-level,Literature,No empirical app bundle
 Tracking study \cite{paci2023tracking},Some,Yes,Tracking,Execution-based,Third-party tracking,Less build alignment
 Data Safety longitudinal \cite{arkalakis2024datasafety},Ecosystem,Dynamic,Disclosure,Longitudinal,Google Play labels,Disclosure-centered
+Karyotakis et al. \cite{karyotakis2026messaging},Yes,Yes,Security/privacy,Scenario/build context,3 messaging apps,Messaging-only
 Privacy labels \cite{khandelwal2024privacylabels},Measurement,No,Disclosure,Developer/app,Data Safety,No runtime PCAP
 Privacy SDKs \cite{zhang2024privacysdks},SDK config,Limited,SDK risk,SDK/app,Mobile SDKs,SDK-specific
 Android SAST \cite{zhu2024sastandroid},Yes,No,Security findings,Tool/app,SAST tools,No runtime layer
-This study,Yes,Yes,Transport/provenance,Exact selected build,15 apps,Scenario-bounded
+This study,Yes,Yes,Transport/provenance,Exact selected build,15 heterogeneous apps,Single device; scenario-bounded

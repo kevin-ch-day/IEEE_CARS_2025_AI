@@ -1,0 +1,10 @@
+{
+  "policy_version": "median-split-v1",
+  "static_indicator": "severity_high_count + severity_medium_count",
+  "runtime_indicator": "interactive_median_domain_count",
+  "static_threshold": 52.0,
+  "runtime_threshold": 12.0,
+  "comparison_operator": ">=",
+  "tie_handling": "Values equal to the median are assigned to the higher group.",
+  "taxonomy_version": "paper3-primary-function-v1"
+}

@@ -2,15 +2,15 @@ App,Category,Version,Runs,I/Q/Int
 BBC News,News,2026.5.0,10,4/0/6
 CNN,News,26.13.0,12,4/1/7
 The Guardian,News,6.226.23011,9,3/2/4
-Facebook,Social/content,567.1.0.52.74,8,3/1/4
-Instagram,Social/content,436.0.0.41.73,7,2/4/1
-Pinterest,Social/content,14.26.0,7,5/0/2
-Reddit,Social/content,2026.26.0,6,2/3/1
-TikTok,Social/video,45.7.3,11,0/8/3
-X,Social/content,12.5.0-release.0,8,3/1/4
-LinkedIn,Professional social,4.1.1218,8,3/1/4
+Facebook,Social Media,567.1.0.52.74,8,3/1/4
+Instagram,Social Media,436.0.0.41.73,7,2/4/1
+Pinterest,Social Media,14.26.0,7,5/0/2
+Reddit,Social Media,2026.26.0,6,2/3/1
+Snapchat,Social Media,14.14.0.43,5,1/2/2
+TikTok,Social Media,45.7.3,11,0/8/3
+X,Social Media,12.5.0-release.0,8,3/1/4
+FB Messenger,Messaging,567.1.0.53.87,9,4/0/5
 Signal,Messaging,8.18.2,7,3/0/4
-Snapchat,Messaging/social,14.14.0.43,5,1/2/2
 Telegram,Messaging,12.8.3,7,3/0/4
 WhatsApp,Messaging,2.26.25.80,9,4/0/5
-Facebook Msg,Messaging,567.1.0.53.87,9,4/0/5
+LinkedIn,Professional Networking,4.1.1218,8,3/1/4

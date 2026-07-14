@@ -33,18 +33,45 @@ APP_ORDER = [
     "CNN",
     "The Guardian",
     "Facebook",
-    "Facebook Msg",
     "Instagram",
     "Pinterest",
     "Reddit",
+    "Snapchat",
     "TikTok",
     "X",
-    "LinkedIn",
+    "Facebook Messenger",
     "Signal",
-    "Snapchat",
     "Telegram",
     "WhatsApp",
+    "LinkedIn",
 ]
+
+CATEGORY_POLICY_VERSION = "paper3-primary-function-v1"
+CATEGORY_POLICY = {
+    "bbc.mobile.news.ww": ("News", "News publication and consumption", "Primary purpose is news publication and consumption."),
+    "com.cnn.mobile.android.phone": ("News", "News publication and consumption", "Primary purpose is news publication and consumption."),
+    "com.guardian": ("News", "News publication and consumption", "Primary purpose is news publication and consumption."),
+    "com.facebook.katana": ("Social Media", "Social feed and content interaction", "Supports social feeds, publishing, and broad social interaction."),
+    "com.instagram.android": ("Social Media", "Social feed and content sharing", "Supports social feeds, creator content, and content sharing."),
+    "com.pinterest": ("Social Media", "Content discovery and social recommendation", "Supports content discovery, recommendations, and social interaction."),
+    "com.reddit.frontpage": ("Social Media", "Community content and discussion", "Supports public and semi-public community discussion and content feeds."),
+    "com.snapchat.android": ("Social Media", "Social media and ephemeral content", "Classified by primary user-facing function rather than ownership; despite messaging features, it is treated as a social media/content app for this study."),
+    "com.zhiliaoapp.musically": ("Social Media", "Short-form social video/content", "Supports creator content, social video, and feed-based interaction."),
+    "com.twitter.android": ("Social Media", "Social feed and public interaction", "Supports social feeds, publishing, and public or semi-public interaction."),
+    "com.facebook.orca": ("Messaging", "Direct and group private communication", "Primary purpose is direct or group private message exchange."),
+    "org.thoughtcrime.securesms": ("Messaging", "Direct and group private communication", "Primary purpose is direct or group private message exchange and calls."),
+    "org.telegram.messenger": ("Messaging", "Direct and group private communication", "Primary purpose is direct or group private message exchange and calls."),
+    "com.whatsapp": ("Messaging", "Direct and group private communication", "Primary purpose is direct or group private message exchange and calls."),
+    "com.linkedin.android": ("Professional Networking", "Professional identity and networking", "Primary purpose is professional identity, employment, and professional network formation."),
+}
+
+CATEGORY_ORDER = ["News", "Social Media", "Messaging", "Professional Networking"]
+CATEGORY_STYLES = {
+    "News": {"color": "#0072B2", "marker": "^"},
+    "Social Media": {"color": "#D55E00", "marker": "o"},
+    "Messaging": {"color": "#009E73", "marker": "s"},
+    "Professional Networking": {"color": "#CC79A7", "marker": "D"},
+}
 
 
 def latex_escape(value: object) -> str:
@@ -150,7 +177,49 @@ def count_ids(value: object) -> int:
 
 def display_label(value: object) -> str:
     text = "" if pd.isna(value) else str(value)
-    return "Facebook Msg" if text == "Facebook Messenger" else text
+    return "FB Messenger" if text == "Facebook Messenger" else text
+
+
+def publication_category(package: object) -> str:
+    pkg = "" if pd.isna(package) else str(package)
+    return CATEGORY_POLICY.get(pkg, ("Other", ""))[0]
+
+
+def write_category_policy() -> None:
+    rows = []
+    display_names = {
+        "bbc.mobile.news.ww": "BBC News",
+        "com.cnn.mobile.android.phone": "CNN",
+        "com.guardian": "The Guardian",
+        "com.facebook.katana": "Facebook",
+        "com.instagram.android": "Instagram",
+        "com.pinterest": "Pinterest",
+        "com.reddit.frontpage": "Reddit",
+        "com.snapchat.android": "Snapchat",
+        "com.zhiliaoapp.musically": "TikTok",
+        "com.twitter.android": "X",
+        "com.facebook.orca": "Facebook Messenger",
+        "org.thoughtcrime.securesms": "Signal",
+        "org.telegram.messenger": "Telegram",
+        "com.whatsapp": "WhatsApp",
+        "com.linkedin.android": "LinkedIn",
+    }
+    for package, (category, primary_function, rationale) in CATEGORY_POLICY.items():
+        rows.append(
+            {
+                "app_display_name": display_names[package],
+                "package_name": package,
+                "category": category,
+                "primary_function": primary_function,
+                "assignment_rationale": rationale,
+                "taxonomy_version": CATEGORY_POLICY_VERSION,
+            }
+        )
+    write_csv(
+        SOURCE_DIR / "app_category_policy.csv",
+        sorted(rows, key=lambda r: APP_ORDER.index(r["app_display_name"]) if r["app_display_name"] in APP_ORDER else 999),
+        ["app_display_name", "package_name", "category", "primary_function", "assignment_rationale", "taxonomy_version"],
+    )
 
 
 def category_sort(df: pd.DataFrame, column: str = "app_label") -> pd.DataFrame:
@@ -170,6 +239,7 @@ def read_inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFram
 def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame, dynamic: pd.DataFrame, runs: pd.DataFrame) -> None:
     TABLE_DIR.mkdir(exist_ok=True)
     SOURCE_DIR.mkdir(parents=True, exist_ok=True)
+    write_category_policy()
 
     lit_rows = [
         {
@@ -218,6 +288,15 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
             "Limit": "Disclosure-centered",
         },
         {
+            "Study": r"Karyotakis et al. \cite{karyotakis2026messaging}",
+            "Static": "Yes",
+            "Runtime": "Yes",
+            "Privacy": "Security/privacy",
+            "Provenance": "Scenario/build context",
+            "Scope": "3 messaging apps",
+            "Limit": "Messaging-only",
+        },
+        {
             "Study": r"Privacy labels \cite{khandelwal2024privacylabels}",
             "Static": "Measurement",
             "Runtime": "No",
@@ -250,14 +329,16 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
             "Runtime": "Yes",
             "Privacy": "Transport/provenance",
             "Provenance": "Exact selected build",
-            "Scope": "15 apps",
-            "Limit": "Scenario-bounded",
+            "Scope": "15 heterogeneous apps",
+            "Limit": "Single device; scenario-bounded",
         },
     ]
     lit_cols = ["Study", "Static", "Runtime", "Privacy", "Provenance", "Scope", "Limit"]
     write_csv(TABLE_DIR / "table1_literature_comparison.csv", lit_rows, lit_cols)
     write_literature_table(TABLE_DIR / "table1_literature_comparison.tex", lit_rows)
 
+    manifest = manifest.copy()
+    manifest["app_category"] = manifest["package_name"].map(publication_category)
     manifest = category_sort(manifest.rename(columns={"app_label": "App"}), column="App")
     table2 = []
     for _, row in manifest.iterrows():
@@ -279,8 +360,11 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         cols2,
         table2,
         r"lllrc",
+        note="Categories reflect primary application function rather than corporate ownership or every supported feature.",
     )
 
+    static = static.copy()
+    static["app_category"] = static["package_name"].map(publication_category)
     static = category_sort(static)
     table3 = []
     for _, row in static.iterrows():
@@ -311,6 +395,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     )
 
     dynamic = dynamic.rename(columns={"app": "app_label"})
+    dynamic["app_category"] = dynamic["package"].map(publication_category)
     dynamic = category_sort(dynamic)
     table4 = []
     for _, row in dynamic.iterrows():
@@ -340,7 +425,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         r"lcccc",
         size=r"\scriptsize",
         table_env="table",
-        note="Base: I=strict idle, Q=QFG. B/I reports baseline/interactive medians.",
+        note="Base: I=strict-idle, Q=QFG. B/I reports baseline/interactive medians.",
     )
 
     merged = static.merge(dynamic, left_on="package_name", right_on="package", suffixes=("_s", "_d"))
@@ -352,6 +437,17 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     merged["int_domains"] = domain_vals
     hm_med = float(hm_vals.median())
     dom_med = float(domain_vals.median())
+    threshold_policy = {
+        "policy_version": "median-split-v1",
+        "static_indicator": "severity_high_count + severity_medium_count",
+        "runtime_indicator": "interactive_median_domain_count",
+        "static_threshold": hm_med,
+        "runtime_threshold": dom_med,
+        "comparison_operator": ">=",
+        "tie_handling": "Values equal to the median are assigned to the higher group.",
+        "taxonomy_version": CATEGORY_POLICY_VERSION,
+    }
+    (SOURCE_DIR / "integrated_profile_policy.json").write_text(json.dumps(threshold_policy, indent=2), encoding="utf-8")
     table5 = []
     for _, row in merged.pipe(category_sort).iterrows():
         s = "High static" if row["high_med"] >= hm_med else "Lower static"
@@ -371,16 +467,32 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
                 "High+Med": int(row["high_med"]),
                 "Int domains": fnum(row["int_domains"], 0),
                 "Int runs": int(row["interactive_run_count"]),
+                "Static threshold": f"{hm_med:.0f}",
+                "Runtime threshold": f"{dom_med:.0f}",
+                "Threshold policy": threshold_policy["comparison_operator"],
+                "Policy version": threshold_policy["policy_version"],
                 "Interpretation": interp,
             }
         )
-    cols5 = ["App", "Group", "High+Med", "Int domains", "Int runs", "Interpretation"]
+    cols5 = [
+        "App",
+        "Group",
+        "High+Med",
+        "Int domains",
+        "Int runs",
+        "Static threshold",
+        "Runtime threshold",
+        "Threshold policy",
+        "Policy version",
+        "Interpretation",
+    ]
     write_csv(TABLE_DIR / "table5_integrated_static_runtime_profiles.csv", table5, cols5)
+    tex_cols5 = ["App", "Group", "High+Med", "Int domains", "Int runs", "Interpretation"]
     write_tex_table(
         TABLE_DIR / "table5_integrated_static_runtime_profiles.tex",
         "Supplemental integrated static-runtime app profiles using median-split indicators.",
         "tab:integrated-static-runtime-profiles",
-        cols5,
+        tex_cols5,
         table5,
         r"llrrrl",
         size=r"\tiny",
@@ -410,6 +522,11 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     ]
     matrix_cols = ["Static", "Lower runtime", "Higher runtime"]
     write_csv(TABLE_DIR / "table5_integrated_profile_matrix.csv", matrix_rows, matrix_cols)
+    note5 = (
+        f"Higher static uses high/medium findings $\\geq {hm_med:.0f}$; "
+        f"higher runtime uses interactive domains $\\geq {dom_med:.0f}$. "
+        "Ties are assigned to the higher group."
+    )
     write_tex_table(
         TABLE_DIR / "table5_integrated_profile_matrix.tex",
         "Integrated static-runtime profile matrix using median-split indicators.",
@@ -419,6 +536,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         r"@{}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}p{0.34\columnwidth}>{\raggedright\arraybackslash}p{0.34\columnwidth}@{}",
         size=r"\scriptsize",
         table_env="table",
+        note=note5,
     )
 
     eligible = runs[runs["analytic_eligibility"].eq("eligible")].copy()
@@ -454,7 +572,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         r"@{}p{0.68\columnwidth}r@{}",
         table_env="table",
         size=r"\scriptsize",
-        note="Runtime shift uses strict idle when available, otherwise QFG. Associations are descriptive.",
+        note="Runtime shift uses strict-idle when available, otherwise QFG. Associations are descriptive.",
     )
 
     # Preserve the app-level basis for baseline-relative runtime comparisons.
@@ -558,6 +676,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     plt.close(fig)
 
     dynamic = dynamic.rename(columns={"app": "app_label"})
+    dynamic["app_category"] = dynamic["package"].map(publication_category)
     dynamic = category_sort(dynamic)
     dyn_counts = dynamic[["app_label", "strict_idle_run_count", "qfg_run_count", "interactive_run_count"]].copy()
     dyn_counts.to_csv(SOURCE_DIR / "fig3_runtime_coverage_source.csv", index=False)
@@ -566,7 +685,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     left = np.zeros(len(dynamic))
     colors = ["#0072B2", "#E69F00", "#009E73"]
     hatches = ["", "///", "..."]
-    labels = ["Strict idle", "QFG", "Interactive"]
+    labels = ["Strict-idle", "QFG", "Interactive"]
     cols = ["strict_idle_run_count", "qfg_run_count", "interactive_run_count"]
     for col, label, color, hatch in zip(cols, labels, colors, hatches):
         vals = dynamic[col].fillna(0).astype(int).values
@@ -595,23 +714,35 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     )
     merged["runtime_shift_log2_pps"] = np.log2((merged["interactive_median_packets_per_second"].fillna(0) + 1) / (baseline.fillna(0) + 1))
     merged["x_log_high_med"] = np.log10(1 + merged["high_medium_findings"])
-    merged[["app_label", "package_name", "high_medium_findings", "runtime_shift_log2_pps", "interactive_run_count", "app_category" if "app_category" in merged.columns else "package_name"]].to_csv(
+    merged["app_category"] = merged["package_name"].map(publication_category)
+    merged[
+        [
+            "app_label",
+            "package_name",
+            "app_category",
+            "high_medium_findings",
+            "runtime_shift_log2_pps",
+            "interactive_run_count",
+            "x_log_high_med",
+        ]
+    ].to_csv(
         SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False
     )
     fig, ax = plt.subplots(figsize=(7.15, 4.15))
-    cats = pd.read_csv(SOURCE / "publication_cohort_manifest.csv")[["app_label", "app_category"]]
-    plot = merged.merge(cats, on="app_label", how="left")
-    category_colors = {cat: c for cat, c in zip(sorted(plot["app_category"].dropna().unique()), ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#999999"])}
-    markers = {cat: m for cat, m in zip(sorted(plot["app_category"].dropna().unique()), ["o", "s", "^", "D", "P"])}
-    for cat, group in plot.groupby("app_category"):
+    plot = merged.copy()
+    for cat in CATEGORY_ORDER:
+        group = plot[plot["app_category"].eq(cat)]
+        if group.empty:
+            continue
+        style = CATEGORY_STYLES[cat]
         ax.scatter(
             group["x_log_high_med"],
             group["runtime_shift_log2_pps"],
             s=35 + group["interactive_run_count"].fillna(0) * 14,
             label=cat,
             alpha=0.82,
-            color=category_colors.get(cat),
-            marker=markers.get(cat, "o"),
+            color=style["color"],
+            marker=style["marker"],
             edgecolor="black",
             linewidth=0.4,
         )
@@ -632,7 +763,8 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         "WhatsApp": (-62, 6),
         "Facebook Messenger": (-86, -11),
     }
-    for _, row in plot.iterrows():
+    label_apps = {"Snapchat", "Facebook", "CNN", "Signal", "Telegram", "TikTok", "WhatsApp"}
+    for _, row in plot[plot["app_label"].isin(label_apps)].iterrows():
         ax.annotate(
             display_label(row["app_label"]),
             (row["x_log_high_med"], row["runtime_shift_log2_pps"]),
@@ -646,7 +778,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     ax.set_ylabel("log2 interactive/base PPS", fontsize=8.6)
     ax.tick_params(labelsize=8.0)
     ax.margins(x=0.18, y=0.14)
-    ax.legend(fontsize=7.2, loc="upper center", bbox_to_anchor=(0.5, 1.18), ncols=5, frameon=False)
+    ax.legend(fontsize=7.2, loc="upper center", bbox_to_anchor=(0.5, 1.17), ncols=4, frameon=False)
     fig.tight_layout(pad=0.2)
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.pdf")
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.png", dpi=240)
