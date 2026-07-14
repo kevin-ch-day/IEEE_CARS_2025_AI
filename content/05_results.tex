@@ -4,26 +4,30 @@
 
 The final evidence bundle included all 15 applications with build-aligned static and runtime evidence; no application was classified as a true evidence hole. Table~\ref{tab:cutoff-evidence-summary} summarizes the selected app versions and the associated strict-idle, quiescent-foreground (QFG), and interactive runtime evidence. Full provenance---including static-run identifiers, dynamic-run identifiers, APK hashes, alignment status, and source-file checksums---is retained in the generated report bundle. The cutoff-window result therefore functions as a provenance control: every app-level observation reported below refers to a selected package and version group rather than to mutable live-installed state.
 
+The selected bundle is intentionally not a same-day installed-state snapshot. It is a recent, build-backed analysis set: each row identifies a selected app version, the selected runtime evidence classes, and the provenance needed to connect static and dynamic observations. This matters because consumer apps updated during collection; the analysis therefore treats app-store churn as a provenance problem rather than as automatic evidence loss.
+
 \input{tables/table2_cutoff_evidence_summary}
 
 \subsection{Static Exposure Across Selected Builds}
 
-Static exposure varied substantially across the selected builds. Figure~\ref{fig:static-exposure} compares three manuscript-level indicators: high- and medium-severity finding volume, unguarded exported components, and dangerous permissions. High- and medium-severity findings ranged from 16 for BBC News and Pinterest to 325 for Snapchat. Facebook and Instagram also exhibited comparatively large finding volumes, with 164 and 128 findings, respectively. A similar concentration appeared in unguarded exported components: Snapchat had 308, Facebook had 118, and Instagram had 91. Dangerous-permission counts were less dispersed, with several messaging and social applications clustered between 18 and 20.
+Static exposure varied substantially across the selected builds. Fig.~\ref{fig:static-exposure} compares three manuscript-level indicators: high- and medium-severity finding volume, unguarded exported components, and dangerous permissions. High- and medium-severity findings ranged from 16 for BBC News and Pinterest to 325 for Snapchat. Facebook and Instagram also exhibited comparatively large finding volumes, with 164 and 128 findings, respectively. A similar concentration appeared in unguarded exported components: Snapchat had 308, Facebook had 118, and Instagram had 91. Dangerous-permission counts were less dispersed, with several messaging and social applications clustered between 18 and 20.
 
-These values represent descriptive exposure counts rather than calibrated exploitability or compliance scores. The complete seven-metric static table, including privacy-, platform-, network-, and storage-aligned findings, is retained in the generated report bundle.
+Across all selected builds, the static export contained 1,235 high/medium findings and 955 unguarded exported components. The median app had 52 high/medium findings and 45 unguarded exported components, so the largest apps are not only marginally higher; they dominate the upper tail. Platform-aligned findings closely track the high/medium totals, while network-security findings are much smaller in count, ranging from 0 to 6 per app. These values represent descriptive exposure counts rather than calibrated exploitability or compliance scores, and the complete seven-metric static table is retained in the generated report bundle.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig2_static_exposure_heatmap.pdf}
+\includegraphics[width=\columnwidth]{figures/fig2_static_exposure_dotplot.pdf}
 \caption{Static exposure indicators for the selected app builds. Counts are shown on a logarithmic scale to compare high/medium findings, unguarded exported components, and dangerous permissions.}
 \label{fig:static-exposure}
 \end{figure}
 
 \subsection{Runtime Coverage and Behavioral Variation}
 
-The selected runtime evidence includes strict-idle, QFG, and interactive captures. Figure~\ref{fig:runtime-coverage} shows the distribution of these evidence classes across the cohort, while Table~\ref{tab:runtime-behavior-summary} reports compact behavior indicators without duplicating the coverage totals. QFG is retained as a separate class because a foregrounded but untouched application may continue loading content, synchronizing services, or maintaining communication state. Treating such activity as strict idle would overstate baseline quietness.
+The selected runtime evidence includes strict-idle, QFG, and interactive captures. Fig.~\ref{fig:runtime-coverage} shows the distribution of these evidence classes across the dataset, while Table~\ref{tab:runtime-behavior-summary} reports compact behavior indicators without duplicating the coverage totals. QFG is retained as a separate class because a foregrounded but untouched application may continue loading content, synchronizing services, or maintaining communication state. Treating such activity as strict idle would overstate baseline quietness.
 
 The selected runtime bundle contains 123 dynamic runs: 44 strict-idle, 23 QFG, and 56 interactive captures. CNN and BBC News provide the deepest selected coverage, with 12 and 10 runs, respectively, and every application contributes at least five selected runs. Interaction produced clearer changes in packet rate and traffic volume than in domain count. TikTok, Instagram, WhatsApp, and Facebook exhibited some of the largest interactive packet-rate or traffic-volume measurements. Signal and Telegram showed substantial packet-rate increases from comparatively quiet baselines, while retaining narrower observed domain diversity under the exercised messaging scenarios.
+
+The runtime results separate activity volume from service breadth. Interactive packet rates ranged from 14.0 packets/s for The Guardian to 285.7 packets/s for TikTok, with a median of 41.6 packets/s. Interactive median transfer volume ranged from about 10.1 MB for Facebook Msg to 211.3 MB for Instagram. Domain breadth was less dispersed: the median interactive domain count was 12, and most content apps clustered between 10 and 16 domains. Messaging apps therefore require a different interpretation: WhatsApp, Signal, and Telegram show large baseline-relative packet-rate shifts, but only three or fewer interactive domains in the selected captures.
 
 \begin{figure}[!t]
 \centering
@@ -38,16 +42,16 @@ The selected runtime bundle contains 123 dynamic runs: 44 strict-idle, 23 QFG, a
 
 The integrated analysis uses a transparent median split rather than an opaque composite score. Table~\ref{tab:integrated-profile-matrix} groups applications according to higher or lower static exposure and higher or lower runtime activity, using high/medium static finding volume and interactive domain count as the respective indicators. The resulting profiles reveal meaningful cross-layer differences. Some applications exhibit substantial packaged exposure but comparatively limited runtime diversity under the selected scenarios, whereas others show broader runtime activity despite lower static finding volume.
 
-These groupings are descriptive and should not be interpreted as formal risk rankings. Static exposure and runtime activity measure different properties: the former represents declared and packaged attack surface, while the latter represents behavior observed during specific execution scenarios.
+These groupings are descriptive and should not be interpreted as formal risk rankings. Static exposure and runtime activity measure different properties: the former represents declared and packaged attack surface, while the latter represents behavior observed during specific execution scenarios. The four cells of the matrix are populated by 3--4 apps each, which is useful for interpretation because no single quadrant explains the dataset. Four apps fall into the high-static/high-runtime group, four into high-static/lower-runtime, four into lower-static/high-runtime, and three into lower-static/lower-runtime.
 
 \input{tables/table5_integrated_profile_matrix}
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig4_static_runtime_scatter.pdf}
-\caption{Descriptive relationship between static exposure and baseline-relative runtime change. The x-axis shows $\log_{10}(1+x)$ high/medium static finding volume, and the y-axis shows the $\log_{2}$ interactive-to-baseline packet-rate ratio. Marker size represents the number of interactive runs; representative applications are labeled.}
+\includegraphics[width=0.82\textwidth]{figures/fig4_static_runtime_scatter.pdf}
+\caption{Descriptive static-runtime relationship with all selected apps labeled. The x-axis is $\log_{10}(1+x)$ high/medium static finding volume; the y-axis is $\log_2$ baseline-relative interactive packet-rate shift. Marker size reflects interactive run count.}
 \label{fig:static-runtime-scatter}
-\end{figure}
+\end{figure*}
 
 \subsection{App-Level Divergence and Representative Cases}
 
@@ -55,8 +59,10 @@ Several applications illustrate why static and runtime evidence should be interp
 
 Messaging applications provide a different pattern. Signal and Telegram exhibit comparatively narrow observed domain diversity, yet both show pronounced packet-rate changes relative to quiet baselines. WhatsApp similarly demonstrates a large baseline-relative packet-rate increase despite a smaller interactive domain count than content-feed applications. TikTok and Instagram combine elevated static exposure with substantial runtime activity under the selected scenarios.
 
-Figure~\ref{fig:static-runtime-scatter} illustrates these differences. The absence of a simple one-to-one relationship is not contradictory; rather, it demonstrates that static exposure and runtime behavior characterize different dimensions of the same selected app builds. Applications may therefore appear static-heavy, runtime-heavy, elevated across both layers, or comparatively limited in both measured dimensions.
+Fig.~\ref{fig:static-runtime-scatter} illustrates these differences. The absence of a simple one-to-one relationship is not contradictory; rather, it demonstrates that static exposure and runtime behavior characterize different dimensions of the same selected app builds. Applications may therefore appear static-heavy, runtime-heavy, elevated across both layers, or comparatively limited in both measured dimensions.
 
-Baseline-relative eligibility was evaluated explicitly for every application. Earlier intermediate outputs contained a discrepancy between an aggregate nine-app comparison and an eight-row detailed table. The current generator resolves this issue by exporting an eligibility and exclusion record for every app. The statistical summaries reported here include only applications satisfying the predefined baseline-relative comparison requirements.
+The near-zero descriptive association between high/medium static findings and interactive domain count in Table~\ref{tab:statistical-summary} should be read in that context. A static detector count captures declared components, permissions, packaged configuration, and detector posture; an interactive domain count captures observed network breadth during selected scenarios. The weak app-level association is therefore not a negative result. It shows that a static-only table would miss runtime-heavy apps, while a runtime-only table would miss packaged exposure in static-heavy apps.
+
+Baseline-relative runtime comparisons were audited at the app level before reporting. The generated eligibility export records baseline/QFG and interactive availability for every selected app; in this bundle, all 15 apps have both baseline-side and interactive-side evidence. This prevents aggregate shift summaries from being interpreted beyond the app-level eligibility recorded in the source data.
 
 \input{tables/table6_statistical_summary}

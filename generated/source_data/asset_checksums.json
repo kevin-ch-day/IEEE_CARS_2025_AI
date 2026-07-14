@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "figures/fig1_study_pipeline.pdf",
-      "sha256": "4e74573480151572d9b76b8d3bee9cbaa3c14ef57516b2f49a9810601cb5da16",
+      "sha256": "3e7ac68e4b93498e96e9491da9e2af7795641c7908f1ba0e4f795fabc5fd7827",
       "bytes": 14383
     },
     {
@@ -12,34 +12,34 @@
       "bytes": 92072
     },
     {
-      "path": "figures/fig2_static_exposure_heatmap.pdf",
-      "sha256": "db3497a96a82599fbe98cfc4b6c11762c6145448beeedd0691fc465e31a054be",
-      "bytes": 16038
+      "path": "figures/fig2_static_exposure_dotplot.pdf",
+      "sha256": "96e883ac4d6116aae3ec23860b91ebb4d1178b4ac6d1c13136c113b0d3be3429",
+      "bytes": 16036
     },
     {
-      "path": "figures/fig2_static_exposure_heatmap.png",
-      "sha256": "f72e41ae9f9a2e6d7702e8d53f47ca3e24606f9c6c0fb0675a47de9409fa1bdf",
-      "bytes": 80305
+      "path": "figures/fig2_static_exposure_dotplot.png",
+      "sha256": "33a1cf812e82fe2de68f49c1efb7bc1e0c8ac4e23b320a71d8499c5c2afa354a",
+      "bytes": 82084
     },
     {
       "path": "figures/fig3_runtime_coverage_by_app.pdf",
-      "sha256": "a39eccebee396085e9753b186feffb7d729de5c7b3c6ab25367c6b6c69df9fb2",
-      "bytes": 39260
+      "sha256": "3d7f77db376da0a1575a2b556cce53a3ce2c42867e9658bd796bbec38cdccb51",
+      "bytes": 39258
     },
     {
       "path": "figures/fig3_runtime_coverage_by_app.png",
-      "sha256": "68f7e10862aa8803f54cf72f58b7d1f0adc189b1ced0c4251a915eb68cb0bf34",
-      "bytes": 96619
+      "sha256": "250474be2f6c7fcf68d48c91b9c2a8b79145a74a01f7863c3b4a2b0b74669610",
+      "bytes": 100691
     },
     {
       "path": "figures/fig4_static_runtime_scatter.pdf",
-      "sha256": "190834298b3940bf5e706d1a90037ab205c62dbd5d95dedf37aa695a3eebbf3e",
-      "bytes": 18230
+      "sha256": "4976d90e815479b2d2adfbcae7ea6feed125b87d3bb6cfb422f1a4adaefd9f1c",
+      "bytes": 18234
     },
     {
       "path": "figures/fig4_static_runtime_scatter.png",
-      "sha256": "d3b40618548a3c58ee88e46d81f85c20962fd9773ce0e477c9a175d9f5fa4f06",
-      "bytes": 109122
+      "sha256": "ef97724286b4a79e76dc72081c6706ee9b3204cb46f818ef65e0592889ce9dc3",
+      "bytes": 110756
     },
     {
       "path": "generated/source_data/baseline_relative_eligibility.csv",
@@ -57,7 +57,7 @@
       "bytes": 421
     },
     {
-      "path": "generated/source_data/fig2_static_exposure_heatmap_source.csv",
+      "path": "generated/source_data/fig2_static_exposure_dotplot_source.csv",
       "sha256": "f0e119a8d0aaadfaade6fbc5d5af1d210456699f5971223a5271bf2e7a37d7fc",
       "bytes": 368
     },

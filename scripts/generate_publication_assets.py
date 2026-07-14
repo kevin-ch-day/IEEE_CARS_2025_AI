@@ -457,7 +457,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         note="Runtime shift uses strict idle when available, otherwise QFG. Associations are descriptive.",
     )
 
-    # A small eligibility CSV resolves the older 9-app/8-row discrepancy.
+    # Preserve the app-level basis for baseline-relative runtime comparisons.
     eligibility = []
     for pkg, g in runs.groupby("package"):
         app_name = g["app"].iloc[0]
@@ -545,16 +545,16 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     for col, label, color, marker, offset in series:
         vals = np.log10(1 + plot_static[col].astype(float).values)
         ax.scatter(vals, y + offset, label=label, color=color, marker=marker, s=22, edgecolor="black", linewidth=0.35)
-    ax.set_yticks(y, [display_label(v) for v in plot_static["app_label"]], fontsize=7.5)
-    ax.set_xlabel("log10(1 + count)", fontsize=8)
-    ax.tick_params(axis="x", labelsize=7.5)
+    ax.set_yticks(y, [display_label(v) for v in plot_static["app_label"]], fontsize=8.0)
+    ax.set_xlabel("log10(1 + count)", fontsize=8.6)
+    ax.tick_params(axis="x", labelsize=8.0)
     ax.grid(axis="x", color="#dddddd", linewidth=0.5)
-    ax.legend(loc="lower right", fontsize=6.8, frameon=True)
+    ax.legend(loc="lower right", fontsize=7.2, frameon=True)
     fig.tight_layout(pad=0.2)
-    fig.savefig(FIGURE_DIR / "fig2_static_exposure_heatmap.pdf")
-    fig.savefig(FIGURE_DIR / "fig2_static_exposure_heatmap.png", dpi=240)
+    fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.pdf")
+    fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.png", dpi=240)
     heat_out = plot_static[["app_label", "high_medium_findings", "exported_components_without_permission_guard", "dangerous_permissions"]].copy()
-    heat_out.to_csv(SOURCE_DIR / "fig2_static_exposure_heatmap_source.csv", index=False)
+    heat_out.to_csv(SOURCE_DIR / "fig2_static_exposure_dotplot_source.csv", index=False)
     plt.close(fig)
 
     dynamic = dynamic.rename(columns={"app": "app_label"})
@@ -573,13 +573,13 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         ax.barh(y, vals, left=left, label=label, color=color, hatch=hatch, edgecolor="black", linewidth=0.25)
         for yi, val, li in zip(y, vals, left):
             if val >= 2:
-                ax.text(li + val / 2, yi, str(val), ha="center", va="center", fontsize=6.8, color="white")
+                ax.text(li + val / 2, yi, str(val), ha="center", va="center", fontsize=7.1, color="white")
         left += vals
-    ax.set_yticks(y, [display_label(v) for v in dynamic["app_label"]], fontsize=7.3)
+    ax.set_yticks(y, [display_label(v) for v in dynamic["app_label"]], fontsize=7.8)
     ax.invert_yaxis()
-    ax.set_xlabel("selected runs", fontsize=8)
-    ax.tick_params(axis="x", labelsize=7.5)
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, 1.10), ncols=3, fontsize=6.5, frameon=False)
+    ax.set_xlabel("selected runs", fontsize=8.6)
+    ax.tick_params(axis="x", labelsize=8.0)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, 1.10), ncols=3, fontsize=7.0, frameon=False)
     fig.tight_layout(pad=0.2)
     fig.savefig(FIGURE_DIR / "fig3_runtime_coverage_by_app.pdf")
     fig.savefig(FIGURE_DIR / "fig3_runtime_coverage_by_app.png", dpi=240)
@@ -638,15 +638,15 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
             (row["x_log_high_med"], row["runtime_shift_log2_pps"]),
             xytext=offsets.get(row["app_label"], (4, 4)),
             textcoords="offset points",
-            fontsize=7.2,
+            fontsize=7.6,
             arrowprops=dict(arrowstyle="-", color="#888888", lw=0.35, shrinkA=0, shrinkB=4),
         )
     ax.axhline(0, color="#777777", lw=0.8, linestyle="--")
-    ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8)
-    ax.set_ylabel("log2 interactive/base PPS", fontsize=8)
-    ax.tick_params(labelsize=7.5)
+    ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8.6)
+    ax.set_ylabel("log2 interactive/base PPS", fontsize=8.6)
+    ax.tick_params(labelsize=8.0)
     ax.margins(x=0.18, y=0.14)
-    ax.legend(fontsize=6.8, loc="upper center", bbox_to_anchor=(0.5, 1.18), ncols=5, frameon=False)
+    ax.legend(fontsize=7.2, loc="upper center", bbox_to_anchor=(0.5, 1.18), ncols=5, frameon=False)
     fig.tight_layout(pad=0.2)
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.pdf")
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.png", dpi=240)
