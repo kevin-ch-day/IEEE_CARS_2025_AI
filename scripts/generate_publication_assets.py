@@ -246,8 +246,13 @@ def evidence_table_label(value: object) -> str:
     text = "" if pd.isna(value) else str(value)
     if text == "Facebook Msg":
         return "Facebook Messenger"
-    if text == "X (Twitter)":
-        return "X"
+    return text
+
+
+def manuscript_table_label(value: object) -> str:
+    text = "" if pd.isna(value) else str(value)
+    if text == "Facebook Msg":
+        return "Facebook Messenger"
     return text
 
 
@@ -429,7 +434,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         hm = int(row["severity_high_count"]) + int(row["severity_medium_count"])
         table3.append(
             {
-                "App": display_label(row["app_label"]),
+                "App": manuscript_table_label(display_label(row["app_label"])),
                 "Danger": int(row["dangerous_permissions"]),
                 "High+Med": hm,
                 "Unguarded": int(row["exported_components_without_permission_guard"]),
@@ -465,7 +470,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         int_pps = row["interactive_median_packets_per_second"]
         table4.append(
             {
-                "App": display_label(row["app_label"]),
+                "App": manuscript_table_label(display_label(row["app_label"])),
                 "Base": base_label,
                 "Domains B/I": f"{fnum(base_domains, 0) or '--'}/{fnum(int_domains, 0) or '--'}",
                 "PPS B/I": f"{fnum(base_pps, 1) or '--'}/{fnum(int_pps, 1) or '--'}",
@@ -520,7 +525,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
             interp = "runtime-heavy"
         table5.append(
             {
-                "App": display_label(row["app_label"]),
+                "App": manuscript_table_label(display_label(row["app_label"])),
                 "Group": f"{s}/{r}",
                 "High+Med": int(row["high_med"]),
                 "Int domains": fnum(row["int_domains"], 0),
