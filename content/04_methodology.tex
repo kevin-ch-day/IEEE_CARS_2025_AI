@@ -1,19 +1,22 @@
 \section{Methodology}
 
-\subsection{Research Questions and Study Design}
-The study is a descriptive, build-aligned analysis of 15 Android consumer apps. The unit of inference is the selected app build: package name, version code/name, base APK hash, split identity, contributing static run, and selected dynamic runs. RQ1 is addressed through static exposure variables; RQ2 through runtime evidence classes and network metadata; RQ3 through app-level integrated profiles and descriptive associations.
+\subsection{Study Design and Evidence Window}
 
-\subsection{Dataset, Device, and Collection Window}
-Collection used a non-root Motorola moto g 5G 2024 running Android 15. The fixed recent-evidence window spans June 26 to July 9, 2026 UTC. A run or static result was eligible only when it could be tied to the selected package/version group and passed identity, validity, signal, and QA checks. Applications were grouped by primary user-facing function into News, Social Media, Messaging, and Professional Networking categories. The categories are used for descriptive visualization only and are not treated as statistical strata. The non-root setting avoids privileged instrumentation, app modification, TLS interception, and payload inspection.
+This study performs a descriptive, build-aligned analysis of 15 Android consumer applications. It examines three questions: the static exposure present in selected app builds, the runtime behavior observed for those builds, and the relationships or divergences between the two evidence layers. The unit of inference is the selected app-build group, defined by package name, version code and name, base APK hash, split-APK identity, contributing static run, and selected dynamic runs.
 
-\subsection{Static Analysis and Exposure Variables}
-Static analysis used harvested base and split APK artifacts for the selected build. Variables include dangerous permission count, high/medium finding count, unguarded exported components, network-security findings, storage findings, privacy findings, platform findings, MASVS-aligned category counts, and SDK/service indicators where supported. These values are exposure indicators; they are not a calibrated exploitability score.
+Collection was conducted on a non-root Motorola moto g 5G 2024 running Android 15. Evidence was selected from a fixed window spanning June 26 through July 9, 2026 UTC. Static results and dynamic runs were eligible only when they could be linked to the selected package and build group and passed identity, validity, signal-sufficiency, and quality-assurance checks. Applications were grouped by primary user-facing function into News, Social Media, Messaging, and Professional Networking categories. The categories are used for descriptive visualization only and are not treated as statistical strata. The non-root setting avoided application modification, privileged instrumentation, TLS interception, and payload inspection.
 
-\subsection{Runtime Collection and Evidence Classes}
-Runtime collection used package-associated dynamic evidence packs and PCAP metadata. Runs were classified as strict-idle, QFG, or interactive. Strict-idle captures represent foreground quiet-state baselines. QFG captures are no-touch foreground observations in which app-driven activity continued. Interactive captures exercise user-facing behavior. Runtime variables include run counts, duration, PCAP bytes, packet rate, domain count, service-family count, protocol prevalence, and baseline-relative shifts where both baseline and interactive evidence exist.
+\subsection{Static and Runtime Evidence}
 
-\subsection{Build Selection and Static-Runtime Alignment}
-For each app, we selected a build group using package/version identity, base APK hash, static-run availability, dynamic-run availability, PCAP state, QA validity, and recency. Algorithm~\ref{alg:build-aligned-selection} summarizes the deterministic selection and reporting procedure. Static and runtime rows were included only when the selected static and dynamic evidence aligned to the same selected build group. Runs with mismatched build identity, missing static evidence, missing dynamic evidence, invalid QA state, or insufficient signal were excluded or deferred.
+Static analysis used the harvested base and split APK artifacts associated with each selected build. The reported variables include dangerous permissions, high- and medium-severity findings, unguarded exported components, network- and storage-related findings, privacy and platform findings, MASVS-aligned categories, and supported SDK or service indicators. These measurements represent descriptive exposure indicators rather than calibrated exploitability, compliance, or risk scores.
+
+Runtime analysis used package-associated evidence packs and PCAP-derived metadata. Captures were classified as strict-idle, quiescent foreground (QFG), or interactive. Strict-idle captures represent quiet foreground baselines; QFG captures represent no-touch foreground periods in which app-driven activity continued; and interactive captures exercise user-facing behavior. Runtime variables include capture count and duration, PCAP volume, packet rate, observed domains, service families, protocol prevalence, and baseline-relative changes where comparable baseline and interactive evidence were available.
+
+\subsection{Build Selection and Evidence Alignment}
+
+For each application, ScytaleDroid selected one eligible build group using package and version identity, base APK hash, static- and dynamic-run availability, PCAP state, recency, signal sufficiency, and quality-assurance status. Static and runtime observations were integrated only when they referred to the same selected build group. Evidence with mismatched build identity, missing static or dynamic support, invalid QA state, or insufficient signal was excluded or deferred. Algorithm~\ref{alg:build-aligned-selection} summarizes the deterministic selection and reporting procedure.
+
+The 14-day window serves as a provenance control rather than a claim that every application remained on the same installed version throughout the study. A later app-store update did not invalidate evidence collected from a recent, fully identified build; it instead created a candidate for future longitudinal comparison.
 
 \begin{algorithm}[!t]
 \caption{Build-Aligned Static-Runtime Evidence Selection}
@@ -40,11 +43,21 @@ For each app, we selected a build group using package/version identity, base APK
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Integrated Measures and Statistical Analysis}
-Integrated analysis compares app-level static exposure with app-level runtime metadata. The paper reports descriptive counts, medians by evidence class, baseline-relative packet-rate shifts, and Spearman-style app-level associations only as exploratory summaries. For cross-layer grouping, apps are assigned by median split: higher static exposure uses high/medium finding volume greater than or equal to the cohort median, and higher runtime activity uses interactive domain count greater than or equal to the cohort median. Equality is assigned to the higher group. No opaque composite risk score is introduced.
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_study_pipeline.pdf}
+\caption{Study pipeline for build-aligned static and runtime evidence. The qualification gate excludes mismatched builds, missing evidence, and invalid or insufficient runs before integrated analysis.}
+\label{fig:study-pipeline}
+\end{figure}
 
-\subsection{Privacy and Reproducibility Boundaries}
-PCAP processing is limited to metadata and derived transport indicators. The study does not inspect message bodies, cookies, authorization headers, private account content, or decrypted TLS payloads. Reproducibility artifacts include source CSVs, generated \LaTeX{} tables, figure source data, and SHA-256 checksums for generated assets.
+\subsection{Integrated Analysis and Reproducibility}
 
-\subsection{Limitations and Threats to Validity}
-The study is bounded by a 15-app dataset, one Android 15 physical device, selected user scenarios, available static detectors, and a non-root no-MITM PCAP privacy model. It does not claim exhaustive code coverage, decrypted payload semantics, or full Data Safety validation. Some apps have stronger interactive depth than others, and runtime findings are scenario-bounded. Static detector counts remain descriptive exposure indicators rather than formal exploitability or compliance scores. The integrated analysis is therefore intended to characterize cross-layer posture for selected builds, not to infer causation or predict future app behavior.
+Integrated analysis compares app-level static exposure indicators with app-level runtime observations. The study reports descriptive counts, evidence-class medians, baseline-relative packet-rate changes, and exploratory Spearman associations. Cross-layer profiles are constructed using a transparent median split: higher static exposure is determined from high- and medium-severity finding volume greater than or equal to the cohort median, while higher runtime activity is determined from interactive domain count greater than or equal to the cohort median. Equality is assigned to the higher group. These profiles support comparative interpretation but do not constitute a composite risk score or predictive model.
+
+PCAP processing is limited to metadata and derived transport indicators. Message bodies, cookies, authorization headers, private account content, and decrypted TLS payloads are not inspected. Reproducibility artifacts include the selected-build manifest, source CSV files, generated \LaTeX{} tables, figure source data, inclusion and exclusion records, and SHA-256 checksums for generated assets.
+
+\subsection{Limitations}
+
+The study is limited to 15 applications, one Android 15 physical device, one collection environment, selected interaction scenarios, and the available static detectors. Runtime observations are scenario-bounded and do not establish exhaustive application behavior, while unequal capture depth may affect the precision of app-level comparisons. The non-root, no-MITM design preserves a clear privacy boundary but prevents inspection of encrypted payload semantics.
+
+Static finding counts are tool-dependent exposure indicators rather than formal measures of exploitability, MASVS compliance, or privacy harm. Likewise, observed runtime activity does not demonstrate malicious behavior, and limited activity does not establish low risk. The integrated analysis therefore characterizes the static and runtime posture of the selected builds without inferring causation, predicting future behavior, or generalizing the results to all Android devices and app versions.
