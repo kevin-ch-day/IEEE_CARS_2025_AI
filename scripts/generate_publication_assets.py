@@ -165,21 +165,21 @@ def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]], *, ta
     body = [
         r"\begin{table}[!t]",
         r"\centering",
-        r"\caption{Selected runtime evidence by application and evidence class.}",
+        r"\caption{Selected runtime evidence by app and evidence class.}",
         r"\label{tab:cutoff-evidence-summary}",
         r"\scriptsize",
         rf"\setlength{{\tabcolsep}}{{{tabcolsep}}}",
         r"\renewcommand{\arraystretch}{1.03}",
         r"\begin{tabular}{@{}llccc@{}}",
         r"\toprule",
-        r"Application & Category & \shortstack{Strict\\idle} & \shortstack{Quiescent\\foreground} & Interactive \\",
+        r"App & Category & \shortstack{Strict\\idle} & \shortstack{Quiescent\\foreground} & Interactive \\",
         r"\midrule",
     ]
     for row in rows:
         body.append(
             " & ".join(
                 [
-                    latex_escape(row["Application"]),
+                    latex_escape(row["App"]),
                     latex_escape(row["Category"]),
                     latex_escape(row["Strict idle"]),
                     latex_escape(row["Quiescent foreground"]),
@@ -415,14 +415,14 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     for _, row in manifest.iterrows():
         table2_rows.append(
             {
-                "Application": evidence_table_label(display_label(row["App"])),
+                "App": evidence_table_label(display_label(row["App"])),
                 "Category": manuscript_category_label(row["app_category"]),
                 "Strict idle": count_ids(row["strict_idle_run_ids"]),
                 "Quiescent foreground": count_ids(row["qfg_run_ids"]),
                 "Interactive": count_ids(row["interactive_run_ids"]),
             }
         )
-    cols2 = ["Application", "Category", "Strict idle", "Quiescent foreground", "Interactive"]
+    cols2 = ["App", "Category", "Strict idle", "Quiescent foreground", "Interactive"]
     write_csv(TABLE_DIR / "table2_cutoff_evidence_summary.csv", table2_rows, cols2)
     write_cutoff_evidence_table(TABLE_DIR / "table2_cutoff_evidence_summary.tex", table2_rows)
 
@@ -721,7 +721,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     static["high_medium_findings"] = static["severity_high_count"] + static["severity_medium_count"]
     plot_static = static.sort_values("high_medium_findings", ascending=True).copy()
     y = np.arange(len(plot_static))
-    fig, ax = plt.subplots(figsize=(3.45, 4.6))
+    fig, ax = plt.subplots(figsize=(3.45, 4.95))
     series = [
         ("high_medium_findings", "High/medium findings", "#0072B2", "o", 0.22),
         ("exported_components_without_permission_guard", "Unguarded components", "#D55E00", "s", 0.0),
@@ -731,13 +731,25 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         vals = np.log10(1 + plot_static[col].astype(float).values)
         ax.scatter(vals, y + offset, label=label, color=color, marker=marker, s=22, edgecolor="black", linewidth=0.35)
     ax.set_yticks(y, [display_label(v) for v in plot_static["app_label"]], fontsize=8.0)
-    ax.set_xlabel("log10(1 + count)", fontsize=8.6)
+    ax.set_xlabel("log10(1 + count)", fontsize=8.6, labelpad=3.0)
     ax.tick_params(axis="x", labelsize=8.0)
+    ax.set_ylim(-0.75, len(plot_static) - 0.25)
     ax.grid(axis="x", color="#dddddd", linewidth=0.5)
-    ax.legend(loc="lower right", fontsize=7.2, frameon=True)
-    fig.tight_layout(pad=0.2)
-    fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.pdf")
-    fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.png", dpi=240)
+    ax.legend(
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.13),
+        ncols=3,
+        fontsize=6.8,
+        frameon=False,
+        borderaxespad=0.0,
+        handletextpad=0.35,
+        columnspacing=0.8,
+    )
+    fig.subplots_adjust(left=0.29, right=0.98, top=0.98, bottom=0.20)
+    fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.pdf", bbox_inches="tight", pad_inches=0.03)
+    fig.savefig(FIGURE_DIR / "fig2_static_exposure_dotplot.png", dpi=240, bbox_inches="tight", pad_inches=0.03)
+    fig.savefig(FIGURE_DIR / "fig2_static_exposure_heatmap.pdf", bbox_inches="tight", pad_inches=0.03)
+    fig.savefig(FIGURE_DIR / "fig2_static_exposure_heatmap.png", dpi=240, bbox_inches="tight", pad_inches=0.03)
     heat_out = plot_static[["app_label", "high_medium_findings", "exported_components_without_permission_guard", "dangerous_permissions"]].copy()
     heat_out["app_label"] = heat_out["app_label"].map(display_label)
     heat_out.to_csv(SOURCE_DIR / "fig2_static_exposure_dotplot_source.csv", index=False)

@@ -1,4 +1,4 @@
-Application,Category,Strict idle,Quiescent foreground,Interactive
+App,Category,Strict idle,Quiescent foreground,Interactive
 BBC News,News,4,0,6
 CNN,News,4,1,7
 The Guardian,News,3,2,4
