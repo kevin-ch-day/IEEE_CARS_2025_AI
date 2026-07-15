@@ -2,7 +2,7 @@
 
 \subsection{Study Design and Evidence Window}
 
-This study performs a descriptive, build-aligned analysis of 15 Android consumer apps. It examines three questions: the static exposure present in selected app builds, the runtime behavior observed for those builds, and the relationships or divergences between the two evidence layers. The unit of inference is the selected app-build group, defined by package name, version code and name, base APK hash, split-APK identity, contributing static run, and selected dynamic runs.
+This study performs a descriptive, build-aligned analysis of 15 Android consumer apps. It examines three metrics: the static exposure present in selected app builds, the runtime behavior observed for those builds, and the relationships or divergences between the two evidence layers. The unit of inference is the selected app-build group, defined by package name, version code and name, base APK hash, split-APK identity, contributing static run, and selected dynamic runs.
 
 Collection was conducted on a non-root Motorola Moto G 5G (2024) running Android 15. Evidence was selected from a fixed window spanning June 26 through July 9, 2026 UTC. Static results and dynamic runs were eligible only when they could be linked to the selected package and build group and passed identity, validity, signal-sufficiency, and quality-assurance checks. Each app was grouped by primary user-facing function into News, Social Media, Messaging, and Professional Networking categories. The categories are used for descriptive visualization only and are not treated as statistical strata. The non-root setting avoided app modification, privileged instrumentation, TLS interception, and payload inspection.
 
