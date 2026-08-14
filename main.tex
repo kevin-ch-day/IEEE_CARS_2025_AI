@@ -21,8 +21,10 @@
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage[draft,bookmarks=false]{hyperref}
+% Break long bibliography URLs at path separators without stretching
+% characters apart (avoids "https : / /" artifacts).
 \def\UrlBreaks{\do\/\do-\do.\do\_\do\?\do\&\do\=}
-\Urlmuskip=0mu plus 2mu
+\Urlmuskip=0mu
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -44,7 +46,7 @@
 % IEEE bibliography
 \bibliographystyle{IEEEtran}
 % Balance leftover references on the final page.
-\IEEEtriggeratref{7}
+\IEEEtriggeratref{4}
 \bibliography{references/references}
 
 \end{document}
