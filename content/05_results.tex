@@ -2,7 +2,7 @@
 
 \subsection{Dataset and Evidence Provenance}
 
-The final evidence bundle included all 15 apps with static and runtime build-aligned evidence, and no app was classified as a true evidence hole. Table~\ref{tab:cutoff-evidence-summary} reports the selected runtime evidence by app and evidence class. Counts represent build-aligned runs selected from the 14-day evidence window. Full app versions, APK hashes, static and dynamic run identifiers, and alignment records are retained in the generated source bundle. Results therefore refer to selected package/version groups rather than mutable installed-app state.
+The final evidence bundle included all 15 selected builds with qualifying static evidence and both baseline-side and interactive-side runtime evidence, although evidence-class depth varied by app. Table~\ref{tab:cutoff-evidence-summary} reports the selected runtime evidence by app and evidence class. Counts represent build-aligned runs selected from the 14-day evidence window. Full app versions, APK hashes, static and dynamic run identifiers, and alignment records are retained in the generated source bundle. Results therefore refer to selected package/version groups rather than mutable installed-app state.
 
 \input{tables/table2_cutoff_evidence_summary}
 
@@ -23,7 +23,7 @@ Across all selected builds, the static export contained 1,235 high/medium findin
 
 Table~\ref{tab:runtime-behavior-summary} and Fig.~\ref{fig:runtime-coverage} report the selected runtime evidence: 123 dynamic runs (44 strict-idle, 23 QFG, and 56 interactive). QFG is retained separately because a foregrounded but untouched app may continue loading content, synchronizing services, or maintaining communication state; treating that activity as strict-idle would overstate baseline quietness. Every app contributes at least five selected runs, with the deepest coverage on CNN (12) and BBC News (10). Interaction produced clearer changes in packet rate and traffic volume than in retained hostname count. TikTok, Instagram, WhatsApp, and Facebook exhibited some of the largest interactive packet-rate or traffic-volume measurements.
 
-Interactive packet rates ranged from 14.0 packets/s (The Guardian) to 285.7 packets/s (TikTok), with a median of 41.6 packets/s. Interactive median transfer volume ranged from about 10.1\,MB (Facebook Messenger) to 211.3\,MB (Instagram). Hostname breadth was less dispersed: the median interactive retained-host count was 12, and most content apps clustered between 10 and 16 hosts. Messaging apps need a different reading: WhatsApp, Signal, and Telegram show large baseline-relative packet-rate shifts but three or fewer interactive hosts. A zero retained-hostname value does not imply an absence of traffic; packet activity may occur without a retained DNS/SNI name.
+Interactive packet rates ranged from 14.0 packets/s (The Guardian) to 285.7 packets/s (TikTok), with a median of 41.6 packets/s. Interactive median transfer volume ranged from about 10.1\,MB (Facebook Messenger) to 211.3\,MB (Instagram). Hostname breadth was less dispersed: the median interactive retained-host count was 12, and most content apps clustered between 10 and 16 hosts. Messaging apps need a different reading: WhatsApp, Signal, and Telegram show large baseline-relative packet-rate shifts but three or fewer interactive hosts. A zero retained-hostname value does not imply an absence of traffic; packet activity may occur without a retained DNS/SNI name. Third-party Disconnect matches were concentrated in the news apps---BBC News (15), The Guardian (13), and CNN (11)---while several social and messaging apps had no such matches in the selected scenarios.
 
 \input{tables/table4_runtime_behavior_summary}
 
@@ -36,8 +36,6 @@ Interactive packet rates ranged from 14.0 packets/s (The Guardian) to 285.7 pack
 
 \subsection{Integrated Static--Runtime Findings}
 
-The integrated analysis uses a transparent median split rather than an opaque composite score. Table~\ref{tab:integrated-profile-matrix} groups apps by high/medium finding volume ($\geq 52$) and interactive retained-host count ($\geq 12$); ties are assigned to the higher group. The four cells are cohort-relative evidence/posture groups (4/4/4/3), not risk ratings: high static / lower runtime indicates packaged exposure not strongly expressed as retained-name breadth in the sampled scenarios, while lower static / higher runtime indicates active communication that is not matched by high detector volume. Disagreement between the layers is itself informative for review.
-
 \input{tables/table5_integrated_profile_matrix}
 
 \begin{figure*}[!t]
@@ -49,7 +47,7 @@ The integrated analysis uses a transparent median split rather than an opaque co
 
 \subsection{App-Level Divergence and Representative Cases}
 
-Several apps illustrate why static and runtime evidence should be interpreted together. Snapchat is the clearest static-heavy case: its selected build has the largest static finding volume, while its interactive retained-host median (11) sits just below the cohort runtime cutoff of 12. Facebook combines high static exposure with broad observed runtime hostname activity. CNN and BBC News exhibit lower static finding volumes than the large social platforms but show clear interactive broadening and substantial runtime evidence depth.
+Disagreement between packaged exposure and observed hostname breadth is itself informative for review. Several apps illustrate why static and runtime evidence should be interpreted together. Snapchat is the clearest static-heavy case: its selected build has the largest static finding volume, while its interactive retained-host median (11) sits just below the cohort runtime cutoff of 12. Facebook combines high static exposure with broad observed runtime hostname activity. CNN and BBC News exhibit lower static finding volumes than the large social platforms but show clear interactive broadening and substantial runtime evidence depth.
 
 Messaging apps provide a different pattern. Signal and Telegram exhibit comparatively narrow observed hostname breadth, yet both show pronounced packet-rate changes relative to quiet baselines. WhatsApp similarly demonstrates a large baseline-relative packet-rate increase despite a smaller interactive host count than content-feed apps. TikTok and Instagram combine elevated static exposure with substantial runtime activity under the selected scenarios. Fig.~\ref{fig:static-runtime-scatter} and Table~\ref{tab:statistical-summary} show the same pattern. The near-zero association between high/medium findings and interactive retained-host count persists after excluding Snapchat, so it is not an artifact of the largest static outlier: a static-only table would miss runtime-heavy apps, and a runtime-only table would miss packaged exposure. In this bundle, all 15 apps have both baseline-side and interactive-side evidence, so the reported median packet-rate shift is not an artifact of incomplete app-level eligibility.
 

@@ -1,13 +1,15 @@
 \section{Discussion}
 
-\subsection{Interpreting Static and Runtime Evidence}
+\subsection{Evidence Stability Under App-Update Churn}
+
+The fixed recent-evidence window separates publication readiness from the continuously changing app-store queue. Once a fully identified build is linked to qualifying static and runtime evidence, a later update does not invalidate that observation; the newer build becomes a candidate for future longitudinal comparison. The window therefore strengthens recency, build alignment, and provenance, but it does not establish temporal repeatability across independent collection periods.
+
+\subsection{Interpreting Static and Runtime Risk Posture}
 
 Static and runtime evidence describe related but different dimensions of Android app risk posture. Static analysis characterizes potential exposure: declared capabilities, packaged attack surface, unguarded-export findings, permissions, configuration choices, and detector rows. Runtime analysis characterizes observed behavior during selected strict-idle, QFG, and interactive scenarios, including communication intensity and retained DNS/SNI hostname breadth. Because the layers measure different properties, a high static finding count does not necessarily imply broad retained-hostname activity, and limited observed runtime activity does not demonstrate low exposure.
 
-Their disagreement is itself informative for review. Low observed activity does not negate a broad packaged surface, and high runtime activity does not by itself establish exploitation. In this dataset the two layers therefore function as complementary evidence streams rather than interchangeable scores. The 14-day window keeps each claim tied to a concrete build: a later store update does not invalidate that evidence, but a single window also does not establish temporal repeatability across independent collection periods. The integrated results should be read as a cross-layer characterization of risk posture, not as causation, prediction, exploitability, or evidence of malicious behavior.
+Their disagreement is itself informative for review. Low observed activity does not negate a broad packaged surface, and high runtime activity does not by itself establish exploitation. In this dataset the two layers therefore function as complementary evidence streams rather than interchangeable scores. The integrated results should be read as a cross-layer characterization of risk posture, not as causation, prediction, exploitability, or evidence of malicious behavior.
 
-\subsection{App-Level Profiles and QFG}
+\subsection{QFG Separation and Practical Implications}
 
-The median-split profiles in Table~\ref{tab:integrated-profile-matrix} are triage signals rather than rankings or composite scores. Static-heavy apps such as Snapchat expose substantial packaged surfaces even when selected runtime scenarios do not produce the broadest hostname breadth; finding volume here is exposure volume, not severity-weighted realized risk. Lower-static but higher-runtime cases such as CNN and BBC News suggest follow-up scenario review, while Facebook, Instagram, TikTok, and X (Twitter) are elevated on both layers.
-
-The 23 QFG captures remain a separate class. Counting that activity as strict-idle would overstate baseline quietness; discarding it would remove app-driven foreground behavior that is not user inactivity in the strictest sense. Keeping QFG separate lets the paper describe app-driven foreground behavior without claiming that it represents strict user inactivity.
+The 23 QFG captures remain a separate class. Discarding QFG would remove meaningful app-driven foreground behavior, while merging it into strict idle would overstate baseline quietness. Keeping QFG separate lets the paper describe app-driven foreground behavior without claiming that it represents user inactivity in the strictest sense.

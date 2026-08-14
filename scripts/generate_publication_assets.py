@@ -588,7 +588,8 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     note5 = (
         f"Higher static uses high/medium findings $\\geq {hm_med:.0f}$; "
         f"higher runtime uses interactive hosts $\\geq {dom_med:.0f}$. "
-        "Ties are assigned to the higher group."
+        "Ties are assigned to the higher group. "
+        "Cells are cohort-relative evidence/posture groups, not risk ratings."
     )
     write_tex_table(
         TABLE_DIR / "table5_integrated_profile_matrix.tex",
@@ -730,7 +731,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     fig, ax = plt.subplots(figsize=(3.45, 4.95))
     series = [
         ("high_medium_findings", "High/medium findings", "#0072B2", "o", 0.22),
-        ("exported_components_without_permission_guard", "Unguarded components", "#D55E00", "s", 0.0),
+        ("exported_components_without_permission_guard", "Unguarded-export findings", "#D55E00", "s", 0.0),
         ("dangerous_permissions", "Dangerous permissions", "#009E73", "^", -0.22),
     ]
     for col, label, color, marker, offset in series:
