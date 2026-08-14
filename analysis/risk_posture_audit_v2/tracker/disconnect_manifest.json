@@ -1,0 +1,37 @@
+{
+  "repository": "https://github.com/disconnectme/disconnect-tracking-protection",
+  "commit": "22c7d6166b6e30f7629ee1b49386855bb9b64a50",
+  "source_file": "services.json",
+  "source_path": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/tracker/disconnect_services.json",
+  "source_sha256": "41b9a4949949fddd44a45c7e006264c30b44d6544dfb28dc313dd4673505005f",
+  "retrieval_timestamp_utc": "2026-08-14T16:20:22Z",
+  "license": "CC BY-NC-SA 4.0 (Disconnect, Inc.)",
+  "list_format": "JSON categories -> entities -> homepage -> hostname list",
+  "categories": [
+    "Advertising",
+    "Analytics",
+    "Anti-fraud",
+    "ConsentManagers",
+    "Content",
+    "Cryptomining",
+    "Email",
+    "EmailAggressive",
+    "FingerprintingGeneral",
+    "FingerprintingInvasive",
+    "Social"
+  ],
+  "unique_normalized_domains": 4468,
+  "match_rule": "host==d or host.endswith('.'+d); no substring match",
+  "primary_tracking_categories": [
+    "Advertising",
+    "Analytics",
+    "ConsentManagers",
+    "Cryptomining",
+    "Email",
+    "EmailAggressive",
+    "FingerprintingGeneral",
+    "FingerprintingInvasive",
+    "Social"
+  ],
+  "content_category_note": "Disconnect Content often includes CDNs; reported separately from tracking-oriented categories"
+}

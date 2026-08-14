@@ -1,0 +1,9 @@
+{
+  "interactive_runs_total": 56,
+  "interactive_runs_with_retained_hostname_rows": 53,
+  "interactive_runs_zero_retained": 3,
+  "zero_retained_interpretation": "domain_count=0 and no top_dns/top_sni rows: zero retained names, not missing extraction",
+  "cohort_distinct_interactive_hostnames": 216,
+  "cohort_distinct_tracking_oriented_matches": 79,
+  "interpretation": "tracker-associated infrastructure; not confirmed tracking, leakage, exfiltration, or malice"
+}

@@ -1,0 +1,27 @@
+{
+  "unit": "app-level pairs (n=15), with-replacement",
+  "n_resamples": 10000,
+  "seed": 20260709,
+  "point_rho": 0.011690817662978083,
+  "percentile_ci_95": [
+    -0.5782849378497001,
+    0.5843988936351024
+  ],
+  "percentile_median": 0.01102490125742183,
+  "bca_ci_95": [
+    -0.5783759453849682,
+    0.5842190715644647
+  ],
+  "exploratory_note": "n=15; interval is exploratory, not a confirmatory CI",
+  "jackknife": {
+    "formula": "V=((n-1)/n)*sum((theta_(-i)-mean_loo)^2); SE=sqrt(V); pseudo=n*theta-(n-1)*theta_(-i)",
+    "se": 0.3210221577009522,
+    "mean_loo": 0.011472597621227916,
+    "ci_normal_approx": [
+      -0.6175126114308882,
+      0.6408942467568444
+    ],
+    "usable": "True",
+    "reason_if_unusable": null
+  }
+}

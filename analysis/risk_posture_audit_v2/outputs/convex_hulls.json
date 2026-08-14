@@ -1,0 +1,56 @@
+{
+  "hm_vs_hosts": {
+    "x": "high+medium findings",
+    "y": "interactive retained-host median",
+    "normalization": "z-score mean/sd, ddof=1, fitted once on full n=15",
+    "robust_alternative_not_used": "median/MAD not used for primary hull",
+    "area": 6.9507333227608425,
+    "perimeter": 11.407894087852345,
+    "vertices": [
+      "Telegram",
+      "Snapchat",
+      "Facebook",
+      "BBC News",
+      "Pinterest",
+      "Signal"
+    ],
+    "note": "vertices are axis-dependent extremes, not highest-risk apps",
+    "tolerance": "Qhull default"
+  },
+  "residual_vs_logpps": {
+    "x": "residual high+medium (alias title dropped cohort-wide)",
+    "y": "smoothed log2 PPS shift",
+    "normalization": "z-score mean/sd, ddof=1, fitted once on full n=15",
+    "robust_alternative_not_used": "median/MAD not used for primary hull",
+    "area": 6.906724215086119,
+    "perimeter": 10.94547444458056,
+    "vertices": [
+      "Facebook",
+      "WhatsApp",
+      "Signal",
+      "Pinterest",
+      "BBC News",
+      "The Guardian"
+    ],
+    "note": "vertices are axis-dependent extremes, not highest-risk apps",
+    "tolerance": "Qhull default"
+  },
+  "hm_vs_tracker_frac": {
+    "x": "high+medium findings",
+    "y": "interactive tracker-associated hostname fraction",
+    "normalization": "z-score mean/sd, ddof=1, fitted once on full n=15",
+    "robust_alternative_not_used": "median/MAD not used for primary hull",
+    "area": 5.80951248872438,
+    "perimeter": 10.948444639692106,
+    "vertices": [
+      "WhatsApp",
+      "Snapchat",
+      "LinkedIn",
+      "BBC News",
+      "Pinterest",
+      "Signal"
+    ],
+    "note": "vertices are axis-dependent extremes, not highest-risk apps",
+    "tolerance": "Qhull default"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "matplotlib": "3.11.1",
+    "seed": 20260709,
+    "n_boot": 10000,
+    "n_perm": 10000,
+    "generated_utc": "2026-08-14T16:28:32Z"
+  },
+  "inputs": {
+    "publication_cohort_manifest.csv": {
+      "sha256": "676b416eff0a460d0cde2873c361a19c2ad6b6caffa6f95d68d8a8008d97d871",
+      "bytes": 15500
+    },
+    "publication_dynamic_app_metrics.csv": {
+      "sha256": "7e70dc1b12dadfb2050b58679dd96ccc41e40ebabfb6de229a9ebc7adf9a3a48",
+      "bytes": 6719
+    },
+    "publication_dynamic_domain_rows.csv": {
+      "sha256": "2f24506cfe689ea94cf901638831ba2b2d6c8b93f4ee112c8fc8852dd932b4f6",
+      "bytes": 178026
+    },
+    "publication_dynamic_run_metrics.csv": {
+      "sha256": "75f4057c5efa48b6f8e7c8fe1b188778fac0baed0a946cc81650b5c38e1fafee",
+      "bytes": 56110
+    },
+    "publication_static_app_metrics.csv": {
+      "sha256": "a0b1d8c1124bd0fd424a51f51c6aa6e22d5e626075e60a21c23193d0f449eaca",
+      "bytes": 3654
+    },
+    "publication_static_component_rows.csv": {
+      "sha256": "982436a887dd97e798123386fd2bd457e8d3b3ac92d984db64085445922cf005",
+      "bytes": 88223
+    },
+    "publication_static_finding_rows.csv": {
+      "sha256": "fb3163f066707481f61aba21c64d679d513ef142ffcd33dedf9d5df4b4615c27",
+      "bytes": 834380
+    }
+  },
+  "metric_definitions": {
+    "static_csv": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/inputs/publication_static_app_metrics.csv",
+    "dynamic_csv": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/inputs/publication_dynamic_app_metrics.csv",
+    "findings_csv": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/inputs/publication_static_finding_rows.csv",
+    "residual_rule": "cohort-wide drop of High/Medium rows titled 'Exported activity alias without permission'",
+    "pps_shift": "log2((interactive_median_pps+1)/(baseline_median_pps+1)); baseline=strict_idle if count>0 else qfg",
+    "hostname_metric": "interactive_median_domain_count = median per-run union of retained top_dns/top_sni"
+  },
+  "spearman": {
+    "n15": {
+      "rho": 0.011690817662978083,
+      "p": 0.9670159354654979,
+      "n": 15
+    },
+    "n14_no_snapchat": {
+      "rho": 0.04102086320090072,
+      "p": 0.8892660404198544,
+      "n": 14
+    },
+    "most_influential_loo": "BBC News",
+    "jackknife_usable": "True",
+    "bootstrap": {
+      "unit": "app-level pairs (n=15), with-replacement",
+      "n_resamples": 10000,
+      "seed": 20260709,
+      "point_rho": 0.011690817662978083,
+      "percentile_ci_95": [
+        -0.5782849378497001,
+        0.5843988936351024
+      ],
+      "percentile_median": 0.01102490125742183,
+      "bca_ci_95": [
+        -0.5783759453849682,
+        0.5842190715644647
+      ],
+      "exploratory_note": "n=15; interval is exploratory, not a confirmatory CI",
+      "jackknife": {
+        "formula": "V=((n-1)/n)*sum((theta_(-i)-mean_loo)^2); SE=sqrt(V); pseudo=n*theta-(n-1)*theta_(-i)",
+        "se": 0.3210221577009522,
+        "mean_loo": 0.011472597621227916,
+        "ci_normal_approx": [
+          -0.6175126114308882,
+          0.6408942467568444
+        ],
+        "usable": "True",
+        "reason_if_unusable": null
+      }
+    },
+    "columns": {
+      "x": "severity_high_count+severity_medium_count",
+      "y": "interactive_median_domain_count"
+    }
+  },
+  "distance_correlation_pairs": [
+    {
+      "pair": "hm vs hosts (paper)",
+      "dcor": 0.3099562016288093,
+      "p_plus_one": 0.91000899910009,
+      "bh_q_among_6_pairs": 0.91000899910009
+    },
+    {
+      "pair": "residual vs hosts",
+      "dcor": 0.3453332832742071,
+      "p_plus_one": 0.6068393160683931,
+      "bh_q_among_6_pairs": 0.7327667233276671
+    },
+    {
+      "pair": "hm vs log2 PPS",
+      "dcor": 0.3929119361666505,
+      "p_plus_one": 0.6106389361063893,
+      "bh_q_among_6_pairs": 0.7327667233276671
+    },
+    {
+      "pair": "hosts vs log2 PPS",
+      "dcor": 0.7867275065155184,
+      "p_plus_one": 0.001999800019998,
+      "bh_q_among_6_pairs": 0.0059994000599940004
+    },
+    {
+      "pair": "dang vs log2 PPS",
+      "dcor": 0.7524518281414007,
+      "p_plus_one": 0.0014998500149985001,
+      "bh_q_among_6_pairs": 0.0059994000599940004
+    },
+    {
+      "pair": "dang vs hosts",
+      "dcor": 0.5591743774481716,
+      "p_plus_one": 0.050794920507949204,
+      "bh_q_among_6_pairs": 0.10158984101589841
+    }
+  ],
+  "wasserstein_idle_int_pps_run_pooled": {
+    "field": "pps",
+    "unit": "packets/s",
+    "from": "strict_idle",
+    "to": "interactive",
+    "run_pooled_W1": 95.19761417029859,
+    "n_from_runs": 44,
+    "n_to_runs": 56,
+    "app_balanced_W1_on_app_medians": 84.33886982187569,
+    "n_from_apps": 14,
+    "n_to_apps": 15,
+    "warning_pooled": "run-pooled weights apps with more selected captures more heavily",
+    "app_balanced_construction": "one median per app per class, then W1 between those empirical measures (equal app weight)"
+  },
+  "convex_hull_vertices_hm_hosts": [
+    "Telegram",
+    "Snapchat",
+    "Facebook",
+    "BBC News",
+    "Pinterest",
+    "Signal"
+  ],
+  "copula_masses": {
+    "UU": 0.2,
+    "UL": 0.2,
+    "LU": 0.2,
+    "LL": 0.2,
+    "on_median_rank": 0.2,
+    "sum": 1.0
+  },
+  "score_crossings": 19,
+  "score_regions": 20,
+  "median_pps_shift": {
+    "median": 3.3852445817762273,
+    "median_app": "TikTok",
+    "sorted": [
+      "The Guardian",
+      "CNN",
+      "Reddit",
+      "BBC News",
+      "X",
+      "Snapchat",
+      "Pinterest",
+      "TikTok",
+      "Facebook Messenger",
+      "LinkedIn",
+      "Instagram",
+      "Facebook",
+      "Telegram",
+      "Signal",
+      "WhatsApp"
+    ]
+  },
+  "disconnect": {
+    "commit": "22c7d6166b6e30f7629ee1b49386855bb9b64a50",
+    "source_sha256": "41b9a4949949fddd44a45c7e006264c30b44d6544dfb28dc313dd4673505005f",
+    "unique_normalized_domains": 4468,
+    "license": "CC BY-NC-SA 4.0 (Disconnect, Inc.)"
+  },
+  "tracker_summary_path": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/outputs/tracker_cohort_summary.json",
+  "withdraw": [
+    "jackknife normal CI for Spearman (unusable; leaves [-1,1])",
+    "copula 0.20/0.20/0.20/0.20 as a complete partition (omitted on-median mass)",
+    "constructed Final Risk Score as a cybersecurity measurement"
+  ]
+}

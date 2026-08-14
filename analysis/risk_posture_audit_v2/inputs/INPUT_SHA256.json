@@ -1,0 +1,30 @@
+{
+  "publication_cohort_manifest.csv": {
+    "sha256": "676b416eff0a460d0cde2873c361a19c2ad6b6caffa6f95d68d8a8008d97d871",
+    "bytes": 15500
+  },
+  "publication_dynamic_app_metrics.csv": {
+    "sha256": "7e70dc1b12dadfb2050b58679dd96ccc41e40ebabfb6de229a9ebc7adf9a3a48",
+    "bytes": 6719
+  },
+  "publication_dynamic_domain_rows.csv": {
+    "sha256": "2f24506cfe689ea94cf901638831ba2b2d6c8b93f4ee112c8fc8852dd932b4f6",
+    "bytes": 178026
+  },
+  "publication_dynamic_run_metrics.csv": {
+    "sha256": "75f4057c5efa48b6f8e7c8fe1b188778fac0baed0a946cc81650b5c38e1fafee",
+    "bytes": 56110
+  },
+  "publication_static_app_metrics.csv": {
+    "sha256": "a0b1d8c1124bd0fd424a51f51c6aa6e22d5e626075e60a21c23193d0f449eaca",
+    "bytes": 3654
+  },
+  "publication_static_component_rows.csv": {
+    "sha256": "982436a887dd97e798123386fd2bd457e8d3b3ac92d984db64085445922cf005",
+    "bytes": 88223
+  },
+  "publication_static_finding_rows.csv": {
+    "sha256": "fb3163f066707481f61aba21c64d679d513ef142ffcd33dedf9d5df4b4615c27",
+    "bytes": 834380
+  }
+}

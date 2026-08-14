@@ -1,55 +1,55 @@
 {
-  "source_root": "/home/secadmin/Laughlin/GitHub/ScytaleDroid/output/paper/android_empirical_alignment_final",
+  "source_root": "/home/systemadmin/GitHub/ScytaleDroid/output/paper/android_empirical_alignment_final",
   "files": [
     {
       "path": "figures/fig1_study_pipeline.pdf",
-      "sha256": "bf67bd17b6733c16b3703939b49ddd37d7c9925a0680e47028aad9bbf5b8ea9b",
-      "bytes": 14383
+      "sha256": "60f253a6da92d937bd496700e475b1d5b816ce7cc1094dc6aa8d36faed7f48ba",
+      "bytes": 18727
     },
     {
       "path": "figures/fig1_study_pipeline.png",
-      "sha256": "dba015ebd1636a55f125754863d28aaa76c6db93f36a457d51daa84ae2aae063",
-      "bytes": 92072
+      "sha256": "74c87fe076df2e07522fa2177e94b9f54f222f59428d596d878f0c1e662a2024",
+      "bytes": 92052
     },
     {
       "path": "figures/fig2_static_exposure_dotplot.pdf",
-      "sha256": "1641603ac36f9fe2f81caf2e28a9ae02b6278e4268f5a03d7d1bacbdc2e032be",
-      "bytes": 15949
+      "sha256": "cecb109112d347d54133f4f2e86f61e3883a27f809264eefeaf1ab66709e75c4",
+      "bytes": 19444
     },
     {
       "path": "figures/fig2_static_exposure_dotplot.png",
-      "sha256": "83b44c99d77ef5208959d707301d099c08c1884b50007901bcdbff8a7b5f6581",
-      "bytes": 82919
+      "sha256": "c16a5d8fe6a0892dfa05721c73923659086c72f70ab8c0b0b6efc9d0bb0582f6",
+      "bytes": 87273
     },
     {
       "path": "figures/fig2_static_exposure_heatmap.pdf",
-      "sha256": "1641603ac36f9fe2f81caf2e28a9ae02b6278e4268f5a03d7d1bacbdc2e032be",
-      "bytes": 15949
+      "sha256": "cecb109112d347d54133f4f2e86f61e3883a27f809264eefeaf1ab66709e75c4",
+      "bytes": 19444
     },
     {
       "path": "figures/fig2_static_exposure_heatmap.png",
-      "sha256": "83b44c99d77ef5208959d707301d099c08c1884b50007901bcdbff8a7b5f6581",
-      "bytes": 82919
+      "sha256": "c16a5d8fe6a0892dfa05721c73923659086c72f70ab8c0b0b6efc9d0bb0582f6",
+      "bytes": 87273
     },
     {
       "path": "figures/fig3_runtime_coverage_by_app.pdf",
-      "sha256": "38b843752bda643acce77ebe05239e8c0fcbc00976a73609795d0a75e08443d4",
-      "bytes": 39921
+      "sha256": "2b012ee1282c066d7de74c85d28beabc4bc283029b6c9e89f3cf44e450c8a5b6",
+      "bytes": 40410
     },
     {
       "path": "figures/fig3_runtime_coverage_by_app.png",
-      "sha256": "7c16809ede5a16c08cacc3cb7ea7b6de4f981331989087d49031d0e0bb1cb367",
-      "bytes": 102804
+      "sha256": "363ee6393f5699c83ff3a7d4edd96d5ff64a7b0524d144911388017cf6dfcac3",
+      "bytes": 103799
     },
     {
       "path": "figures/fig4_static_runtime_scatter.pdf",
-      "sha256": "6fd6b73046aac6808ee0fe0192804b6eb410cb35da17afd2520bf81d5cef94b3",
-      "bytes": 19202
+      "sha256": "8d72224924d6258cbc3ad9c0e0d9193032453deecfcf49d5de6b01161d311f28",
+      "bytes": 23780
     },
     {
       "path": "figures/fig4_static_runtime_scatter.png",
-      "sha256": "5a6eb66a571a31613e522e32f284de52c7492ca84226fc2ddd13df253ead6591",
-      "bytes": 105381
+      "sha256": "d7588afabe1b68fcfcb058f790075c33a0040dea10b5a5fd58f15574fd7401bc",
+      "bytes": 105134
     },
     {
       "path": "generated/source_data/app_category_policy.csv",
@@ -83,8 +83,8 @@
     },
     {
       "path": "generated/source_data/fig4_static_runtime_scatter_source.csv",
-      "sha256": "3259cfc8b5207ecdd39642b1d2523190a8ce41edd8d932a340add09be10792ca",
-      "bytes": 1351
+      "sha256": "c15f306a3ee0e4fcb53107be6dd3814911e43d9349b99aa9a4392fd1dbf5f227",
+      "bytes": 1350
     },
     {
       "path": "generated/source_data/integrated_profile_policy.json",
@@ -133,13 +133,13 @@
     },
     {
       "path": "tables/table4_runtime_behavior_summary.csv",
-      "sha256": "d95a6b34140000ac7a5efa359354148d32a948922db7e4e5baab5a890516c994",
-      "bytes": 524
+      "sha256": "4011645a4a91a2929e8b63336cc9fdc43569271a4f58d925a20dc20fec7cc734",
+      "bytes": 522
     },
     {
       "path": "tables/table4_runtime_behavior_summary.tex",
-      "sha256": "1476cace6ec083d8bf745ee88b1ee885e3adda7af3cd44ea5888df2a26aeaa37",
-      "bytes": 1031
+      "sha256": "0493dd19825b638866d6ac03e909cc087cc3766a74ad1bbe96216379b7821cab",
+      "bytes": 1084
     },
     {
       "path": "tables/table5_integrated_profile_matrix.csv",
@@ -148,8 +148,8 @@
     },
     {
       "path": "tables/table5_integrated_profile_matrix.tex",
-      "sha256": "8234b37ec1ca41db7340c3e0041e00c6605baa5c1ccee9af3a3bcc6a4426f5e7",
-      "bytes": 836
+      "sha256": "54f7540e275f956c2992973e8c2cedf6e4d5910a6d9ca1e53d92c7adbaaa3ea2",
+      "bytes": 834
     },
     {
       "path": "tables/table5_integrated_static_runtime_profiles.csv",
@@ -163,13 +163,13 @@
     },
     {
       "path": "tables/table6_statistical_summary.csv",
-      "sha256": "90e87bc8287151dcebaaf5ffc7d7d33970029ffae4f3720c884fe7a8ca06f1ae",
-      "bytes": 301
+      "sha256": "3e43abb29ffffab8972e8bee2d4c7478726f7c02cb9fd3363ac96d4e87db6bf7",
+      "bytes": 330
     },
     {
       "path": "tables/table6_statistical_summary.tex",
-      "sha256": "900dda3f5639924535b0450566be27e2c5957fc287a596767dcd447ebd19dffe",
-      "bytes": 733
+      "sha256": "38610f73772cc0bcbd5e1a340ffcdd647a84f70f1dd5f7b9200ba99a096ef368",
+      "bytes": 806
     }
   ]
 }

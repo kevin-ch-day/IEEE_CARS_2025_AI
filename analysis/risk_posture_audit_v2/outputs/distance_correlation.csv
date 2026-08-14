@@ -1,0 +1,7 @@
+pair,estimator,n,dcor,perm_B,perm_seed_stream,perm_count_ge_obs,p_plus_one,ties_x,ties_y,spearman_rho,spearman_p,bh_q_among_6_pairs,n_hypotheses
+hm vs hosts (paper),"Székely–Rizzo biased distance correlation (double-centering, n^{-2})",15,0.3099562016288093,10000,20260709,9100,0.91000899910009,True,True,0.011690817662978083,0.9670159354654979,0.91000899910009,6
+residual vs hosts,"Székely–Rizzo biased distance correlation (double-centering, n^{-2})",15,0.3453332832742071,10000,20260709,6068,0.6068393160683931,True,True,0.05125973898382699,0.856035705156223,0.7327667233276671,6
+hm vs log2 PPS,"Székely–Rizzo biased distance correlation (double-centering, n^{-2})",15,0.3929119361666505,10000,20260709,6106,0.6106389361063893,True,False,0.43431652731422477,0.10573762285477832,0.7327667233276671,6
+hosts vs log2 PPS,"Székely–Rizzo biased distance correlation (double-centering, n^{-2})",15,0.7867275065155184,10000,20260709,19,0.001999800019998,True,False,-0.504951586160294,0.054878867256613076,0.0059994000599940004,6
+dang vs log2 PPS,"Székely–Rizzo biased distance correlation (double-centering, n^{-2})",15,0.7524518281414007,10000,20260709,14,0.0014998500149985001,True,False,0.8809180915646363,1.4456280740304527e-05,0.0059994000599940004,6
+dang vs hosts,"Székely–Rizzo biased distance correlation (double-centering, n^{-2})",15,0.5591743774481716,10000,20260709,507,0.050794920507949204,True,True,-0.4723027813169648,0.07545304814423685,0.10158984101589841,6

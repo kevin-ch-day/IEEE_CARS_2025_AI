@@ -1,0 +1,12 @@
+{
+  "target": "app-balanced W1 of app-median PPS, idle vs interactive",
+  "n_apps_with_both": 14,
+  "n_resamples": 10000,
+  "seed": 20260709,
+  "point": 84.33886982187569,
+  "percentile_ci_95": [
+    39.326979772776276,
+    105.97895671491723
+  ],
+  "unit": "packets/s"
+}

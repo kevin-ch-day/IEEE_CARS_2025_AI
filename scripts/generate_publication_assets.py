@@ -20,7 +20,7 @@ plt.rcParams.update({"pdf.fonttype": 42, "ps.fonttype": 42})
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path(
-    "/home/secadmin/Laughlin/GitHub/ScytaleDroid/output/paper/"
+    "/home/systemadmin/GitHub/ScytaleDroid/output/paper/"
     "android_empirical_alignment_final"
 )
 TABLE_DIR = ROOT / "tables"
@@ -472,12 +472,12 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
             {
                 "App": manuscript_table_label(display_label(row["app_label"])),
                 "Base": base_label,
-                "Domains B/I": f"{fnum(base_domains, 0) or '--'}/{fnum(int_domains, 0) or '--'}",
+                "Hosts B/I": f"{fnum(base_domains, 0) or '--'}/{fnum(int_domains, 0) or '--'}",
                 "PPS B/I": f"{fnum(base_pps, 1) or '--'}/{fnum(int_pps, 1) or '--'}",
                 "Int MB": fnum(float(row["interactive_median_bytes"]) / 1_000_000 if not pd.isna(row["interactive_median_bytes"]) else np.nan, 1),
             }
         )
-    cols4 = ["App", "Base", "Domains B/I", "PPS B/I", "Int MB"]
+    cols4 = ["App", "Base", "Hosts B/I", "PPS B/I", "Int MB"]
     write_csv(TABLE_DIR / "table4_runtime_behavior_summary.csv", table4, cols4)
     write_tex_table(
         TABLE_DIR / "table4_runtime_behavior_summary.tex",
@@ -488,7 +488,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         r"lcccc",
         size=r"\scriptsize",
         table_env="table",
-        note="Base: I=strict-idle, Q=QFG. B/I reports baseline/interactive medians.",
+        note="Base: I=strict-idle, Q=QFG. B/I reports baseline/interactive medians. Hosts denote median retained DNS/SNI hostname breadth.",
     )
 
     merged = static.merge(dynamic, left_on="package_name", right_on="package", suffixes=("_s", "_d"))
@@ -587,7 +587,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     write_csv(TABLE_DIR / "table5_integrated_profile_matrix.csv", matrix_rows, matrix_cols)
     note5 = (
         f"Higher static uses high/medium findings $\\geq {hm_med:.0f}$; "
-        f"higher runtime uses interactive domains $\\geq {dom_med:.0f}$. "
+        f"higher runtime uses interactive hosts $\\geq {dom_med:.0f}$. "
         "Ties are assigned to the higher group."
     )
     write_tex_table(
@@ -608,6 +608,12 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     compared = sorted(set(base["package"]) & set(inter["package"]))
     excluded = sorted(set(eligible["package"]) - set(compared))
     rho = merged[["high_med", "int_domains"]].corr(method="spearman").iloc[0, 1]
+    snap_pkg = "com.snapchat.android"
+    if "package_name" in merged.columns:
+        no_snap = merged.loc[merged["package_name"] != snap_pkg, ["high_med", "int_domains"]]
+    else:
+        no_snap = merged.loc[merged["package"] != snap_pkg, ["high_med", "int_domains"]]
+    rho_no_snap = no_snap.corr(method="spearman").iloc[0, 1]
     shift = []
     for _, row in merged.iterrows():
         b = row["strict_idle_median_packets_per_second"]
@@ -621,8 +627,8 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         {"Measure": "Selected dynamic runs", "Basis": "QA-valid runs", "Value": str(int(dynamic["selected_run_count"].sum()))},
         {"Measure": "Strict idle/QFG/interactive", "Basis": "Evidence classes", "Value": f"{int(dynamic['strict_idle_run_count'].sum())}/{int(dynamic['qfg_run_count'].sum())}/{int(dynamic['interactive_run_count'].sum())}"},
         {"Measure": "Runtime-shift eligible apps", "Basis": "Baseline+interactive", "Value": str(len(compared))},
-        {"Measure": "Median log2 PPS shift", "Basis": "App medians", "Value": f"{np.median(shift):.2f}"},
-        {"Measure": "Spearman rho, findings vs. domains", "Basis": "Descriptive", "Value": f"{rho:.2f}"},
+        {"Measure": "Median smoothed log2 PPS shift", "Basis": "App medians", "Value": f"{np.median(shift):.2f}"},
+        {"Measure": "Spearman rho, findings vs. hosts", "Basis": "n=15 / n=14 excl. Snapchat", "Value": f"{rho:.2f} / {rho_no_snap:.2f}"},
     ]
     cols6 = ["Measure", "Basis", "Value"]
     write_csv(TABLE_DIR / "table6_statistical_summary.csv", table6, cols6)
@@ -635,7 +641,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         r"@{}p{0.42\columnwidth}p{0.34\columnwidth}r@{}",
         table_env="table",
         size=r"\scriptsize",
-        note="Runtime shift uses strict-idle when available, otherwise QFG. Associations are descriptive.",
+        note=r"Runtime shift is $\log_2[(I+1)/(B+1)]$ using strict-idle when available, otherwise QFG. Associations are descriptive rank correlations.",
     )
 
     # Preserve the app-level basis for baseline-relative runtime comparisons.
@@ -856,7 +862,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         )
     ax.axhline(0, color="#777777", lw=0.8, linestyle="--")
     ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8.6)
-    ax.set_ylabel("log2(interactive/base PPS)", fontsize=8.6)
+    ax.set_ylabel(r"log2[(I+1)/(B+1)] PPS", fontsize=8.6)
     ax.tick_params(labelsize=8.0)
     ax.margins(x=0.18, y=0.14)
     ax.legend(fontsize=7.2, loc="upper center", bbox_to_anchor=(0.5, 1.17), ncols=4, frameon=False)

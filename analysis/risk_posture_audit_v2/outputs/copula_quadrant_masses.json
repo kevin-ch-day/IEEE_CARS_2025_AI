@@ -1,0 +1,140 @@
+{
+  "rank_method": "scipy.stats.rankdata average ties",
+  "threshold": "median of ranks",
+  "UU": 0.2,
+  "UL": 0.2,
+  "LU": 0.2,
+  "LL": 0.2,
+  "on_median_rank": 0.2,
+  "sum": 1.0,
+  "prior_0.20x4_explanation": "earlier 0.20*4=0.80 omitted the on-median-rank mass; it was not a copula of independent uniforms with a missing 0.20 from error in arithmetic of independent cells alone",
+  "table_iv_rule": "higher group if value >= cohort median (raw metric, not rank copula)",
+  "detail": [
+    {
+      "app": "BBC News",
+      "rank_x": 1.5,
+      "rank_y": 14.5,
+      "copula_cell": "LU"
+    },
+    {
+      "app": "CNN",
+      "rank_x": 4.0,
+      "rank_y": 11.0,
+      "copula_cell": "LU"
+    },
+    {
+      "app": "Facebook",
+      "rank_x": 14.0,
+      "rank_y": 14.5,
+      "copula_cell": "UU"
+    },
+    {
+      "app": "Facebook Messenger",
+      "rank_x": 11.0,
+      "rank_y": 4.0,
+      "copula_cell": "UL"
+    },
+    {
+      "app": "Instagram",
+      "rank_x": 13.0,
+      "rank_y": 13.0,
+      "copula_cell": "UU"
+    },
+    {
+      "app": "LinkedIn",
+      "rank_x": 8.0,
+      "rank_y": 5.0,
+      "copula_cell": "on_median_rank"
+    },
+    {
+      "app": "Pinterest",
+      "rank_x": 1.5,
+      "rank_y": 6.0,
+      "copula_cell": "LL"
+    },
+    {
+      "app": "Reddit",
+      "rank_x": 7.0,
+      "rank_y": 8.5,
+      "copula_cell": "on_median_rank"
+    },
+    {
+      "app": "Signal",
+      "rank_x": 5.0,
+      "rank_y": 2.5,
+      "copula_cell": "LL"
+    },
+    {
+      "app": "Snapchat",
+      "rank_x": 15.0,
+      "rank_y": 7.0,
+      "copula_cell": "UL"
+    },
+    {
+      "app": "Telegram",
+      "rank_x": 6.0,
+      "rank_y": 1.0,
+      "copula_cell": "LL"
+    },
+    {
+      "app": "The Guardian",
+      "rank_x": 3.0,
+      "rank_y": 11.0,
+      "copula_cell": "LU"
+    },
+    {
+      "app": "TikTok",
+      "rank_x": 10.0,
+      "rank_y": 11.0,
+      "copula_cell": "UU"
+    },
+    {
+      "app": "WhatsApp",
+      "rank_x": 12.0,
+      "rank_y": 2.5,
+      "copula_cell": "UL"
+    },
+    {
+      "app": "X",
+      "rank_x": 9.0,
+      "rank_y": 8.5,
+      "copula_cell": "on_median_rank"
+    }
+  ],
+  "table_iv": {
+    "static_threshold": 52.0,
+    "runtime_threshold": 12.0,
+    "tie_rule": ">= median assigned to higher group",
+    "cells": {
+      "LH": [
+        "BBC News",
+        "CNN",
+        "Reddit",
+        "The Guardian"
+      ],
+      "HH": [
+        "Facebook",
+        "Instagram",
+        "TikTok",
+        "X"
+      ],
+      "HL": [
+        "Facebook Messenger",
+        "LinkedIn",
+        "Snapchat",
+        "WhatsApp"
+      ],
+      "LL": [
+        "Pinterest",
+        "Signal",
+        "Telegram"
+      ]
+    },
+    "counts": {
+      "LH": 4,
+      "HH": 4,
+      "HL": 4,
+      "LL": 3
+    }
+  }
+}

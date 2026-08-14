@@ -1,0 +1,21 @@
+w_left,top3,perm,w_right
+0.0,"WhatsApp, Instagram, Facebook","13,4,2,12,8,5,10,9,3,6,0,1,14,7,11",0.051000000000000004
+0.051000000000000004,"WhatsApp, Instagram, Facebook","13,4,2,12,8,5,10,9,3,6,0,14,1,7,11",0.0755
+0.0755,"WhatsApp, Instagram, Facebook","13,4,2,12,8,5,10,3,9,6,0,14,1,7,11",0.1
+0.1,"WhatsApp, Instagram, Facebook","13,4,2,12,8,5,10,3,9,6,14,0,1,7,11",0.193
+0.193,"Instagram, WhatsApp, Facebook","4,13,2,12,8,5,10,3,9,6,14,0,1,7,11",0.26
+0.26,"Instagram, WhatsApp, Facebook","4,13,2,12,8,5,10,3,9,6,14,0,7,1,11",0.343
+0.343,"Instagram, WhatsApp, Facebook","4,13,2,12,8,10,5,3,9,6,14,0,7,1,11",0.34950000000000003
+0.34950000000000003,"Instagram, WhatsApp, Facebook","4,13,2,12,8,10,5,3,9,14,6,0,7,1,11",0.354
+0.354,"Instagram, WhatsApp, Facebook","4,13,2,12,8,10,5,3,9,14,6,7,0,1,11",0.358
+0.358,"Instagram, WhatsApp, Facebook","4,13,2,12,8,10,3,5,9,14,6,7,0,1,11",0.365
+0.365,"Instagram, WhatsApp, Facebook","4,13,2,12,8,3,10,5,9,14,6,7,0,1,11",0.3765
+0.3765,"Instagram, Facebook, WhatsApp","4,2,13,12,8,3,10,5,9,14,6,7,0,1,11",0.436
+0.436,"Instagram, Facebook, WhatsApp","4,2,13,12,3,8,10,5,9,14,6,7,0,1,11",0.5605
+0.5605,"Instagram, Facebook, WhatsApp","4,2,13,12,3,10,8,5,9,14,6,7,0,1,11",0.7185
+0.7185,"Instagram, Facebook, WhatsApp","4,2,13,12,3,10,8,9,5,14,6,7,0,1,11",0.8425
+0.8425,"Instagram, Facebook, WhatsApp","4,2,13,12,3,10,9,8,5,14,6,7,0,1,11",0.9075
+0.9075,"Instagram, Facebook, WhatsApp","4,2,13,3,12,10,9,8,5,14,6,7,0,1,11",0.913
+0.913,"Instagram, Facebook, Facebook Messenger","4,2,3,13,12,10,9,8,5,14,6,7,0,1,11",0.9275
+0.9275,"Instagram, Facebook, Facebook Messenger","4,2,3,12,13,10,9,8,5,14,6,7,0,1,11",0.981
+0.981,"Instagram, Facebook, Facebook Messenger","4,2,3,12,13,10,9,8,5,14,6,7,0,11,1",1.0

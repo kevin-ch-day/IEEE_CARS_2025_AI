@@ -1,0 +1,46 @@
+plane,left_out,full_area,loo_area,delta_area,rel_change,scaler
+hm_vs_hosts,BBC News,6.9507333227608425,6.636984943608442,0.3137483791524005,0.04513888888888908,frozen full-cohort mean/sd
+hm_vs_hosts,CNN,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,Facebook,6.9507333227608425,6.548703517085803,0.4020298056750393,0.057839912280701976,frozen full-cohort mean/sd
+hm_vs_hosts,Facebook Messenger,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,Instagram,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,LinkedIn,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,Pinterest,6.9507333227608425,6.830060869240689,0.12067245352015377,0.017361111111111147,frozen full-cohort mean/sd
+hm_vs_hosts,Reddit,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,Signal,6.9507333227608425,6.946922613702311,0.003810709058531536,0.0005482456140351414,frozen full-cohort mean/sd
+hm_vs_hosts,Snapchat,6.9507333227608425,3.730684168302008,3.2200491544588346,0.4632675438596493,frozen full-cohort mean/sd
+hm_vs_hosts,Telegram,6.9507333227608425,6.41469358186079,0.5360397409000521,0.07711988304093592,frozen full-cohort mean/sd
+hm_vs_hosts,The Guardian,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,TikTok,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,WhatsApp,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_hosts,X,6.9507333227608425,6.9507333227608425,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,BBC News,6.906724215086119,6.889150839308054,0.01757337577806517,0.0025443864892824666,frozen full-cohort mean/sd
+residual_vs_logpps,CNN,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,Facebook,6.906724215086119,5.4559008754577345,1.4508233396283847,0.21005954406857616,frozen full-cohort mean/sd
+residual_vs_logpps,Facebook Messenger,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,Instagram,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,LinkedIn,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,Pinterest,6.906724215086119,6.8197238866173,0.087000328468819,0.01259646769720256,frozen full-cohort mean/sd
+residual_vs_logpps,Reddit,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,Signal,6.906724215086119,6.0256711308524045,0.8810530842337148,0.12756453809307472,frozen full-cohort mean/sd
+residual_vs_logpps,Snapchat,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,Telegram,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,The Guardian,6.906724215086119,5.472752379026334,1.4339718360597855,0.20761967488547037,frozen full-cohort mean/sd
+residual_vs_logpps,TikTok,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+residual_vs_logpps,WhatsApp,6.906724215086119,5.324797322416964,1.5819268926691556,0.22904156057278316,frozen full-cohort mean/sd
+residual_vs_logpps,X,6.906724215086119,6.906724215086119,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,BBC News,5.80951248872438,5.657005430751965,0.15250705797241526,0.026251266051740926,frozen full-cohort mean/sd
+hm_vs_tracker_frac,CNN,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Facebook,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Facebook Messenger,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Instagram,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,LinkedIn,5.80951248872438,5.305703459168431,0.5038090295559492,0.08672139538967973,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Pinterest,5.80951248872438,5.602065005449787,0.20744748327459295,0.03570824293384781,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Reddit,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Signal,5.80951248872438,5.801051592720378,0.008460896004002016,0.0014563865763992552,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Snapchat,5.80951248872438,3.1895607873518053,2.6199517013725746,0.4509761716594311,frozen full-cohort mean/sd
+hm_vs_tracker_frac,Telegram,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,The Guardian,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,TikTok,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd
+hm_vs_tracker_frac,WhatsApp,5.80951248872438,4.80266586424814,1.00684662447624,0.1733100025915114,frozen full-cohort mean/sd
+hm_vs_tracker_frac,X,5.80951248872438,5.80951248872438,0.0,0.0,frozen full-cohort mean/sd

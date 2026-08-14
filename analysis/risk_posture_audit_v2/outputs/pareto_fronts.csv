@@ -1,0 +1,46 @@
+plane,app,x_var,y_var,x,y,maximize,nondominated,label
+max hm & max hosts,BBC News,hm,idom,16,15.5,both,False,dominated
+max hm & max hosts,CNN,hm,idom,25,14.0,both,False,dominated
+max hm & max hosts,Facebook,hm,idom,164,15.5,both,True,nondominated under the selected evidence dimensions
+max hm & max hosts,Facebook Messenger,hm,idom,96,9.0,both,False,dominated
+max hm & max hosts,Instagram,hm,idom,128,15.0,both,False,dominated
+max hm & max hosts,LinkedIn,hm,idom,52,9.5,both,False,dominated
+max hm & max hosts,Pinterest,hm,idom,16,10.5,both,False,dominated
+max hm & max hosts,Reddit,hm,idom,47,12.0,both,False,dominated
+max hm & max hosts,Signal,hm,idom,35,3.0,both,False,dominated
+max hm & max hosts,Snapchat,hm,idom,325,11.0,both,True,nondominated under the selected evidence dimensions
+max hm & max hosts,Telegram,hm,idom,43,0.0,both,False,dominated
+max hm & max hosts,The Guardian,hm,idom,21,14.0,both,False,dominated
+max hm & max hosts,TikTok,hm,idom,85,14.0,both,False,dominated
+max hm & max hosts,WhatsApp,hm,idom,99,3.0,both,False,dominated
+max hm & max hosts,X,hm,idom,83,12.0,both,False,dominated
+max residual & max log_s,BBC News,residual,log_s,16,2.4555309335222284,both,False,dominated
+max residual & max log_s,CNN,residual,log_s,25,2.3707100566852812,both,False,dominated
+max residual & max log_s,Facebook,residual,log_s,132,4.343173612081366,both,True,nondominated under the selected evidence dimensions
+max residual & max log_s,Facebook Messenger,residual,log_s,84,3.6203634787677466,both,False,dominated
+max residual & max log_s,Instagram,residual,log_s,104,4.311695075342142,both,False,dominated
+max residual & max log_s,LinkedIn,residual,log_s,29,3.732741810096105,both,False,dominated
+max residual & max log_s,Pinterest,residual,log_s,15,3.3773832330863067,both,False,dominated
+max residual & max log_s,Reddit,residual,log_s,24,2.4254912341110715,both,False,dominated
+max residual & max log_s,Signal,residual,log_s,23,6.08974899674651,both,False,dominated
+max residual & max log_s,Snapchat,residual,log_s,35,2.6496082119364557,both,False,dominated
+max residual & max log_s,Telegram,residual,log_s,37,5.159467094235193,both,False,dominated
+max residual & max log_s,The Guardian,residual,log_s,20,0.8056528677235969,both,False,dominated
+max residual & max log_s,TikTok,residual,log_s,83,3.3852445817762273,both,False,dominated
+max residual & max log_s,WhatsApp,residual,log_s,70,7.019347320082375,both,True,nondominated under the selected evidence dimensions
+max residual & max log_s,X,residual,log_s,35,2.624807584110142,both,False,dominated
+max hm & max tracker_frac,BBC News,hm,tfrac,16,0.5147058823529411,both,False,dominated
+max hm & max tracker_frac,CNN,hm,tfrac,25,0.42857142857142855,both,False,dominated
+max hm & max tracker_frac,Facebook,hm,tfrac,164,0.5166666666666666,both,False,dominated
+max hm & max tracker_frac,Facebook Messenger,hm,tfrac,96,0.6,both,False,dominated
+max hm & max tracker_frac,Instagram,hm,tfrac,128,0.4666666666666667,both,False,dominated
+max hm & max tracker_frac,LinkedIn,hm,tfrac,52,0.6333333333333333,both,False,dominated
+max hm & max tracker_frac,Pinterest,hm,tfrac,16,0.045454545454545456,both,False,dominated
+max hm & max tracker_frac,Reddit,hm,tfrac,47,0.08333333333333333,both,False,dominated
+max hm & max tracker_frac,Signal,hm,tfrac,35,0.0,both,False,dominated
+max hm & max tracker_frac,Snapchat,hm,tfrac,325,0.7727272727272727,both,True,nondominated under the selected evidence dimensions
+max hm & max tracker_frac,Telegram,hm,tfrac,43,0.0,both,False,dominated
+max hm & max tracker_frac,The Guardian,hm,tfrac,21,0.41428571428571426,both,False,dominated
+max hm & max tracker_frac,TikTok,hm,tfrac,85,0.15384615384615385,both,False,dominated
+max hm & max tracker_frac,WhatsApp,hm,tfrac,99,0.0,both,False,dominated
+max hm & max tracker_frac,X,hm,tfrac,83,0.5419580419580419,both,False,dominated

@@ -1,0 +1,16 @@
+app,n_strict_idle,n_qfg,n_interactive,interactive_pps_cv,interactive_duration_cv,hostname_availability,low_confidence_flag,note
+BBC News,4,0,6,0.5302471915675222,0.5546206861901368,present,False,confidence qualifies interpretation; it is not a risk score
+CNN,4,1,7,0.8189563682732042,0.2974406958464634,present,False,confidence qualifies interpretation; it is not a risk score
+Facebook,3,1,4,0.5579301386505341,0.23640141748592172,present,False,confidence qualifies interpretation; it is not a risk score
+Facebook Messenger,4,0,5,1.176047190659621,0.2884050371438151,present,False,confidence qualifies interpretation; it is not a risk score
+Instagram,2,4,1,,,present,True,confidence qualifies interpretation; it is not a risk score
+LinkedIn,3,1,4,1.1251729378771524,0.3287236033211264,present,False,confidence qualifies interpretation; it is not a risk score
+Pinterest,5,0,2,0.030803639514757272,0.3476248446846576,present,False,confidence qualifies interpretation; it is not a risk score
+Reddit,2,3,1,,,present,True,confidence qualifies interpretation; it is not a risk score
+Signal,3,0,4,1.1385740903241792,0.22342108735926342,present,False,confidence qualifies interpretation; it is not a risk score
+Snapchat,1,2,2,0.6253692709081506,0.10159115601015041,present,False,confidence qualifies interpretation; it is not a risk score
+Telegram,3,0,4,0.9747102187270846,0.22058059744208242,present,False,confidence qualifies interpretation; it is not a risk score
+The Guardian,3,2,4,0.6019222529574575,0.6407485118635448,present,False,confidence qualifies interpretation; it is not a risk score
+TikTok,0,8,3,0.1763399117208499,0.503732713859686,present,True,confidence qualifies interpretation; it is not a risk score
+WhatsApp,4,0,5,0.8823850042773483,0.3165871608978133,present,False,confidence qualifies interpretation; it is not a risk score
+X,3,1,4,0.3278872006579648,0.39761764678636546,present,False,confidence qualifies interpretation; it is not a risk score
