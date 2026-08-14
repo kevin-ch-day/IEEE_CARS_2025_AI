@@ -398,7 +398,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
             "Study": "This study",
             "Static": "Yes",
             "Runtime": "Yes",
-            "Privacy": "Transport/provenance",
+            "Privacy": "Metadata + tracker context",
             "Provenance": "Exact selected build",
             "Scope": "15 heterogeneous apps",
             "Limit": "Single device; scenario-bounded",
