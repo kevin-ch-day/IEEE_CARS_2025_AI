@@ -14,6 +14,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.stats import spearmanr
 
 plt.rcParams.update({"pdf.fonttype": 42, "ps.fonttype": 42})
 
@@ -100,10 +101,41 @@ def latex_escape(value: object) -> str:
     return escaped
 
 
+def interactive_pps_iqr_rows(runs: pd.DataFrame) -> list[dict[str, object]]:
+    """Per-app interactive packet-rate IQR for apps with at least three captures.
+
+    Quartiles use pandas' default linear interpolation. This implementation
+    detail is retained here and in generated/source_data; it is not a
+    manuscript claim.
+    """
+    inter = runs[runs["evidence_class"].eq("interactive")].copy()
+    app_col = "app" if "app" in inter.columns else "app_label"
+    rows: list[dict[str, object]] = []
+    for app_name, group in inter.groupby(app_col, sort=False):
+        n_int = int(len(group))
+        if n_int < 3:
+            continue
+        pps = group["packets_per_second"].astype(float)
+        q1 = float(pps.quantile(0.25, interpolation="linear"))
+        q3 = float(pps.quantile(0.75, interpolation="linear"))
+        rows.append(
+            {
+                "app": str(app_name),
+                "interactive_runs": n_int,
+                "q1_packets_per_second": q1,
+                "q3_packets_per_second": q3,
+                "iqr_packets_per_second": q3 - q1,
+                "median_packets_per_second": float(pps.median()),
+                "run_ids": ",".join(str(x) for x in group["dynamic_run_id"]),
+            }
+        )
+    return rows
+
+
 def write_csv(path: Path, rows: list[dict[str, object]], columns: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=columns)
+        writer = csv.DictWriter(fh, fieldnames=columns, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({col: row.get(col, "") for col in columns})
@@ -608,13 +640,13 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
     inter = eligible[eligible["evidence_class"].eq("interactive")]
     compared = sorted(set(base["package"]) & set(inter["package"]))
     excluded = sorted(set(eligible["package"]) - set(compared))
-    rho = merged[["high_med", "int_domains"]].corr(method="spearman").iloc[0, 1]
+    rho, p_rho = spearmanr(merged["high_med"], merged["int_domains"])
     snap_pkg = "com.snapchat.android"
     if "package_name" in merged.columns:
         no_snap = merged.loc[merged["package_name"] != snap_pkg, ["high_med", "int_domains"]]
     else:
         no_snap = merged.loc[merged["package"] != snap_pkg, ["high_med", "int_domains"]]
-    rho_no_snap = no_snap.corr(method="spearman").iloc[0, 1]
+    rho_no_snap, p_no_snap = spearmanr(no_snap["high_med"], no_snap["int_domains"])
     shift = []
     for _, row in merged.iterrows():
         b = row["strict_idle_median_packets_per_second"]
@@ -623,13 +655,49 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         i = row["interactive_median_packets_per_second"]
         if not pd.isna(b) and not pd.isna(i) and b > 0:
             shift.append(math.log2((i + 1) / (b + 1)))
+    iqr_rows = interactive_pps_iqr_rows(eligible)
+    iqr_vals = [float(row["iqr_packets_per_second"]) for row in iqr_rows]
+    median_iqr = float(np.median(iqr_vals)) if iqr_vals else float("nan")
+    iqr_cols = [
+        "app",
+        "interactive_runs",
+        "q1_packets_per_second",
+        "q3_packets_per_second",
+        "iqr_packets_per_second",
+        "median_packets_per_second",
+        "run_ids",
+    ]
+    write_csv(SOURCE_DIR / "interactive_pps_iqr_by_app.csv", iqr_rows, iqr_cols)
+    (SOURCE_DIR / "interactive_pps_iqr_summary.json").write_text(
+        json.dumps(
+            {
+                "eligible_apps": len(iqr_rows),
+                "minimum_interactive_runs": 3,
+                "quartile_interpolation": "pandas linear",
+                "median_iqr_packets_per_second": median_iqr,
+                "min_iqr_packets_per_second": min(iqr_vals) if iqr_vals else None,
+                "max_iqr_packets_per_second": max(iqr_vals) if iqr_vals else None,
+                "interpretation": "within-window absolute dispersion; not longitudinal repeatability",
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
     table6 = [
         {"Measure": "Selected apps", "Basis": "Build-aligned set", "Value": str(len(manifest))},
         {"Measure": "Selected dynamic runs", "Basis": "QA-valid runs", "Value": str(int(dynamic["selected_run_count"].sum()))},
         {"Measure": "Strict idle/QFG/interactive", "Basis": "Evidence classes", "Value": f"{int(dynamic['strict_idle_run_count'].sum())}/{int(dynamic['qfg_run_count'].sum())}/{int(dynamic['interactive_run_count'].sum())}"},
         {"Measure": "Runtime-shift eligible apps", "Basis": "Baseline+interactive", "Value": str(len(compared))},
         {"Measure": "Median smoothed log2 PPS shift", "Basis": "App medians", "Value": f"{np.median(shift):.2f}"},
-        {"Measure": "Spearman rho, findings vs. hosts", "Basis": "n=15 / n=14 excl. Snapchat", "Value": f"{rho:.2f} / {rho_no_snap:.2f}"},
+        {"Measure": "Within-window interactive PPS variability", "Basis": f"Median per-app IQR, n={len(iqr_rows)}", "Value": f"{median_iqr:.1f} packets/s"},
+        {
+            "Measure": r"Spearman rho (p), findings vs. hosts",
+            "Basis": "n=15 / n=14 excl. Snapchat",
+            "Value": (
+                f"{rho:.2f} (.{f'{p_rho:.3f}'.split('.')[1]}) / "
+                f"{rho_no_snap:.2f} (.{f'{p_no_snap:.3f}'.split('.')[1]})"
+            ),
+        },
     ]
     cols6 = ["Measure", "Basis", "Value"]
     write_csv(TABLE_DIR / "table6_statistical_summary.csv", table6, cols6)
@@ -639,7 +707,7 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         "tab:statistical-summary",
         cols6,
         table6,
-        r"@{}p{0.42\columnwidth}p{0.34\columnwidth}r@{}",
+        r"@{}>{\raggedright\arraybackslash}p{0.36\columnwidth}>{\raggedright\arraybackslash}p{0.28\columnwidth}>{\raggedright\arraybackslash}p{0.24\columnwidth}@{}",
         table_env="table",
         size=r"\scriptsize",
         note=r"Runtime shift is $\log_2[(I+1)/(B+1)]$ using strict-idle when available, otherwise QFG. Associations are descriptive rank correlations.",

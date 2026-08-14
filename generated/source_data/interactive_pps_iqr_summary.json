@@ -1,0 +1,9 @@
+{
+  "eligible_apps": 11,
+  "minimum_interactive_runs": 3,
+  "quartile_interpolation": "pandas linear",
+  "median_iqr_packets_per_second": 63.52035729090214,
+  "min_iqr_packets_per_second": 7.495092105862446,
+  "max_iqr_packets_per_second": 282.8414314311762,
+  "interpretation": "within-window absolute dispersion; not longitudinal repeatability"
+}

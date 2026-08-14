@@ -3,7 +3,7 @@
 \caption{Compact descriptive statistical summary.}
 \label{tab:statistical-summary}
 \scriptsize
-\begin{tabular}{@{}p{0.42\columnwidth}p{0.34\columnwidth}r@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\columnwidth}>{\raggedright\arraybackslash}p{0.28\columnwidth}>{\raggedright\arraybackslash}p{0.24\columnwidth}@{}}
 \toprule
 Measure & Basis & Value \\
 \midrule
@@ -12,7 +12,8 @@ Selected dynamic runs & QA-valid runs & 123 \\
 Strict idle/QFG/interactive & Evidence classes & 44/23/56 \\
 Runtime-shift eligible apps & Baseline+interactive & 15 \\
 Median smoothed log2 PPS shift & App medians & 3.39 \\
-Spearman rho, findings vs. hosts & n=15 / n=14 excl. Snapchat & 0.01 / 0.04 \\
+Within-window interactive PPS variability & Median per-app IQR, n=11 & 63.5 packets/s \\
+Spearman rho (p), findings vs. hosts & n=15 / n=14 excl. Snapchat & 0.01 (.967) / 0.04 (.889) \\
 \bottomrule
 \end{tabular}
 \vspace{1pt}

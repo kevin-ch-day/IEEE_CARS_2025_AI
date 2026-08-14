@@ -36,7 +36,7 @@ Interactive packet rates ranged from 14.0 packets/s (The Guardian) to 285.7 pack
 
 \subsection{Integrated Static--Runtime Findings}
 
-Table~\ref{tab:integrated-profile-matrix} is a cohort-relative risk-posture map, not an absolute risk rating. Apps at or above both median splits occupy the high/high cell and are a cross-layer review priority because packaged exposure and observed hostname breadth are jointly elevated. High-static/lower-runtime indicates packaged exposure that was not broadly expressed through retained hostname activity in the selected scenarios. Lower-static/higher-runtime indicates broader observed communication despite lower detector volume. Lower/lower records comparatively lower measured values within this cohort only; it is not proof of safety. The 4/4/4/3 occupancy shows that all four profile types are represented. The near-zero rank association in Table~\ref{tab:statistical-summary} therefore supports retaining static exposure and runtime behavior as separate dimensions rather than forcing a composite score.
+Table~\ref{tab:integrated-profile-matrix} is a cohort-relative risk-posture map, not an absolute risk rating. The 4/4/4/3 occupancy shows that packaged exposure and retained-hostname activity can be jointly elevated, discordant, or jointly lower within this cohort; the lower/lower cell is not proof of safety. The near-zero rank association in Table~\ref{tab:statistical-summary} therefore supports retaining static exposure and runtime behavior as separate dimensions rather than forcing a composite score.
 
 \input{tables/table5_integrated_profile_matrix}
 
@@ -49,6 +49,6 @@ Table~\ref{tab:integrated-profile-matrix} is a cohort-relative risk-posture map,
 
 \subsection{App-Level Divergence and Representative Cases}
 
-Snapchat is the clearest static-heavy case: its interactive retained-host median (11) sits just below the cohort cutoff of 12. Facebook, TikTok, and Instagram are elevated on both layers, while CNN and BBC News are lower-static but runtime-broad. Signal, Telegram, and WhatsApp show large packet-rate shifts from quiet baselines with narrow hostname breadth. Fig.~\ref{fig:static-runtime-scatter} and Table~\ref{tab:statistical-summary} show the same pattern. The near-zero association persists after excluding Snapchat, so a static-only table would miss runtime-heavy apps and a runtime-only table would miss packaged exposure.
+Snapchat is the clearest static-heavy case: its interactive retained-host median (11) sits just below the cohort cutoff of 12. Facebook, TikTok, and Instagram are elevated on both layers, while CNN and BBC News are lower-static but runtime-broad. Signal, Telegram, and WhatsApp show large packet-rate shifts from quiet baselines with narrow hostname breadth. Fig.~\ref{fig:static-runtime-scatter} and Table~\ref{tab:statistical-summary} summarize this pattern. The near-zero association persists after excluding Snapchat. Among the 11 apps with at least three selected interactive captures, the median within-app packet-rate IQR was 63.5 packets/s, with app-level IQRs ranging from 7.5 to 282.8 packets/s. This dispersion characterizes repeated observations within the fixed evidence window and is not a measure of longitudinal repeatability.
 
 \input{tables/table6_statistical_summary}

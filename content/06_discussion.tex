@@ -4,7 +4,7 @@
 
 The fixed recent-evidence window separates publication readiness from the continuously changing app-store queue. Once a fully identified build is linked to qualifying static and runtime evidence, a later store update does not invalidate that observation; the newer build becomes a candidate for future longitudinal comparison. Package version, APK hash, static run, dynamic run, and QA provenance keep each claim locked to a recent, reconstructable build rather than to whatever version happens to be installed at writing time.
 
-That locking supports provenance, traceability, and computational reconstruction of the reported rows. It does not establish temporal repeatability. Multiple captures inside one 14-day window characterize within-window behavior for the selected builds; they are not independent collection periods. Measuring longitudinal behavioral drift would require another evidence window under the same identity contract.
+That locking supports provenance, traceability, and computational reconstruction of the reported rows. It does not establish temporal repeatability. Multiple captures inside one 14-day window characterize within-window behavior for the selected builds; they are not independent collection periods. The observed within-window dispersion shows that repeated captures were not identical; however, estimating temporal repeatability or behavioral drift would still require a second independently collected evidence window under the same build-alignment contract.
 
 \subsection{Interpreting Static and Runtime Risk Posture}
 
