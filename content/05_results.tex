@@ -2,7 +2,9 @@
 
 \subsection{Dataset and Evidence Provenance}
 
-The final evidence bundle included all 15 selected builds with qualifying static evidence and both baseline-side and interactive-side runtime evidence, although evidence-class depth varied by app. Table~\ref{tab:cutoff-evidence-summary} reports the selected runtime evidence by app and evidence class. Counts represent build-aligned runs selected from the 14-day evidence window. Full app versions, APK hashes, static and dynamic run identifiers, and alignment records are retained in the generated source bundle. Results therefore refer to selected package/version groups rather than mutable installed-app state.
+The final evidence bundle included all 15 selected builds with qualifying static evidence and both baseline-side and interactive-side runtime evidence, although evidence-class depth varied by app. Table~\ref{tab:cutoff-evidence-summary} reports the selected runtime evidence by app and evidence class: 123 captures comprising 44 strict-idle, 23 QFG, and 56 interactive runs. Every app contributes interactive evidence and a baseline-side class, but the baseline is not uniform. Fourteen apps contribute strict-idle captures; TikTok contributes QFG only. Nine apps contribute QFG captures, so the class is not a single-app artifact. Interactive depth ranges from one to seven selected runs, which later motivates reporting within-window packet-rate dispersion only for apps with at least three interactive captures.
+
+Counts represent build-aligned runs selected from the 14-day evidence window. Full app versions, APK hashes, static and dynamic run identifiers, and alignment records are retained in the generated source bundle. Results therefore refer to selected package/version groups rather than mutable installed-app state: a later store update does not revise these rows.
 
 \input{tables/table2_cutoff_evidence_summary}
 
@@ -36,7 +38,9 @@ Interactive packet rates ranged from 14.0 packets/s (The Guardian) to 285.7 pack
 
 \subsection{Integrated Static--Runtime Findings}
 
-Table~\ref{tab:integrated-profile-matrix} is a cohort-relative risk-posture map, not an absolute risk rating. The 4/4/4/3 occupancy shows that packaged exposure and retained-hostname activity can be jointly elevated, discordant, or jointly lower within this cohort; the lower/lower cell is not proof of safety. The near-zero rank association in Table~\ref{tab:statistical-summary} therefore supports retaining static exposure and runtime behavior as separate dimensions rather than forcing a composite score.
+Table~\ref{tab:integrated-profile-matrix} is a cohort-relative risk-posture map, not an absolute risk rating. Higher static exposure is high- and medium-severity finding volume at or above the cohort median (52); higher runtime activity is interactive retained-hostname count at or above the cohort median (12); ties are assigned to the higher group. The resulting 4/4/4/3 occupancy shows that packaged exposure and retained-hostname activity can be jointly elevated, discordant, or jointly lower within this cohort. The two discordant cells are equally populated, so disagreement is not a rare exception: an app may present substantial packaged exposure with comparatively narrow interactive hostname breadth, or the reverse. The lower/lower cell contains three apps and is not proof of safety; both cutoffs are internal to this 15-app set.
+
+The near-zero rank association in Table~\ref{tab:statistical-summary} therefore supports retaining static exposure and runtime behavior as separate dimensions rather than forcing a composite score. Fig.~\ref{fig:static-runtime-scatter} reports packet-rate shift as a complementary runtime intensity measure; it is not the axis used to assign the Table~\ref{tab:integrated-profile-matrix} cells.
 
 \input{tables/table5_integrated_profile_matrix}
 
