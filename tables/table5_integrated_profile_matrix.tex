@@ -1,16 +1,20 @@
 \begin{table}[!t]
 \centering
-\caption{Integrated static-runtime profile matrix using median-split indicators.}
+\caption{Cohort-relative static--runtime profiles.}
 \label{tab:integrated-profile-matrix}
-\scriptsize
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}p{0.34\columnwidth}>{\raggedright\arraybackslash}p{0.34\columnwidth}@{}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.22\columnwidth}>{\raggedright\arraybackslash}p{0.27\columnwidth}>{\raggedright\arraybackslash}X@{}}
 \toprule
-Static & Lower runtime & Higher runtime \\
+Profile & Cohort-relative criterion & Apps \\
 \midrule
-Lower static & 3: Pinterest, Signal, Telegram & 4: BBC News, CNN, The Guardian, Reddit \\
-Higher static & 4: Snapchat, Facebook Messenger, WhatsApp, LinkedIn & 4: Facebook, Instagram, TikTok, X (Twitter) \\
+\textbf{Lower on both} ($n=3$) & Findings $<52$; hosts $<12$ & Pinterest, Signal, Telegram \\
+\textbf{Runtime-broad} ($n=4$) & Findings $<52$; hosts $\geq 12$ & BBC News, CNN, The Guardian, Reddit \\
+\textbf{Static-heavy} ($n=4$) & Findings $\geq 52$; hosts $<12$ & Snapchat, Messenger, WhatsApp, LinkedIn \\
+\textbf{Higher on both} ($n=4$) & Findings $\geq 52$; hosts $\geq 12$ & Facebook, Instagram, TikTok, X \\
 \bottomrule
-\end{tabular}
-\vspace{1pt}
-\begin{flushleft}\scriptsize Higher static uses high/medium findings $\geq 52$; higher runtime uses interactive hosts $\geq 12$. Ties are assigned to the higher group. Cells are cohort-relative evidence/posture groups, not risk ratings.\end{flushleft}
+\end{tabularx}
+\par\vspace{3pt}
+\noindent\parbox{\columnwidth}{\footnotesize Findings denote high/medium finding volume; hosts denote interactive retained DNS/SNI hostname breadth. Thresholds are cohort medians, and profiles are descriptive rather than risk ratings.}
 \end{table}
