@@ -919,11 +919,12 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         "LinkedIn": (5, -10),
     }
     pps_offsets = {
-        "The Guardian": (-31, 5),
+        "The Guardian": (5, 5),
         "Facebook": (5, 5),
         "Snapchat": (-38, -10),
         "TikTok": (5, -10),
         "Signal": (5, 5),
+        "Telegram": (5, -10),
         "WhatsApp": (-35, -10),
     }
 
@@ -957,33 +958,19 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
                 zorder=4,
             )
 
-    def style_axis(ax: plt.Axes, ylabel: str, panel: str) -> None:
+    def style_axis(ax: plt.Axes, ylabel: str) -> None:
         ax.set_xlim(1.12, 2.60)
         ax.set_xticks([1.2, 1.5, 1.8, 2.1, 2.4])
         ax.set_xlabel("Static exposure", fontsize=7.2, labelpad=2)
         ax.set_ylabel(ylabel, fontsize=7.2, labelpad=2)
         ax.tick_params(labelsize=6.4, length=2.5, width=0.6)
         ax.grid(color="#dedede", linewidth=0.35, zorder=0)
-        ax.text(0.0, 1.025, panel, transform=ax.transAxes, ha="left", va="bottom", fontsize=7.2, fontweight="bold")
 
     static_cutoff = float(np.median(plot["high_medium_findings"]))
     host_cutoff = float(np.median(plot["interactive_median_domain_count"]))
     if static_cutoff != 52.0 or host_cutoff != 12.0:
         raise ValueError(f"Unexpected Fig. 3 cohort medians: static={static_cutoff}, hosts={host_cutoff}")
 
-    fig, (host_ax, pps_ax) = plt.subplots(1, 2, figsize=(7.05, 2.25), sharex=True)
-    scatter_categories(host_ax, "interactive_median_domain_count")
-    scatter_categories(pps_ax, "runtime_shift_log2_pps")
-    host_ax.axvline(np.log10(1 + static_cutoff), color="#777777", lw=0.55, linestyle=(0, (3, 2)), zorder=1)
-    host_ax.axhline(host_cutoff, color="#777777", lw=0.55, linestyle=(0, (3, 2)), zorder=1)
-    annotate_apps(host_ax, "interactive_median_domain_count", host_offsets)
-    annotate_apps(pps_ax, "runtime_shift_log2_pps", pps_offsets)
-    style_axis(host_ax, "Interactive retained hosts", "(a)")
-    style_axis(pps_ax, "Smoothed PPS shift", "(b)")
-    host_ax.set_ylim(-1.0, 17.7)
-    host_ax.set_yticks([0, 4, 8, 12, 16])
-    pps_ax.set_ylim(0.3, 7.5)
-    pps_ax.set_yticks([1, 3, 5, 7])
     legend_handles = [
         Line2D(
             [0],
@@ -998,19 +985,49 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
         )
         for category in CATEGORY_ORDER
     ]
+
+    fig, host_ax = plt.subplots(figsize=(3.45, 2.75))
+    scatter_categories(host_ax, "interactive_median_domain_count")
+    host_ax.axvline(np.log10(1 + static_cutoff), color="#777777", lw=0.55, linestyle=(0, (3, 2)), zorder=1)
+    host_ax.axhline(host_cutoff, color="#777777", lw=0.55, linestyle=(0, (3, 2)), zorder=1)
+    annotate_apps(host_ax, "interactive_median_domain_count", host_offsets)
+    style_axis(host_ax, "Interactive retained hosts")
+    host_ax.set_ylim(-1.0, 17.7)
+    host_ax.set_yticks([0, 4, 8, 12, 16])
     fig.legend(
         handles=legend_handles,
         loc="lower center",
-        bbox_to_anchor=(0.5, 0.01),
-        ncol=4,
+        bbox_to_anchor=(0.5, 0.005),
+        ncol=2,
         frameon=False,
         fontsize=5.8,
         handletextpad=0.3,
-        columnspacing=0.9,
+        columnspacing=0.8,
     )
-    fig.subplots_adjust(left=0.075, right=0.99, top=0.90, bottom=0.245, wspace=0.19)
-    fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.pdf")
-    fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.png", dpi=300)
+    fig.subplots_adjust(left=0.17, right=0.98, top=0.97, bottom=0.25)
+    fig.savefig(FIGURE_DIR / "fig3_static_exposure_vs_hosts.pdf")
+    fig.savefig(FIGURE_DIR / "fig3_static_exposure_vs_hosts.png", dpi=300)
+    plt.close(fig)
+
+    fig, pps_ax = plt.subplots(figsize=(3.45, 2.75))
+    scatter_categories(pps_ax, "runtime_shift_log2_pps")
+    annotate_apps(pps_ax, "runtime_shift_log2_pps", pps_offsets)
+    style_axis(pps_ax, "Smoothed PPS shift")
+    pps_ax.set_ylim(0.3, 7.5)
+    pps_ax.set_yticks([1, 3, 5, 7])
+    fig.legend(
+        handles=legend_handles,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.005),
+        ncol=2,
+        frameon=False,
+        fontsize=5.8,
+        handletextpad=0.3,
+        columnspacing=0.8,
+    )
+    fig.subplots_adjust(left=0.17, right=0.98, top=0.97, bottom=0.25)
+    fig.savefig(FIGURE_DIR / "fig4_static_exposure_vs_pps_shift.pdf")
+    fig.savefig(FIGURE_DIR / "fig4_static_exposure_vs_pps_shift.png", dpi=300)
     plt.close(fig)
 
 

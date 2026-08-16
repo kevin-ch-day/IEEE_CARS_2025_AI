@@ -42,14 +42,24 @@
       "bytes": 103799
     },
     {
-      "path": "figures/fig4_static_runtime_scatter.pdf",
-      "sha256": "82083a11f5bcb6e42c105ded0c77dffd8c156c7ddc21b587fc79b6cd5dfb4eff",
-      "bytes": 24140
+      "path": "figures/fig3_static_exposure_vs_hosts.pdf",
+      "sha256": "405f8646099b279314ff23aa10c06300162b67991bd1011b264c8e11264a4f50",
+      "bytes": 17271
     },
     {
-      "path": "figures/fig4_static_runtime_scatter.png",
-      "sha256": "2125b27ee15f0a27a7e0a5d377045647bdc748abb5cd99ce2fc7739f42bef2a0",
-      "bytes": 137467
+      "path": "figures/fig3_static_exposure_vs_hosts.png",
+      "sha256": "d7738f92a0ca23fa702374fff3aa45eb8279bc8f3fbb42007e74734b0399f026",
+      "bytes": 89460
+    },
+    {
+      "path": "figures/fig4_static_exposure_vs_pps_shift.pdf",
+      "sha256": "0734cccbde64d8aa4f8e9a42ea109adc74e9eddcfd0fb9c8cf8a9a7c49d7aa16",
+      "bytes": 15501
+    },
+    {
+      "path": "figures/fig4_static_exposure_vs_pps_shift.png",
+      "sha256": "28ffdd3453f011472e3f2af0138d512cfe4867ef846c2dd8cbfe9a2a11e6774e",
+      "bytes": 64721
     },
     {
       "path": "generated/source_data/app_category_policy.csv",

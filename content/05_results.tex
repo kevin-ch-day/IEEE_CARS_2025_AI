@@ -40,19 +40,26 @@ Interactive packet rates ranged from 14.0 packets/s (The Guardian) to 285.7 pack
 
 Table~\ref{tab:integrated-profile-matrix} is a cohort-relative risk-posture map, not an absolute risk rating. Higher static exposure is high- and medium-severity finding volume at or above the cohort median (52); higher runtime activity is interactive retained-hostname count at or above the cohort median (12); ties are assigned to the higher group. The resulting 4/4/4/3 occupancy shows that packaged exposure and retained-hostname activity can be jointly elevated, discordant, or jointly lower within this cohort. The two discordant cells are equally populated, so disagreement is not a rare exception: an app may present substantial packaged exposure with comparatively narrow interactive hostname breadth, or the reverse. The lower/lower cell contains three apps and is not proof of safety; both cutoffs are internal to this 15-app set.
 
-Fig.~\ref{fig:static-runtime-scatter} places two runtime views against static exposure, whose horizontal axis is $\log_{10}(1+\text{high/medium findings})$. Panel (a) reports interactive retained-host breadth, the runtime measure used by Table~IV and the Spearman analysis. Panel (b) reports complementary runtime intensity as $\log_2[(I+1)/(B+1)]$, where $B$ is the strict-idle median when available and the QFG median otherwise. Similar static finding volume can correspond to substantially different runtime breadth or intensity; in particular, narrow hostname breadth can coexist with a large PPS shift. The evidence layers and runtime measures are therefore complementary rather than interchangeable.
+Fig.~\ref{fig:static-runtime-hosts} plots static exposure, $\log_{10}(1+\text{high/medium findings})$, against interactive retained-host breadth. The median reference lines reproduce the cohort cutoffs used in Table~IV, and retained-host breadth is the runtime measure used in the Spearman findings-vs-hosts analysis. Similar static finding volumes can therefore correspond to substantially different communication breadth.
 
 \input{tables/table5_integrated_profile_matrix}
 
-\begin{figure*}[!t]
+\begin{figure}[!t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig4_static_runtime_scatter.pdf}
-\caption{Cross-layer comparison of static exposure and runtime behavior for the 15 selected app builds. Panel (a) shows interactive retained-host breadth; panel (b) shows smoothed packet-rate shift.}
-\label{fig:static-runtime-scatter}
-\end{figure*}
+\includegraphics[width=\columnwidth]{figures/fig3_static_exposure_vs_hosts.pdf}
+\caption{Static exposure versus interactive retained-host breadth for the 15 selected app builds.}
+\label{fig:static-runtime-hosts}
+\end{figure}
 
 \subsection{App-Level Divergence and Representative Cases}
 
-Snapchat is the clearest static-heavy case: its interactive retained-host median (11) sits just below the cohort cutoff of 12. Facebook, TikTok, and Instagram are elevated on both layers, while CNN and BBC News are lower-static but runtime-broad. Signal, Telegram, and WhatsApp show large packet-rate shifts from quiet baselines with narrow hostname breadth. Fig.~\ref{fig:static-runtime-scatter} and Table~\ref{tab:statistical-summary} summarize this pattern. The near-zero association persists after excluding Snapchat. Among the 11 apps with at least three selected interactive captures, the median within-app packet-rate IQR was 63.5 packets/s, with app-level IQRs ranging from 7.5 to 282.8 packets/s. This dispersion characterizes repeated observations within the fixed evidence window and is not a measure of longitudinal repeatability.
+Snapchat is the clearest static-heavy case: its interactive retained-host median (11) sits just below the cohort cutoff of 12. Facebook, TikTok, and Instagram are elevated on both layers, while CNN and BBC News are lower-static but runtime-broad. Signal, Telegram, and WhatsApp show large packet-rate shifts from quiet baselines with narrow hostname breadth. Fig.~\ref{fig:static-runtime-pps} provides the complementary runtime-intensity view as the additive-smoothed packet-rate shift $\log_2[(I+1)/(B+1)]$, using the strict-idle median as $B$ when available and QFG otherwise. Hostname breadth and packet-rate shift capture different runtime properties; narrow breadth can coexist with a large PPS shift. Table~\ref{tab:statistical-summary} summarizes the findings-vs-hosts association, which remains near zero after excluding Snapchat. Among the 11 apps with at least three selected interactive captures, the median within-app packet-rate IQR was 63.5 packets/s, with app-level IQRs ranging from 7.5 to 282.8 packets/s. This dispersion characterizes repeated observations within the fixed evidence window and is not a measure of longitudinal repeatability.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_static_exposure_vs_pps_shift.pdf}
+\caption{Static exposure versus smoothed packet-rate shift for the 15 selected app builds.}
+\label{fig:static-runtime-pps}
+\end{figure}
 
 \input{tables/table6_statistical_summary}
