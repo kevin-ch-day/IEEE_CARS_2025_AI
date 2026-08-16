@@ -12,6 +12,7 @@ import textwrap
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
@@ -877,6 +878,7 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
             "package_name",
             "app_category",
             "high_medium_findings",
+            "interactive_median_domain_count",
             "runtime_shift_log2_pps",
             "interactive_run_count",
             "x_log_high_med",
@@ -884,60 +886,131 @@ def build_figures(static: pd.DataFrame, dynamic: pd.DataFrame) -> None:
     ].copy()
     scatter_source["app_label"] = scatter_source["app_label"].map(display_label)
     scatter_source.to_csv(SOURCE_DIR / "fig4_static_runtime_scatter_source.csv", index=False)
-    fig, ax = plt.subplots(figsize=(7.2, 4.05))
     plot = merged.copy()
-    for cat in CATEGORY_ORDER:
-        group = plot[plot["app_category"].eq(cat)]
-        if group.empty:
-            continue
-        style = CATEGORY_STYLES[cat]
-        ax.scatter(
-            group["x_log_high_med"],
-            group["runtime_shift_log2_pps"],
-            s=58,
-            label=cat,
-            alpha=0.82,
-            color=style["color"],
-            marker=style["marker"],
-            edgecolor="black",
-            linewidth=0.4,
-        )
-    offsets = {
-        "BBC News": (-48, 7),
-        "CNN": (6, 6),
-        "The Guardian": (-76, -13),
-        "Facebook": (8, 7),
-        "Instagram": (-72, 9),
-        "Pinterest": (-58, 9),
-        "Reddit": (-52, -12),
-        "TikTok": (8, -14),
-        "X": (8, -15),
-        "LinkedIn": (8, 7),
-        "Signal": (7, 8),
-        "Snapchat": (8, -10),
-        "Telegram": (8, -12),
-        "WhatsApp": (-68, 8),
-        "Facebook Messenger": (8, 8),
+    palette = {
+        "News": "#4477AA",
+        "Social Media": "#EE7733",
+        "Messaging": "#009988",
+        "Professional Networking": "#AA4499",
     }
-    for _, row in plot.iterrows():
-        ax.annotate(
-            display_label(row["app_label"]),
-            (row["x_log_high_med"], row["runtime_shift_log2_pps"]),
-            xytext=offsets.get(row["app_label"], (4, 4)),
-            textcoords="offset points",
-            fontsize=7.1,
-            bbox=dict(boxstyle="round,pad=0.12", fc="white", ec="none", alpha=0.72),
-            arrowprops=dict(arrowstyle="-", color="#8a8a8a", lw=0.35, shrinkA=0, shrinkB=4),
+    labels = {
+        "BBC News": "BBC",
+        "The Guardian": "Guardian",
+        "Facebook Messenger": "Messenger",
+        "X": "X",
+        "X (Twitter)": "X",
+    }
+    host_offsets = {
+        "BBC News": (5, 5),
+        "CNN": (4, 5),
+        "The Guardian": (5, -16),
+        "Facebook": (4, 5),
+        "Instagram": (-38, 4),
+        "Pinterest": (5, -10),
+        "Reddit": (5, 5),
+        "Snapchat": (-40, 5),
+        "TikTok": (-19, 5),
+        "X": (-12, -10),
+        "X (Twitter)": (-12, -10),
+        "Facebook Messenger": (5, -10),
+        "Signal": (-22, 5),
+        "Telegram": (5, 4),
+        "WhatsApp": (5, -9),
+        "LinkedIn": (5, -10),
+    }
+    pps_offsets = {
+        "The Guardian": (-31, 5),
+        "Facebook": (5, 5),
+        "Snapchat": (-38, -10),
+        "TikTok": (5, -10),
+        "Signal": (5, 5),
+        "WhatsApp": (-35, -10),
+    }
+
+    def scatter_categories(ax: plt.Axes, y_col: str) -> None:
+        for category in CATEGORY_ORDER:
+            group = plot[plot["app_category"].eq(category)]
+            if group.empty:
+                continue
+            ax.scatter(
+                group["x_log_high_med"],
+                group[y_col],
+                s=34,
+                marker=CATEGORY_STYLES[category]["marker"],
+                facecolor=palette[category],
+                edgecolor="#202020",
+                linewidth=0.55,
+                zorder=3,
+            )
+
+    def annotate_apps(ax: plt.Axes, y_col: str, offsets: dict[str, tuple[int, int]]) -> None:
+        selected = plot[plot["app_label"].isin(offsets)]
+        for _, row in selected.iterrows():
+            ax.annotate(
+                labels.get(row["app_label"], display_label(row["app_label"])),
+                (row["x_log_high_med"], row[y_col]),
+                xytext=offsets[row["app_label"]],
+                textcoords="offset points",
+                fontsize=5.7,
+                color="#111111",
+                arrowprops=dict(arrowstyle="-", color="#777777", lw=0.3, shrinkA=1, shrinkB=3),
+                zorder=4,
+            )
+
+    def style_axis(ax: plt.Axes, ylabel: str, panel: str) -> None:
+        ax.set_xlim(1.12, 2.60)
+        ax.set_xticks([1.2, 1.5, 1.8, 2.1, 2.4])
+        ax.set_xlabel("Static exposure", fontsize=7.2, labelpad=2)
+        ax.set_ylabel(ylabel, fontsize=7.2, labelpad=2)
+        ax.tick_params(labelsize=6.4, length=2.5, width=0.6)
+        ax.grid(color="#dedede", linewidth=0.35, zorder=0)
+        ax.text(0.0, 1.025, panel, transform=ax.transAxes, ha="left", va="bottom", fontsize=7.2, fontweight="bold")
+
+    static_cutoff = float(np.median(plot["high_medium_findings"]))
+    host_cutoff = float(np.median(plot["interactive_median_domain_count"]))
+    if static_cutoff != 52.0 or host_cutoff != 12.0:
+        raise ValueError(f"Unexpected Fig. 3 cohort medians: static={static_cutoff}, hosts={host_cutoff}")
+
+    fig, (host_ax, pps_ax) = plt.subplots(1, 2, figsize=(7.05, 2.25), sharex=True)
+    scatter_categories(host_ax, "interactive_median_domain_count")
+    scatter_categories(pps_ax, "runtime_shift_log2_pps")
+    host_ax.axvline(np.log10(1 + static_cutoff), color="#777777", lw=0.55, linestyle=(0, (3, 2)), zorder=1)
+    host_ax.axhline(host_cutoff, color="#777777", lw=0.55, linestyle=(0, (3, 2)), zorder=1)
+    annotate_apps(host_ax, "interactive_median_domain_count", host_offsets)
+    annotate_apps(pps_ax, "runtime_shift_log2_pps", pps_offsets)
+    style_axis(host_ax, "Interactive retained hosts", "(a)")
+    style_axis(pps_ax, "Smoothed PPS shift", "(b)")
+    host_ax.set_ylim(-1.0, 17.7)
+    host_ax.set_yticks([0, 4, 8, 12, 16])
+    pps_ax.set_ylim(0.3, 7.5)
+    pps_ax.set_yticks([1, 3, 5, 7])
+    legend_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker=CATEGORY_STYLES[category]["marker"],
+            linestyle="none",
+            label=category,
+            markerfacecolor=palette[category],
+            markeredgecolor="#202020",
+            markeredgewidth=0.5,
+            markersize=4.2,
         )
-    ax.axhline(0, color="#777777", lw=0.8, linestyle="--")
-    ax.set_xlabel("log10(1 + high/medium findings)", fontsize=8.6)
-    ax.set_ylabel(r"log2[(I+1)/(B+1)] PPS", fontsize=8.6)
-    ax.tick_params(labelsize=8.0)
-    ax.margins(x=0.18, y=0.14)
-    ax.legend(fontsize=7.2, loc="upper center", bbox_to_anchor=(0.5, 1.17), ncols=4, frameon=False)
-    fig.tight_layout(pad=0.2)
+        for category in CATEGORY_ORDER
+    ]
+    fig.legend(
+        handles=legend_handles,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.01),
+        ncol=4,
+        frameon=False,
+        fontsize=5.8,
+        handletextpad=0.3,
+        columnspacing=0.9,
+    )
+    fig.subplots_adjust(left=0.075, right=0.99, top=0.90, bottom=0.245, wspace=0.19)
     fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.pdf")
-    fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.png", dpi=240)
+    fig.savefig(FIGURE_DIR / "fig4_static_runtime_scatter.png", dpi=300)
     plt.close(fig)
 
 

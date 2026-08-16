@@ -43,13 +43,13 @@
     },
     {
       "path": "figures/fig4_static_runtime_scatter.pdf",
-      "sha256": "8d72224924d6258cbc3ad9c0e0d9193032453deecfcf49d5de6b01161d311f28",
-      "bytes": 23780
+      "sha256": "82083a11f5bcb6e42c105ded0c77dffd8c156c7ddc21b587fc79b6cd5dfb4eff",
+      "bytes": 24140
     },
     {
       "path": "figures/fig4_static_runtime_scatter.png",
-      "sha256": "d7588afabe1b68fcfcb058f790075c33a0040dea10b5a5fd58f15574fd7401bc",
-      "bytes": 105134
+      "sha256": "2125b27ee15f0a27a7e0a5d377045647bdc748abb5cd99ce2fc7739f42bef2a0",
+      "bytes": 137467
     },
     {
       "path": "generated/source_data/app_category_policy.csv",
@@ -83,8 +83,8 @@
     },
     {
       "path": "generated/source_data/fig4_static_runtime_scatter_source.csv",
-      "sha256": "c15f306a3ee0e4fcb53107be6dd3814911e43d9349b99aa9a4392fd1dbf5f227",
-      "bytes": 1350
+      "sha256": "25e44937962eb975faea1cfd03ec71dfbe9663c7c042a61a6db1cec558a2473a",
+      "bytes": 1452
     },
     {
       "path": "generated/source_data/integrated_profile_policy.json",
