@@ -1,4 +1,8 @@
 {
+  "app_property_domain_exclusions.csv": {
+    "sha256": "de6f6d5b79eca7c89035bac4872181df096bb4b04e763bc5ceba3ed66791484d",
+    "bytes": 7873
+  },
   "publication_cohort_manifest.csv": {
     "sha256": "676b416eff0a460d0cde2873c361a19c2ad6b6caffa6f95d68d8a8008d97d871",
     "bytes": 15500

@@ -4,6 +4,10 @@
   "interactive_runs_zero_retained": 3,
   "zero_retained_interpretation": "domain_count=0 and no top_dns/top_sni rows: zero retained names, not missing extraction",
   "cohort_distinct_interactive_hostnames": 216,
-  "cohort_distinct_tracking_oriented_matches": 79,
+  "cohort_distinct_tracking_oriented_matches_raw": 79,
+  "cohort_distinct_third_party_tracking_oriented_matches": 32,
+  "zero_retained_packages": [
+    "org.telegram.messenger"
+  ],
   "interpretation": "tracker-associated infrastructure; not confirmed tracking, leakage, exfiltration, or malice"
 }

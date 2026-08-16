@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import json
@@ -21,10 +22,11 @@ plt.rcParams.update({"pdf.fonttype": 42, "ps.fonttype": 42})
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = Path(
+DEFAULT_SOURCE = Path(
     "/home/systemadmin/GitHub/ScytaleDroid/output/paper/"
     "android_empirical_alignment_final"
 )
+SOURCE = DEFAULT_SOURCE
 TABLE_DIR = ROOT / "tables"
 FIGURE_DIR = ROOT / "figures"
 SOURCE_DIR = ROOT / "generated" / "source_data"
@@ -183,7 +185,7 @@ def write_literature_table(path: Path, rows: list[dict[str, object]]) -> None:
         r"\scriptsize",
         r"\setlength{\tabcolsep}{3.2pt}",
         r"\renewcommand{\arraystretch}{1.08}",
-        r"\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.15\textwidth}cccc>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}X@{}}",
+        r"\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth}cccc>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}X@{}}",
         r"\toprule",
         " & ".join(columns) + r" \\",
         r"\midrule",
@@ -239,6 +241,38 @@ def write_cutoff_evidence_table(path: Path, rows: list[dict[str, object]], *, ta
     path.write_text("\n".join(body), encoding="utf-8")
 
 
+def write_integrated_profile_matrix(path: Path, rows: list[dict[str, object]]) -> None:
+    """Write the approved compact four-row Table IV layout."""
+    body = [
+        r"\begin{table}[!t]",
+        r"\centering",
+        r"\caption{Cohort-relative static--runtime profiles.}",
+        r"\label{tab:integrated-profile-matrix}",
+        r"\footnotesize",
+        r"\setlength{\tabcolsep}{3pt}",
+        r"\renewcommand{\arraystretch}{1.14}",
+        r"\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.22\columnwidth}>{\raggedright\arraybackslash}p{0.27\columnwidth}>{\raggedright\arraybackslash}X@{}}",
+        r"\toprule",
+        r"Profile & Cohort-relative criterion & Apps \\",
+        r"\midrule",
+    ]
+    for row in rows:
+        body.append(
+            rf"\textbf{{{row['Profile']}}} ($n={row['Count']}$) & {row['Criterion']} & {row['Apps']} \\"
+        )
+    body.extend(
+        [
+            r"\bottomrule",
+            r"\end{tabularx}",
+            r"\par\vspace{3pt}",
+            r"\noindent\parbox{\columnwidth}{\footnotesize Findings denote high/medium finding volume; hosts denote interactive retained DNS/SNI hostname breadth. Thresholds are cohort medians, and profiles are descriptive rather than risk ratings.}",
+            r"\end{table}",
+            "",
+        ]
+    )
+    path.write_text("\n".join(body), encoding="utf-8")
+
+
 def fnum(value: object, digits: int = 1) -> str:
     try:
         if value == "" or pd.isna(value):
@@ -287,6 +321,10 @@ def manuscript_table_label(value: object) -> str:
     if text == "Facebook Msg":
         return "Facebook Messenger"
     return text
+
+
+def compact_profile_label(value: str) -> str:
+    return {"Facebook Messenger": "Messenger", "X (Twitter)": "X"}.get(value, value)
 
 
 def write_category_policy() -> None:
@@ -606,35 +644,36 @@ def build_tables(manifest: pd.DataFrame, app: pd.DataFrame, static: pd.DataFrame
         matrix_groups[(s_group, r_group)].append(str(row["App"]))
     matrix_rows = [
         {
-            "Static": "Lower static",
-            "Lower runtime": f"{len(matrix_groups[('Lower static', 'lower runtime')])}: {', '.join(matrix_groups[('Lower static', 'lower runtime')])}",
-            "Higher runtime": f"{len(matrix_groups[('Lower static', 'high runtime')])}: {', '.join(matrix_groups[('Lower static', 'high runtime')])}",
+            "Profile": "Lower on both",
+            "Count": len(matrix_groups[("Lower static", "lower runtime")]),
+            "Criterion": rf"Findings $<{hm_med:.0f}$; hosts $<{dom_med:.0f}$",
+            "Apps": ", ".join(compact_profile_label(v) for v in matrix_groups[("Lower static", "lower runtime")]),
         },
         {
-            "Static": "Higher static",
-            "Lower runtime": f"{len(matrix_groups[('High static', 'lower runtime')])}: {', '.join(matrix_groups[('High static', 'lower runtime')])}",
-            "Higher runtime": f"{len(matrix_groups[('High static', 'high runtime')])}: {', '.join(matrix_groups[('High static', 'high runtime')])}",
+            "Profile": "Runtime-broad",
+            "Count": len(matrix_groups[("Lower static", "high runtime")]),
+            "Criterion": rf"Findings $<{hm_med:.0f}$; hosts $\geq {dom_med:.0f}$",
+            "Apps": ", ".join(compact_profile_label(v) for v in matrix_groups[("Lower static", "high runtime")]),
+        },
+        {
+            "Profile": "Static-heavy",
+            "Count": len(matrix_groups[("High static", "lower runtime")]),
+            "Criterion": rf"Findings $\geq {hm_med:.0f}$; hosts $<{dom_med:.0f}$",
+            "Apps": ", ".join(compact_profile_label(v) for v in matrix_groups[("High static", "lower runtime")]),
+        },
+        {
+            "Profile": "Higher on both",
+            "Count": len(matrix_groups[("High static", "high runtime")]),
+            "Criterion": rf"Findings $\geq {hm_med:.0f}$; hosts $\geq {dom_med:.0f}$",
+            "Apps": ", ".join(compact_profile_label(v) for v in matrix_groups[("High static", "high runtime")]),
         },
     ]
-    matrix_cols = ["Static", "Lower runtime", "Higher runtime"]
+    expected_profile_counts = [3, 4, 4, 4]
+    if [row["Count"] for row in matrix_rows] != expected_profile_counts:
+        raise ValueError(f"Unexpected profile occupancy: {matrix_rows}")
+    matrix_cols = ["Profile", "Count", "Criterion", "Apps"]
     write_csv(TABLE_DIR / "table5_integrated_profile_matrix.csv", matrix_rows, matrix_cols)
-    note5 = (
-        f"Higher static uses high/medium findings $\\geq {hm_med:.0f}$; "
-        f"higher runtime uses interactive hosts $\\geq {dom_med:.0f}$. "
-        "Ties are assigned to the higher group. "
-        "Cells are cohort-relative evidence/posture groups, not risk ratings."
-    )
-    write_tex_table(
-        TABLE_DIR / "table5_integrated_profile_matrix.tex",
-        "Integrated static-runtime profile matrix using median-split indicators.",
-        "tab:integrated-profile-matrix",
-        matrix_cols,
-        matrix_rows,
-        r"@{}>{\raggedright\arraybackslash}p{0.16\columnwidth}>{\raggedright\arraybackslash}p{0.34\columnwidth}>{\raggedright\arraybackslash}p{0.34\columnwidth}@{}",
-        size=r"\scriptsize",
-        table_env="table",
-        note=note5,
-    )
+    write_integrated_profile_matrix(TABLE_DIR / "table5_integrated_profile_matrix.tex", matrix_rows)
 
     eligible = runs[runs["analytic_eligibility"].eq("eligible")].copy()
     base = eligible[eligible["evidence_class"].isin(["strict_idle", "qfg"])]
@@ -1048,7 +1087,36 @@ def write_manifest() -> None:
     checksum_path.write_text(json.dumps({"source_root": str(SOURCE), "files": files}, indent=2), encoding="utf-8")
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--source-root",
+        type=Path,
+        default=DEFAULT_SOURCE,
+        help="read-only publication-alignment source directory",
+    )
+    parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=ROOT,
+        help="paper tree or temporary directory to receive tables/figures/generated data",
+    )
+    return parser.parse_args()
+
+
+def configure_paths(source_root: Path, output_root: Path) -> None:
+    global ROOT, SOURCE, TABLE_DIR, FIGURE_DIR, SOURCE_DIR
+    SOURCE = source_root.resolve()
+    ROOT = output_root.resolve()
+    ROOT.mkdir(parents=True, exist_ok=True)
+    TABLE_DIR = ROOT / "tables"
+    FIGURE_DIR = ROOT / "figures"
+    SOURCE_DIR = ROOT / "generated" / "source_data"
+
+
 def main() -> None:
+    args = parse_args()
+    configure_paths(args.source_root, args.output_root)
     manifest, app, static, dynamic, runs = read_inputs()
     build_tables(manifest, app, static, dynamic, runs)
     build_figures(static, dynamic)

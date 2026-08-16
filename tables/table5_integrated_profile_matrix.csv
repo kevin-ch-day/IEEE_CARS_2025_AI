@@ -1,3 +1,5 @@
-Static,Lower runtime,Higher runtime
-Lower static,"3: Pinterest, Signal, Telegram","4: BBC News, CNN, The Guardian, Reddit"
-Higher static,"4: Snapchat, Facebook Messenger, WhatsApp, LinkedIn","4: Facebook, Instagram, TikTok, X (Twitter)"
+Profile,Count,Criterion,Apps
+Lower on both,3,Findings $<52$; hosts $<12$,"Pinterest, Signal, Telegram"
+Runtime-broad,4,Findings $<52$; hosts $\geq 12$,"BBC News, CNN, The Guardian, Reddit"
+Static-heavy,4,Findings $\geq 52$; hosts $<12$,"Snapchat, Messenger, WhatsApp, LinkedIn"
+Higher on both,4,Findings $\geq 52$; hosts $\geq 12$,"Facebook, Instagram, TikTok, X"

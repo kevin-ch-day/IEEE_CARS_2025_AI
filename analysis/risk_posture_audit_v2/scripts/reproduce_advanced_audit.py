@@ -8,8 +8,10 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import importlib.metadata
 import json
 import math
+import os
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -19,6 +21,8 @@ import numpy as np
 from scipy import stats
 from scipy.integrate import trapezoid
 from scipy.spatial import ConvexHull, QhullError
+from publicsuffix2 import get_sld
+import publicsuffix2
 
 try:
     import matplotlib
@@ -75,10 +79,24 @@ CAT = {
 
 DISCONNECT_COMMIT = "22c7d6166b6e30f7629ee1b49386855bb9b64a50"
 DISCONNECT_REPO = "https://github.com/disconnectme/disconnect-tracking-protection"
+TRACKER_SCRIPT_VERSION = "tracker-audit-v2"
+SOURCE_BASE_COMMIT = "1082be6edc7f1254289be29f867d6ae0f0d5ba12"
+PROPERTY_DOMAIN_MAP = INPUTS / "app_property_domain_exclusions.csv"
+PUBLIC_SUFFIX_IMPLEMENTATION = "publicsuffix2"
+PUBLIC_SUFFIX_VERSION = "2.20191221"
+PUBLIC_SUFFIX_SNAPSHOT_SHA256 = "76e4a8d1e76dae8db6da3829024108c02203c4e4b5a4301b5717564b05c7966d"
 
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def generation_timestamp() -> str:
+    """Return a reproducible timestamp when SOURCE_DATE_EPOCH is supplied."""
+    epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    if epoch is None:
+        return utc_now()
+    return datetime.fromtimestamp(int(epoch), timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def sha256_file(path: Path) -> str:
@@ -925,12 +943,12 @@ def load_disconnect() -> tuple[dict[str, set[str]], dict]:
             for _name, hosts_by_url in ent.items():
                 for _url, hosts in hosts_by_url.items():
                     for h in hosts:
-                        domain_cats[h.lower().rstrip(".")].add(cat)
+                        domain_cats[normalize_hostname(h)].add(cat)
     man = {
         "repository": DISCONNECT_REPO,
         "commit": DISCONNECT_COMMIT,
         "source_file": "services.json",
-        "source_path": str(path),
+        "source_path": "tracker/disconnect_services.json",
         "source_sha256": sha256_file(path),
         "retrieval_timestamp_utc": "2026-08-14T16:20:22Z",
         "license": "CC BY-NC-SA 4.0 (Disconnect, Inc.)",
@@ -947,7 +965,7 @@ def load_disconnect() -> tuple[dict[str, set[str]], dict]:
 
 def match_host(host: str, domain_cats: dict[str, set[str]]) -> set[str]:
     """host==d or host.endswith('.'+d). Do not match a bare TLD suffix."""
-    host = host.lower().rstrip(".")
+    host = normalize_hostname(host)
     cats: set[str] = set()
     parts = host.split(".")
     for i in range(len(parts)):
@@ -959,22 +977,120 @@ def match_host(host: str, domain_cats: dict[str, set[str]]) -> set[str]:
     return cats
 
 
-def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[str, float]:
+def normalize_hostname(value: str) -> str:
+    """Canonicalize retained/list hostnames without treating substrings as domains."""
+    host = str(value).strip().lower().rstrip(".")
+    if not host:
+        return ""
+    try:
+        return host.encode("idna").decode("ascii")
+    except UnicodeError as exc:
+        raise ValueError(f"invalid hostname {value!r}") from exc
+
+
+def public_suffix_metadata() -> dict[str, str]:
+    version = importlib.metadata.version(PUBLIC_SUFFIX_IMPLEMENTATION)
+    snapshot = Path(publicsuffix2.__file__).with_name("public_suffix_list.dat")
+    snapshot_sha = sha256_file(snapshot)
+    if version != PUBLIC_SUFFIX_VERSION:
+        raise RuntimeError(
+            f"expected {PUBLIC_SUFFIX_IMPLEMENTATION}=={PUBLIC_SUFFIX_VERSION}, found {version}"
+        )
+    if snapshot_sha != PUBLIC_SUFFIX_SNAPSHOT_SHA256:
+        raise RuntimeError(
+            f"public-suffix snapshot mismatch: expected {PUBLIC_SUFFIX_SNAPSHOT_SHA256}, found {snapshot_sha}"
+        )
+    return {
+        "implementation": PUBLIC_SUFFIX_IMPLEMENTATION,
+        "version": version,
+        "bundled_snapshot": "public_suffix_list.dat",
+        "bundled_snapshot_sha256": snapshot_sha,
+    }
+
+
+def registrable_domain(hostname: str) -> str:
+    host = normalize_hostname(hostname)
+    if not host or "." not in host:
+        return ""
+    return normalize_hostname(get_sld(host, strict=True) or "")
+
+
+def load_property_domain_exclusions(apps: list[dict]) -> tuple[dict[str, set[str]], dict]:
+    rows = read_csv(PROPERTY_DOMAIN_MAP)
+    required = {
+        "app",
+        "package_name",
+        "registrable_domain",
+        "exclusion_role",
+        "basis_or_source",
+        "reviewed",
+    }
+    if not rows or set(rows[0]) != required:
+        raise ValueError(f"{PROPERTY_DOMAIN_MAP} must contain exactly {sorted(required)}")
+    known_apps = {a["pkg"]: a["app"] for a in apps}
+    known_packages = set(known_apps)
+    by_package: dict[str, set[str]] = defaultdict(set)
+    pairs: set[tuple[str, str]] = set()
+    for row in rows:
+        package = row["package_name"].strip()
+        domain = normalize_hostname(row["registrable_domain"])
+        if package not in known_packages:
+            raise ValueError(f"unknown package in property-domain map: {package}")
+        if row["app"].strip() != known_apps[package]:
+            raise ValueError(
+                f"app/package mismatch in property-domain map: {row['app']} / {package}"
+            )
+        if row["reviewed"].strip().lower() not in {"yes", "true", "1"}:
+            raise ValueError(f"unreviewed property-domain row: {package} {domain}")
+        if row["exclusion_role"].strip() != "documented_app_property":
+            raise ValueError(f"unexpected exclusion role: {row['exclusion_role']}")
+        if not row["basis_or_source"].strip():
+            raise ValueError(f"missing basis/source: {package} {domain}")
+        if registrable_domain(domain) != domain:
+            raise ValueError(f"mapping value is not a PSL registrable domain: {domain}")
+        pair = (package, domain)
+        if pair in pairs:
+            raise ValueError(f"duplicate property-domain row: {package} {domain}")
+        pairs.add(pair)
+        by_package[package].add(domain)
+    missing = sorted(known_packages - set(by_package))
+    if missing:
+        raise ValueError(f"packages without documented property-domain sets: {missing}")
+    return by_package, {
+        "path": "inputs/app_property_domain_exclusions.csv",
+        "sha256": sha256_file(PROPERTY_DOMAIN_MAP),
+        "rows": len(rows),
+        "packages": len(by_package),
+        "reviewed_rows": sum(r["reviewed"].strip().lower() in {"yes", "true", "1"} for r in rows),
+    }
+
+
+def tracker_audit(
+    apps: list[dict],
+    domain_cats: dict[str, set[str]],
+    disconnect_manifest: dict,
+    generated_utc: str,
+) -> dict[str, float]:
+    psl_meta = public_suffix_metadata()
+    property_domains, property_meta = load_property_domain_exclusions(apps)
     runs = read_csv(INPUTS / "publication_dynamic_run_metrics.csv")
     dom = read_csv(INPUTS / "publication_dynamic_domain_rows.csv")
     int_runs = [r for r in runs if r["evidence_class"] == "interactive"]
     hosts_by_run: dict[str, set[str]] = defaultdict(set)
     for row in dom:
-        hosts_by_run[row["dynamic_run_id"]].add(row["domain"].lower().rstrip("."))
+        host = normalize_hostname(row["domain"])
+        if host:
+            hosts_by_run[row["dynamic_run_id"]].add(host)
     per_host = []
     seen_hosts = set()
     for r in int_runs:
-        for h in hosts_by_run.get(r["dynamic_run_id"], set()):
+        for h in sorted(hosts_by_run.get(r["dynamic_run_id"], set())):
             if (r["package"], h) in seen_hosts:
                 continue
             seen_hosts.add((r["package"], h))
             cats = match_host(h, domain_cats)
             track = sorted(c for c in cats if c in TRACKING_CATS)
+            first_party = registrable_domain(h) in property_domains[r["package"]]
             per_host.append(
                 {
                     "package": r["package"],
@@ -983,15 +1099,44 @@ def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[st
                     "matched_tracking_oriented": bool(track),
                     "categories": "|".join(sorted(cats)),
                     "tracking_oriented_categories": "|".join(track),
+                    "first_party_property": first_party,
+                    "third_party_tracking_oriented": bool(track) and not first_party,
                 }
             )
-    write_csv(OUT / "tracker_matches_per_hostname.csv", per_host)
+    per_host.sort(key=lambda x: (x["package"], x["hostname"]))
+    raw_fields = [
+        "package",
+        "hostname",
+        "matched_any",
+        "matched_tracking_oriented",
+        "categories",
+        "tracking_oriented_categories",
+    ]
+    sensitivity_fields = raw_fields + ["first_party_property", "third_party_tracking_oriented"]
+    write_csv(OUT / "tracker_matches_per_hostname.csv", per_host, raw_fields)
+    write_csv(
+        OUT / "tracker_matches_per_hostname_first_party_sensitivity.csv",
+        per_host,
+        sensitivity_fields,
+    )
+    write_csv(
+        OUT / "tracker_matches_per_hostname_third_party.csv",
+        [h for h in per_host if h["third_party_tracking_oriented"]],
+        sensitivity_fields,
+    )
+    host_result = {(h["package"], h["hostname"]): h for h in per_host}
 
     per_run = []
     for r in int_runs:
         hs = hosts_by_run.get(r["dynamic_run_id"], set())
         m_any = {h for h in hs if match_host(h, domain_cats)}
-        m_tr = {h for h in hs if any(c in TRACKING_CATS for c in match_host(h, domain_cats))}
+        m_tr_raw = {h for h in hs if any(c in TRACKING_CATS for c in match_host(h, domain_cats))}
+        m_property = {h for h in hs if registrable_domain(h) in property_domains[r["package"]]}
+        m_tr = {
+            h
+            for h in hs
+            if host_result[(r["package"], h)]["third_party_tracking_oriented"]
+        }
         per_run.append(
             {
                 "dynamic_run_id": r["dynamic_run_id"],
@@ -999,6 +1144,8 @@ def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[st
                 "app": r["app"],
                 "n_retained": len(hs),
                 "n_match_any": len(m_any),
+                "n_match_tracking_oriented_raw": len(m_tr_raw),
+                "n_documented_property": len(m_property),
                 "n_match_tracking_oriented": len(m_tr),
                 "prop_tracking_oriented": (len(m_tr) / len(hs)) if hs else "",
                 "zero_retained_status": "zero_retained_names" if not hs else "has_retained_names",
@@ -1016,17 +1163,22 @@ def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[st
             rid = x["dynamic_run_id"]
             hs = hosts_by_run.get(rid, set())
             union |= hs
-            t_union |= {h for h in hs if any(c in TRACKING_CATS for c in match_host(h, domain_cats))}
+            t_union |= {
+                h
+                for h in hs
+                if host_result[(a["pkg"], h)]["third_party_tracking_oriented"]
+            }
         props = [x["prop_tracking_oriented"] for x in rs if x["prop_tracking_oriented"] != ""]
         counts = [x["n_match_tracking_oriented"] for x in rs]
         n_with = sum(1 for x in rs if x["n_retained"] > 0)
         med_prop = float(np.median(props)) if props else float("nan")
         frac[a["pkg"]] = med_prop if props else float("nan")
         cats = Counter()
-        for h in t_union:
+        for h in sorted(t_union):
             for c in match_host(h, domain_cats):
                 if c in TRACKING_CATS:
                     cats[c] += 1
+        category_summary = sorted(cats.items(), key=lambda item: (-item[1], item[0]))
         per_app.append(
             {
                 "app": a["app"],
@@ -1039,7 +1191,7 @@ def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[st
                 "distinct_tracker_associated_hostnames": len(t_union),
                 "median_per_run_tracker_count": float(np.median(counts)) if counts else "",
                 "median_per_run_tracker_proportion": med_prop if props else "",
-                "tracker_categories": "|".join(f"{k}:{v}" for k, v in cats.most_common()),
+                "tracker_categories": "|".join(f"{k}:{v}" for k, v in category_summary),
                 "unmatched_retained": "|".join(sorted(union - t_union)),
             }
         )
@@ -1053,8 +1205,14 @@ def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[st
         "interactive_runs_zero_retained": n_int - n_with_rows,
         "zero_retained_interpretation": "domain_count=0 and no top_dns/top_sni rows: zero retained names, not missing extraction",
         "cohort_distinct_interactive_hostnames": len({h["hostname"] for h in per_host}),
-        "cohort_distinct_tracking_oriented_matches": len(
+        "cohort_distinct_tracking_oriented_matches_raw": len(
             {h["hostname"] for h in per_host if h["matched_tracking_oriented"]}
+        ),
+        "cohort_distinct_third_party_tracking_oriented_matches": len(
+            {h["hostname"] for h in per_host if h["third_party_tracking_oriented"]}
+        ),
+        "zero_retained_packages": sorted(
+            {r["package"] for r in int_runs if not hosts_by_run.get(r["dynamic_run_id"])}
         ),
         "interpretation": "tracker-associated infrastructure; not confirmed tracking, leakage, exfiltration, or malice",
     }
@@ -1064,13 +1222,54 @@ def tracker_audit(apps: list[dict], domain_cats: dict[str, set[str]]) -> dict[st
         f"Pinned `{DISCONNECT_COMMIT}`.\n\n"
         f"Interactive runs: {n_int}; with retained hostname rows: {n_with_rows}; "
         f"zero retained names: {n_int - n_with_rows}.\n\n"
-        "Match rule: `host==d` or `host.endswith('.'+d)`.\n\n"
+        "Match rule: `host==d` or `host.endswith('.'+d)`; documented app-property "
+        "registrable domains are excluded with the pinned public-suffix implementation.\n\n"
         "Primary reported matches use tracking-oriented Disconnect categories "
         "(Advertising, Analytics, Social, Fingerprinting*, Cryptomining, Email*, ConsentManagers). "
         "Content/Anti-fraud are recorded in per-hostname categories but not counted in the primary fraction.\n\n"
         "**Tracker association ≠ leakage.**\n",
         encoding="utf-8",
     )
+
+    output_names = [
+        "tracker_matches_per_hostname.csv",
+        "tracker_matches_per_hostname_first_party_sensitivity.csv",
+        "tracker_matches_per_hostname_third_party.csv",
+        "tracker_matches_per_run.csv",
+        "tracker_matches_per_app.csv",
+        "tracker_cohort_summary.json",
+    ]
+    output_checksums = {
+        name: {"sha256": sha256_file(OUT / name), "bytes": (OUT / name).stat().st_size}
+        for name in output_names
+    }
+    generation_manifest = {
+        "schema_version": 1,
+        "generated_utc": generated_utc,
+        "script_version": TRACKER_SCRIPT_VERSION,
+        "source_base_commit": SOURCE_BASE_COMMIT,
+        "script_path": "scripts/reproduce_advanced_audit.py",
+        "script_sha256": sha256_file(Path(__file__)),
+        "disconnect": {
+            "commit": disconnect_manifest["commit"],
+            "services_file": disconnect_manifest["source_path"],
+            "services_sha256": disconnect_manifest["source_sha256"],
+            "tracking_categories": disconnect_manifest["primary_tracking_categories"],
+        },
+        "property_domain_mapping": property_meta,
+        "public_suffix": psl_meta,
+        "counts": summary,
+        "outputs": output_checksums,
+    }
+    dump_json(TRACKER / "tracker_generation_manifest.json", generation_manifest)
+    disconnect_manifest.update(
+        {
+            "property_domain_mapping": property_meta,
+            "public_suffix": psl_meta,
+            "generation_manifest": "tracker/tracker_generation_manifest.json",
+        }
+    )
+    dump_json(TRACKER / "disconnect_manifest.json", disconnect_manifest)
     return frac
 
 
@@ -1192,7 +1391,7 @@ def main() -> None:
         "seed": SEED,
         "n_boot": N_BOOT,
         "n_perm": N_PERM,
-        "generated_utc": utc_now(),
+        "generated_utc": generation_timestamp(),
     }
     rng_sp = np.random.default_rng(SEED)
     rng_dc = np.random.default_rng(SEED + 1)
@@ -1203,7 +1402,7 @@ def main() -> None:
     dc = dcor_audit(apps, rng_dc)
     wass = wasserstein_audit(apps, rng_w)
     domain_cats, dman = load_disconnect()
-    tfrac = tracker_audit(apps, domain_cats)
+    tfrac = tracker_audit(apps, domain_cats, dman, versions["generated_utc"])
     hull = hull_audit(apps, tfrac)
     cop = copula_audit(apps)
     par = pareto_front(apps, tfrac)

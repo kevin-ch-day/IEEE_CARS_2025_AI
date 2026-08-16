@@ -2,7 +2,7 @@
   "repository": "https://github.com/disconnectme/disconnect-tracking-protection",
   "commit": "22c7d6166b6e30f7629ee1b49386855bb9b64a50",
   "source_file": "services.json",
-  "source_path": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/tracker/disconnect_services.json",
+  "source_path": "tracker/disconnect_services.json",
   "source_sha256": "41b9a4949949fddd44a45c7e006264c30b44d6544dfb28dc313dd4673505005f",
   "retrieval_timestamp_utc": "2026-08-14T16:20:22Z",
   "license": "CC BY-NC-SA 4.0 (Disconnect, Inc.)",
@@ -33,5 +33,19 @@
     "FingerprintingInvasive",
     "Social"
   ],
-  "content_category_note": "Disconnect Content often includes CDNs; reported separately from tracking-oriented categories"
+  "content_category_note": "Disconnect Content often includes CDNs; reported separately from tracking-oriented categories",
+  "property_domain_mapping": {
+    "path": "inputs/app_property_domain_exclusions.csv",
+    "sha256": "de6f6d5b79eca7c89035bac4872181df096bb4b04e763bc5ceba3ed66791484d",
+    "rows": 36,
+    "packages": 15,
+    "reviewed_rows": 36
+  },
+  "public_suffix": {
+    "implementation": "publicsuffix2",
+    "version": "2.20191221",
+    "bundled_snapshot": "public_suffix_list.dat",
+    "bundled_snapshot_sha256": "76e4a8d1e76dae8db6da3829024108c02203c4e4b5a4301b5717564b05c7966d"
+  },
+  "generation_manifest": "tracker/tracker_generation_manifest.json"
 }

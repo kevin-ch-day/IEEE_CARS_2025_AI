@@ -7,9 +7,13 @@
     "seed": 20260709,
     "n_boot": 10000,
     "n_perm": 10000,
-    "generated_utc": "2026-08-14T16:28:32Z"
+    "generated_utc": "2026-08-16T15:28:49Z"
   },
   "inputs": {
+    "app_property_domain_exclusions.csv": {
+      "sha256": "de6f6d5b79eca7c89035bac4872181df096bb4b04e763bc5ceba3ed66791484d",
+      "bytes": 7873
+    },
     "publication_cohort_manifest.csv": {
       "sha256": "676b416eff0a460d0cde2873c361a19c2ad6b6caffa6f95d68d8a8008d97d871",
       "bytes": 15500
@@ -40,9 +44,9 @@
     }
   },
   "metric_definitions": {
-    "static_csv": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/inputs/publication_static_app_metrics.csv",
-    "dynamic_csv": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/inputs/publication_dynamic_app_metrics.csv",
-    "findings_csv": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/inputs/publication_static_finding_rows.csv",
+    "static_csv": "/tmp/ieee-cars-freeze-candidate-20260816/analysis/risk_posture_audit_v2/inputs/publication_static_app_metrics.csv",
+    "dynamic_csv": "/tmp/ieee-cars-freeze-candidate-20260816/analysis/risk_posture_audit_v2/inputs/publication_dynamic_app_metrics.csv",
+    "findings_csv": "/tmp/ieee-cars-freeze-candidate-20260816/analysis/risk_posture_audit_v2/inputs/publication_static_finding_rows.csv",
     "residual_rule": "cohort-wide drop of High/Medium rows titled 'Exported activity alias without permission'",
     "pps_shift": "log2((interactive_median_pps+1)/(baseline_median_pps+1)); baseline=strict_idle if count>0 else qfg",
     "hostname_metric": "interactive_median_domain_count = median per-run union of retained top_dns/top_sni"
@@ -189,7 +193,7 @@
     "unique_normalized_domains": 4468,
     "license": "CC BY-NC-SA 4.0 (Disconnect, Inc.)"
   },
-  "tracker_summary_path": "/home/systemadmin/GitHub/IEEE_CARS_2025_AI/analysis/risk_posture_audit_v2/outputs/tracker_cohort_summary.json",
+  "tracker_summary_path": "/tmp/ieee-cars-freeze-candidate-20260816/analysis/risk_posture_audit_v2/outputs/tracker_cohort_summary.json",
   "withdraw": [
     "jackknife normal CI for Spearman (unusable; leaves [-1,1])",
     "copula 0.20/0.20/0.20/0.20 as a complete partition (omitted on-median mass)",

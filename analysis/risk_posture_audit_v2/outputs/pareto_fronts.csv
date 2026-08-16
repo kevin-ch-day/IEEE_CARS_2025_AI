@@ -29,18 +29,18 @@ max residual & max log_s,The Guardian,residual,log_s,20,0.8056528677235969,both,
 max residual & max log_s,TikTok,residual,log_s,83,3.3852445817762273,both,False,dominated
 max residual & max log_s,WhatsApp,residual,log_s,70,7.019347320082375,both,True,nondominated under the selected evidence dimensions
 max residual & max log_s,X,residual,log_s,35,2.624807584110142,both,False,dominated
-max hm & max tracker_frac,BBC News,hm,tfrac,16,0.5147058823529411,both,False,dominated
-max hm & max tracker_frac,CNN,hm,tfrac,25,0.42857142857142855,both,False,dominated
-max hm & max tracker_frac,Facebook,hm,tfrac,164,0.5166666666666666,both,False,dominated
-max hm & max tracker_frac,Facebook Messenger,hm,tfrac,96,0.6,both,False,dominated
-max hm & max tracker_frac,Instagram,hm,tfrac,128,0.4666666666666667,both,False,dominated
-max hm & max tracker_frac,LinkedIn,hm,tfrac,52,0.6333333333333333,both,False,dominated
+max hm & max tracker_frac,BBC News,hm,tfrac,16,0.5147058823529411,both,True,nondominated under the selected evidence dimensions
+max hm & max tracker_frac,CNN,hm,tfrac,25,0.42857142857142855,both,True,nondominated under the selected evidence dimensions
+max hm & max tracker_frac,Facebook,hm,tfrac,164,0.0,both,False,dominated
+max hm & max tracker_frac,Facebook Messenger,hm,tfrac,96,0.0,both,False,dominated
+max hm & max tracker_frac,Instagram,hm,tfrac,128,0.0,both,False,dominated
+max hm & max tracker_frac,LinkedIn,hm,tfrac,52,0.0,both,False,dominated
 max hm & max tracker_frac,Pinterest,hm,tfrac,16,0.045454545454545456,both,False,dominated
-max hm & max tracker_frac,Reddit,hm,tfrac,47,0.08333333333333333,both,False,dominated
+max hm & max tracker_frac,Reddit,hm,tfrac,47,0.0,both,False,dominated
 max hm & max tracker_frac,Signal,hm,tfrac,35,0.0,both,False,dominated
-max hm & max tracker_frac,Snapchat,hm,tfrac,325,0.7727272727272727,both,True,nondominated under the selected evidence dimensions
+max hm & max tracker_frac,Snapchat,hm,tfrac,325,0.0,both,True,nondominated under the selected evidence dimensions
 max hm & max tracker_frac,Telegram,hm,tfrac,43,0.0,both,False,dominated
 max hm & max tracker_frac,The Guardian,hm,tfrac,21,0.41428571428571426,both,False,dominated
-max hm & max tracker_frac,TikTok,hm,tfrac,85,0.15384615384615385,both,False,dominated
+max hm & max tracker_frac,TikTok,hm,tfrac,85,0.0,both,False,dominated
 max hm & max tracker_frac,WhatsApp,hm,tfrac,99,0.0,both,False,dominated
-max hm & max tracker_frac,X,hm,tfrac,83,0.5419580419580419,both,False,dominated
+max hm & max tracker_frac,X,hm,tfrac,83,0.08391608391608392,both,True,nondominated under the selected evidence dimensions

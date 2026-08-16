@@ -1,57 +1,57 @@
-dynamic_run_id,package,app,n_retained,n_match_any,n_match_tracking_oriented,prop_tracking_oriented,zero_retained_status
-0d59f4ef-1a4e-4da3-88fa-4e8088939e46,bbc.mobile.news.ww,BBC News,13,7,7,0.5384615384615384,has_retained_names
-21fbdaf6-39f7-446e-bc8b-cc542fda5597,bbc.mobile.news.ww,BBC News,16,10,8,0.5,has_retained_names
-5463c962-016c-4d1e-b81b-661977a76452,bbc.mobile.news.ww,BBC News,15,7,6,0.4,has_retained_names
-5d77ac7f-25d7-4eeb-ab17-d8858a9f4210,bbc.mobile.news.ww,BBC News,17,12,9,0.5294117647058824,has_retained_names
-63abb795-47c7-4517-a2a5-7ecb712a8798,bbc.mobile.news.ww,BBC News,16,9,7,0.4375,has_retained_names
-a7f93c59-307e-45a4-8357-bd0b90f46621,bbc.mobile.news.ww,BBC News,15,9,9,0.6,has_retained_names
-0f353ecf-ef04-4729-9d5c-e098f2ca5afd,com.cnn.mobile.android.phone,CNN,13,8,5,0.38461538461538464,has_retained_names
-439428e8-af05-490c-9f82-bfe4984aa46c,com.cnn.mobile.android.phone,CNN,14,8,6,0.42857142857142855,has_retained_names
-765ae61a-1967-433c-baa6-b80e5347b20c,com.cnn.mobile.android.phone,CNN,13,7,7,0.5384615384615384,has_retained_names
-84b46fff-3009-4aa3-a7e7-87436b7855fd,com.cnn.mobile.android.phone,CNN,15,8,6,0.4,has_retained_names
-86addff3-891d-4e0a-8311-7e3d370f115d,com.cnn.mobile.android.phone,CNN,16,9,7,0.4375,has_retained_names
-9190dab5-8e17-4317-b17d-0f35cb5e730a,com.cnn.mobile.android.phone,CNN,15,8,7,0.4666666666666667,has_retained_names
-d7f84ff5-a1f5-4895-b7ba-c08ab7da51ad,com.cnn.mobile.android.phone,CNN,14,8,6,0.42857142857142855,has_retained_names
-1b37dbc2-d891-44f5-902d-243c6970f52a,com.facebook.katana,Facebook,16,14,10,0.625,has_retained_names
-57364e51-4e48-419c-bcf4-1793d184f59f,com.facebook.katana,Facebook,15,12,8,0.5333333333333333,has_retained_names
-71ee87ee-614a-4045-a704-9e3a0b17ac40,com.facebook.katana,Facebook,14,14,7,0.5,has_retained_names
-ce203d65-1bf4-4a5e-8250-88a8e4d37e2a,com.facebook.katana,Facebook,16,13,8,0.5,has_retained_names
-4af635d1-7776-4216-bd63-9c71dd02f442,com.facebook.orca,Facebook Messenger,9,9,6,0.6666666666666666,has_retained_names
-9e2ab664-ca69-4e61-8d7a-ebac20664f01,com.facebook.orca,Facebook Messenger,10,8,6,0.6,has_retained_names
-dd62d129-5bde-4961-91ed-a1f1e6069a59,com.facebook.orca,Facebook Messenger,9,7,6,0.6666666666666666,has_retained_names
-f9ca2087-877d-4533-944e-66d4531ac884,com.facebook.orca,Facebook Messenger,10,8,6,0.6,has_retained_names
-ffd5c47f-e0de-4ed4-afe6-9a3f7632acef,com.facebook.orca,Facebook Messenger,11,9,6,0.5454545454545454,has_retained_names
-4650408e-95c9-41a5-b2a6-24b79c9a2b54,com.guardian,The Guardian,14,7,6,0.42857142857142855,has_retained_names
-881032b5-61d5-4e7a-8638-8607a95034a5,com.guardian,The Guardian,15,6,6,0.4,has_retained_names
-af792cda-682b-4103-925b-a053b28cff1f,com.guardian,The Guardian,14,6,5,0.35714285714285715,has_retained_names
-c32d10f5-5d28-49ef-bfe9-3c424ca5823b,com.guardian,The Guardian,14,9,7,0.5,has_retained_names
-bed92445-4088-4c29-82d7-8fecd0d8edb2,com.instagram.android,Instagram,15,15,7,0.4666666666666667,has_retained_names
-72be35d0-3932-480d-b252-88e5d44d55d9,com.linkedin.android,LinkedIn,10,6,6,0.6,has_retained_names
-877deccd-2d6a-47b2-9dc9-04ae899bd5db,com.linkedin.android,LinkedIn,13,7,5,0.38461538461538464,has_retained_names
-9db2b195-05a4-4d18-a85d-38fe9130c975,com.linkedin.android,LinkedIn,9,6,6,0.6666666666666666,has_retained_names
-baa88347-fb99-4ec4-9bc7-a99b77e8a356,com.linkedin.android,LinkedIn,9,6,6,0.6666666666666666,has_retained_names
-99d38ac7-c7de-40db-873c-c1ce4416929d,com.pinterest,Pinterest,10,8,0,0.0,has_retained_names
-d4b09f72-1e21-44e7-b232-c019b901facd,com.pinterest,Pinterest,11,9,1,0.09090909090909091,has_retained_names
-a4087adf-cf1a-4012-b5e5-a3c8013db498,com.reddit.frontpage,Reddit,12,6,1,0.08333333333333333,has_retained_names
-7993cef2-5589-4015-849c-6983f6659a13,com.snapchat.android,Snapchat,11,9,9,0.8181818181818182,has_retained_names
-cf2ed3ff-4247-4f1c-8d0d-800ad025c897,com.snapchat.android,Snapchat,11,9,8,0.7272727272727273,has_retained_names
-1305d61c-1498-4991-a215-032a00f12b2b,com.twitter.android,X,11,11,8,0.7272727272727273,has_retained_names
-4826adbf-e7b9-4119-a495-ac30c442e95d,com.twitter.android,X,13,13,6,0.46153846153846156,has_retained_names
-67b3fa18-ac60-4c14-8711-0df566e93608,com.twitter.android,X,13,13,7,0.5384615384615384,has_retained_names
-b25d4153-50e4-472d-8534-cd005af3f698,com.twitter.android,X,11,11,6,0.5454545454545454,has_retained_names
-1a58612d-70cf-4d48-8cd3-0df5ae1994af,com.whatsapp,WhatsApp,7,1,0,0.0,has_retained_names
-1df0c660-3cb3-4158-a312-86d02abe360d,com.whatsapp,WhatsApp,3,0,0,0.0,has_retained_names
-6e1def29-f200-4edb-a2c1-99194e82ab82,com.whatsapp,WhatsApp,4,0,0,0.0,has_retained_names
-c6236c1f-0360-406e-86a4-21b782cee223,com.whatsapp,WhatsApp,3,0,0,0.0,has_retained_names
-dcf60233-71bc-4fca-8e25-d337ba39ee5b,com.whatsapp,WhatsApp,3,0,0,0.0,has_retained_names
-2f9d24a9-7835-4947-9760-b6b1d30c465d,com.zhiliaoapp.musically,TikTok,13,2,2,0.15384615384615385,has_retained_names
-c5ea1472-85ab-4927-8e79-39e194ea185c,com.zhiliaoapp.musically,TikTok,14,3,3,0.21428571428571427,has_retained_names
-d4a6050d-f1c0-4ed7-a65b-0875e4367e61,com.zhiliaoapp.musically,TikTok,14,2,2,0.14285714285714285,has_retained_names
-1955d4c8-51ec-47d1-87ce-d51b2bfc5b9e,org.telegram.messenger,Telegram,0,0,0,,zero_retained_names
-9ee7db5d-853b-456f-80ba-e92c3fb767d9,org.telegram.messenger,Telegram,0,0,0,,zero_retained_names
-cb9f71f2-7e41-475a-8af6-98187692e243,org.telegram.messenger,Telegram,0,0,0,,zero_retained_names
-e3eddb98-17be-4077-bd47-92d2f134ddaa,org.telegram.messenger,Telegram,1,1,0,0.0,has_retained_names
-5bacd03a-0030-4f13-97c2-6be4c4bed34a,org.thoughtcrime.securesms,Signal,3,2,0,0.0,has_retained_names
-978b0516-9070-4086-b631-dabecb7a1419,org.thoughtcrime.securesms,Signal,3,2,0,0.0,has_retained_names
-b7d0482c-2c26-4a7e-80fc-68a279e105f6,org.thoughtcrime.securesms,Signal,4,2,0,0.0,has_retained_names
-bdbbbe7f-aeb6-427c-9389-e165e487913e,org.thoughtcrime.securesms,Signal,3,2,0,0.0,has_retained_names
+dynamic_run_id,package,app,n_retained,n_match_any,n_match_tracking_oriented_raw,n_documented_property,n_match_tracking_oriented,prop_tracking_oriented,zero_retained_status
+0d59f4ef-1a4e-4da3-88fa-4e8088939e46,bbc.mobile.news.ww,BBC News,13,7,7,4,7,0.5384615384615384,has_retained_names
+21fbdaf6-39f7-446e-bc8b-cc542fda5597,bbc.mobile.news.ww,BBC News,16,10,8,4,8,0.5,has_retained_names
+5463c962-016c-4d1e-b81b-661977a76452,bbc.mobile.news.ww,BBC News,15,7,6,3,6,0.4,has_retained_names
+5d77ac7f-25d7-4eeb-ab17-d8858a9f4210,bbc.mobile.news.ww,BBC News,17,12,9,0,9,0.5294117647058824,has_retained_names
+63abb795-47c7-4517-a2a5-7ecb712a8798,bbc.mobile.news.ww,BBC News,16,9,7,3,7,0.4375,has_retained_names
+a7f93c59-307e-45a4-8357-bd0b90f46621,bbc.mobile.news.ww,BBC News,15,9,9,2,9,0.6,has_retained_names
+0f353ecf-ef04-4729-9d5c-e098f2ca5afd,com.cnn.mobile.android.phone,CNN,13,8,5,4,5,0.38461538461538464,has_retained_names
+439428e8-af05-490c-9f82-bfe4984aa46c,com.cnn.mobile.android.phone,CNN,14,8,6,5,6,0.42857142857142855,has_retained_names
+765ae61a-1967-433c-baa6-b80e5347b20c,com.cnn.mobile.android.phone,CNN,13,7,7,5,7,0.5384615384615384,has_retained_names
+84b46fff-3009-4aa3-a7e7-87436b7855fd,com.cnn.mobile.android.phone,CNN,15,8,6,4,6,0.4,has_retained_names
+86addff3-891d-4e0a-8311-7e3d370f115d,com.cnn.mobile.android.phone,CNN,16,9,7,5,7,0.4375,has_retained_names
+9190dab5-8e17-4317-b17d-0f35cb5e730a,com.cnn.mobile.android.phone,CNN,15,8,7,5,7,0.4666666666666667,has_retained_names
+d7f84ff5-a1f5-4895-b7ba-c08ab7da51ad,com.cnn.mobile.android.phone,CNN,14,8,6,4,6,0.42857142857142855,has_retained_names
+1b37dbc2-d891-44f5-902d-243c6970f52a,com.facebook.katana,Facebook,16,14,10,13,0,0.0,has_retained_names
+57364e51-4e48-419c-bcf4-1793d184f59f,com.facebook.katana,Facebook,15,12,8,12,0,0.0,has_retained_names
+71ee87ee-614a-4045-a704-9e3a0b17ac40,com.facebook.katana,Facebook,14,14,7,14,0,0.0,has_retained_names
+ce203d65-1bf4-4a5e-8250-88a8e4d37e2a,com.facebook.katana,Facebook,16,13,8,13,0,0.0,has_retained_names
+4af635d1-7776-4216-bd63-9c71dd02f442,com.facebook.orca,Facebook Messenger,9,9,6,7,0,0.0,has_retained_names
+9e2ab664-ca69-4e61-8d7a-ebac20664f01,com.facebook.orca,Facebook Messenger,10,8,6,8,0,0.0,has_retained_names
+dd62d129-5bde-4961-91ed-a1f1e6069a59,com.facebook.orca,Facebook Messenger,9,7,6,8,0,0.0,has_retained_names
+f9ca2087-877d-4533-944e-66d4531ac884,com.facebook.orca,Facebook Messenger,10,8,6,8,0,0.0,has_retained_names
+ffd5c47f-e0de-4ed4-afe6-9a3f7632acef,com.facebook.orca,Facebook Messenger,11,9,6,9,0,0.0,has_retained_names
+4650408e-95c9-41a5-b2a6-24b79c9a2b54,com.guardian,The Guardian,14,7,6,5,6,0.42857142857142855,has_retained_names
+881032b5-61d5-4e7a-8638-8607a95034a5,com.guardian,The Guardian,15,6,6,7,6,0.4,has_retained_names
+af792cda-682b-4103-925b-a053b28cff1f,com.guardian,The Guardian,14,6,5,6,5,0.35714285714285715,has_retained_names
+c32d10f5-5d28-49ef-bfe9-3c424ca5823b,com.guardian,The Guardian,14,9,7,3,7,0.5,has_retained_names
+bed92445-4088-4c29-82d7-8fecd0d8edb2,com.instagram.android,Instagram,15,15,7,15,0,0.0,has_retained_names
+72be35d0-3932-480d-b252-88e5d44d55d9,com.linkedin.android,LinkedIn,10,6,6,6,0,0.0,has_retained_names
+877deccd-2d6a-47b2-9dc9-04ae899bd5db,com.linkedin.android,LinkedIn,13,7,5,5,0,0.0,has_retained_names
+9db2b195-05a4-4d18-a85d-38fe9130c975,com.linkedin.android,LinkedIn,9,6,6,6,0,0.0,has_retained_names
+baa88347-fb99-4ec4-9bc7-a99b77e8a356,com.linkedin.android,LinkedIn,9,6,6,6,0,0.0,has_retained_names
+99d38ac7-c7de-40db-873c-c1ce4416929d,com.pinterest,Pinterest,10,8,0,5,0,0.0,has_retained_names
+d4b09f72-1e21-44e7-b232-c019b901facd,com.pinterest,Pinterest,11,9,1,5,1,0.09090909090909091,has_retained_names
+a4087adf-cf1a-4012-b5e5-a3c8013db498,com.reddit.frontpage,Reddit,12,6,1,8,0,0.0,has_retained_names
+7993cef2-5589-4015-849c-6983f6659a13,com.snapchat.android,Snapchat,11,9,9,11,0,0.0,has_retained_names
+cf2ed3ff-4247-4f1c-8d0d-800ad025c897,com.snapchat.android,Snapchat,11,9,8,10,0,0.0,has_retained_names
+1305d61c-1498-4991-a215-032a00f12b2b,com.twitter.android,X,11,11,8,10,1,0.09090909090909091,has_retained_names
+4826adbf-e7b9-4119-a495-ac30c442e95d,com.twitter.android,X,13,13,6,10,0,0.0,has_retained_names
+67b3fa18-ac60-4c14-8711-0df566e93608,com.twitter.android,X,13,13,7,9,1,0.07692307692307693,has_retained_names
+b25d4153-50e4-472d-8534-cd005af3f698,com.twitter.android,X,11,11,6,8,1,0.09090909090909091,has_retained_names
+1a58612d-70cf-4d48-8cd3-0df5ae1994af,com.whatsapp,WhatsApp,7,1,0,7,0,0.0,has_retained_names
+1df0c660-3cb3-4158-a312-86d02abe360d,com.whatsapp,WhatsApp,3,0,0,3,0,0.0,has_retained_names
+6e1def29-f200-4edb-a2c1-99194e82ab82,com.whatsapp,WhatsApp,4,0,0,4,0,0.0,has_retained_names
+c6236c1f-0360-406e-86a4-21b782cee223,com.whatsapp,WhatsApp,3,0,0,3,0,0.0,has_retained_names
+dcf60233-71bc-4fca-8e25-d337ba39ee5b,com.whatsapp,WhatsApp,3,0,0,3,0,0.0,has_retained_names
+2f9d24a9-7835-4947-9760-b6b1d30c465d,com.zhiliaoapp.musically,TikTok,13,2,2,12,0,0.0,has_retained_names
+c5ea1472-85ab-4927-8e79-39e194ea185c,com.zhiliaoapp.musically,TikTok,14,3,3,10,1,0.07142857142857142,has_retained_names
+d4a6050d-f1c0-4ed7-a65b-0875e4367e61,com.zhiliaoapp.musically,TikTok,14,2,2,12,0,0.0,has_retained_names
+1955d4c8-51ec-47d1-87ce-d51b2bfc5b9e,org.telegram.messenger,Telegram,0,0,0,0,0,,zero_retained_names
+9ee7db5d-853b-456f-80ba-e92c3fb767d9,org.telegram.messenger,Telegram,0,0,0,0,0,,zero_retained_names
+cb9f71f2-7e41-475a-8af6-98187692e243,org.telegram.messenger,Telegram,0,0,0,0,0,,zero_retained_names
+e3eddb98-17be-4077-bd47-92d2f134ddaa,org.telegram.messenger,Telegram,1,1,0,0,0,0.0,has_retained_names
+5bacd03a-0030-4f13-97c2-6be4c4bed34a,org.thoughtcrime.securesms,Signal,3,2,0,1,0,0.0,has_retained_names
+978b0516-9070-4086-b631-dabecb7a1419,org.thoughtcrime.securesms,Signal,3,2,0,1,0,0.0,has_retained_names
+b7d0482c-2c26-4a7e-80fc-68a279e105f6,org.thoughtcrime.securesms,Signal,4,2,0,2,0,0.0,has_retained_names
+bdbbbe7f-aeb6-427c-9389-e165e487913e,org.thoughtcrime.securesms,Signal,3,2,0,1,0,0.0,has_retained_names

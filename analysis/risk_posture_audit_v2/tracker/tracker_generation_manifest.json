@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-08-16T15:28:49Z",
+  "script_version": "tracker-audit-v2",
+  "source_base_commit": "1082be6edc7f1254289be29f867d6ae0f0d5ba12",
+  "script_path": "scripts/reproduce_advanced_audit.py",
+  "script_sha256": "67f7a8f3dfe7da50f9c0235f4a4324944b980ad742ff7578252d37a727b0e33b",
+  "disconnect": {
+    "commit": "22c7d6166b6e30f7629ee1b49386855bb9b64a50",
+    "services_file": "tracker/disconnect_services.json",
+    "services_sha256": "41b9a4949949fddd44a45c7e006264c30b44d6544dfb28dc313dd4673505005f",
+    "tracking_categories": [
+      "Advertising",
+      "Analytics",
+      "ConsentManagers",
+      "Cryptomining",
+      "Email",
+      "EmailAggressive",
+      "FingerprintingGeneral",
+      "FingerprintingInvasive",
+      "Social"
+    ]
+  },
+  "property_domain_mapping": {
+    "path": "inputs/app_property_domain_exclusions.csv",
+    "sha256": "de6f6d5b79eca7c89035bac4872181df096bb4b04e763bc5ceba3ed66791484d",
+    "rows": 36,
+    "packages": 15,
+    "reviewed_rows": 36
+  },
+  "public_suffix": {
+    "implementation": "publicsuffix2",
+    "version": "2.20191221",
+    "bundled_snapshot": "public_suffix_list.dat",
+    "bundled_snapshot_sha256": "76e4a8d1e76dae8db6da3829024108c02203c4e4b5a4301b5717564b05c7966d"
+  },
+  "counts": {
+    "interactive_runs_total": 56,
+    "interactive_runs_with_retained_hostname_rows": 53,
+    "interactive_runs_zero_retained": 3,
+    "zero_retained_interpretation": "domain_count=0 and no top_dns/top_sni rows: zero retained names, not missing extraction",
+    "cohort_distinct_interactive_hostnames": 216,
+    "cohort_distinct_tracking_oriented_matches_raw": 79,
+    "cohort_distinct_third_party_tracking_oriented_matches": 32,
+    "zero_retained_packages": [
+      "org.telegram.messenger"
+    ],
+    "interpretation": "tracker-associated infrastructure; not confirmed tracking, leakage, exfiltration, or malice"
+  },
+  "outputs": {
+    "tracker_matches_per_hostname.csv": {
+      "sha256": "eb779d9cc5471dbd5031613a601327251938bb9f45276ea488364a9d4e9ff789",
+      "bytes": 19216
+    },
+    "tracker_matches_per_hostname_first_party_sensitivity.csv": {
+      "sha256": "091955650d307381815ea9b968fedd097e7dab68dc5ddfae3a9fd1f8653b1f77",
+      "bytes": 22077
+    },
+    "tracker_matches_per_hostname_third_party.csv": {
+      "sha256": "4f86f851e75593c0a4f2962aa10b376a6c094b7b31724688e892f72639748dc9",
+      "bytes": 5083
+    },
+    "tracker_matches_per_run.csv": {
+      "sha256": "1befbc6208134abf829298e66906f71a3dd2c01cec972d9cb2dd908dfd161039",
+      "bytes": 6082
+    },
+    "tracker_matches_per_app.csv": {
+      "sha256": "ed3008e7162e199de887c4ea2c08bbe9935e8c0d89be7f0807f570fd196fa856",
+      "bytes": 6411
+    },
+    "tracker_cohort_summary.json": {
+      "sha256": "0ae71576599fc8ba3b7b6f1a565d244528472be3ab48f60d3d44e2a86679726b",
+      "bytes": 598
+    }
+  }
+}

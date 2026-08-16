@@ -40,12 +40,10 @@
     "y": "interactive tracker-associated hostname fraction",
     "normalization": "z-score mean/sd, ddof=1, fitted once on full n=15",
     "robust_alternative_not_used": "median/MAD not used for primary hull",
-    "area": 5.80951248872438,
-    "perimeter": 10.948444639692106,
+    "area": 5.318984526709763,
+    "perimeter": 11.23854218258199,
     "vertices": [
-      "WhatsApp",
       "Snapchat",
-      "LinkedIn",
       "BBC News",
       "Pinterest",
       "Signal"

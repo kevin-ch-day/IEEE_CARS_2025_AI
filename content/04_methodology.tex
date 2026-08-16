@@ -10,7 +10,7 @@ The collection used a non-root Motorola Moto G 5G (2024) running Android 15, wit
 
 Static analysis used the harvested base and split APK artifacts for each selected build. Reported variables include dangerous permissions, high- and medium-severity findings, unguarded-export findings, network- and storage-related findings, privacy and platform findings, and MASVS-aligned categories \cite{owaspMasvs2024}. Unguarded-export findings are High- or Medium-severity detector rows whose titles indicate a missing permission or a weak guard; they count finding rows, not unique Android components.
 
-Runtime analysis used package-associated evidence packs and PCAP-derived metadata. Captures were classified as strict-idle (quiet foreground baselines), quiescent foreground (QFG; no-touch foreground with continued app-driven activity), or interactive (user-facing behavior). Reported variables include duration, PCAP volume, packet rate, retained DNS/SNI hostname breadth, and baseline-relative changes when comparable baseline and interactive evidence were available. Hostname breadth is the per-run union of up to 10 retained DNS query names and up to 10 retained TLS-SNI names, not an exhaustive inventory of endpoints. Retained interactive DNS/SNI hostnames were matched by exact or subdomain relation against tracking-oriented categories in a pinned Disconnect services list (commit \texttt{22c7d616}); each app's documented own registrable domain (eTLD+1) was excluded from the third-party count \cite{disconnectTrackingProtection}.
+Runtime analysis used package-associated evidence packs and PCAP-derived metadata. Captures were classified as strict-idle (quiet foreground baselines), quiescent foreground (QFG; no-touch foreground with continued app-driven activity), or interactive (user-facing behavior). Reported variables include duration, PCAP volume, packet rate, retained DNS/SNI hostname breadth, and baseline-relative changes when comparable baseline and interactive evidence were available. Hostname breadth is the per-run union of up to 10 retained DNS query names and up to 10 retained TLS-SNI names, not an exhaustive inventory of endpoints. Retained interactive DNS/SNI hostnames were matched by exact or subdomain relation against tracking-oriented categories in a pinned Disconnect services list (commit \texttt{22c7d616}); a documented per-app set of registrable domains (eTLD+1 values) was excluded from the third-party count \cite{disconnectTrackingProtection}.
 
 \subsection{Build Selection and Evidence Alignment}
 
@@ -25,7 +25,7 @@ Qualifying runs are grouped by package, version code and name, and base APK hash
 \REQUIRE cohort $A$, 14-day window $W$, static set $S$, dynamic set $D$, qualification policy $P$
 \ENSURE aligned app-build rows, excluded/deferred rows, source data, checksums
 \FOR{each app $a \in A$}
-  \STATE retrieve candidate dynamic runs for $a$ within $W$
+  \STATE retrieve candidate dynamic runs for $a$
   \STATE retain runs satisfying technical qualification policy $P$
   \STATE group runs by normalized package, version code/name, and base APK SHA-256
   \STATE summarize evidence-class coverage and readiness for each group
@@ -34,6 +34,7 @@ Qualifying runs are grouped by package, version code and name, and base APK hash
   \IF{static and dynamic identities do not align}
     \STATE exclude or defer $a$; persist the reason; continue
   \ENDIF
+  \STATE validate the selected dynamic evidence against reporting window $W$
   \STATE preserve strict-idle, QFG, and interactive classes separately
   \STATE compute static exposure and runtime behavior summaries
   \STATE add the aligned app-build row and provenance
@@ -53,6 +54,6 @@ PCAP processing is limited to metadata and derived transport indicators; message
 
 \subsection{Limitations}
 
-The study is limited to 15 apps, one Android 15 physical device, one collection environment, selected interaction scenarios, and the available static detectors. Device and environment consistency improve within-study comparability but limit generalization across OEM implementations, Android versions, hardware, and networks. Runtime observations are scenario-bounded and do not establish exhaustive app behavior; unequal capture depth may affect app-level precision. Multiple captures characterize within-window behavior; the single evidence window does not establish temporal repeatability.
+The study is limited to 15 apps, one Android 15 physical device, one collection and network environment, selected interaction scenarios, and the available static detectors. Device and environment consistency improve within-study comparability but limit generalization across OEM implementations, Android versions, hardware, and networks. Runtime observations are scenario-bounded and do not establish exhaustive app behavior; unequal capture depth may affect app-level precision. Multiple captures characterize within-window behavior; the single evidence window does not establish temporal repeatability.
 
 The non-root, no-MITM design prevents inspection of encrypted payload semantics, so elevated packet rate or transfer volume may reflect media delivery, synchronization, telemetry, advertising, keepalive traffic, or privacy-sensitive exchange. A Disconnect blocklist match indicates association with categorized infrastructure; it does not establish private-data leakage. Static finding counts are tool-dependent exposure indicators, not measures of exploitability, MASVS compliance, or privacy harm. Observed runtime activity does not demonstrate malicious behavior, and limited activity does not establish low risk.
